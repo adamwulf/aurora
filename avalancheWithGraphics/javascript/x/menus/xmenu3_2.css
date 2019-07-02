@@ -1,0 +1,206 @@
+/*
+	xMenu3_1.css
+	Cross-Browser.com
+*/
+
+html {
+  margin:0; padding:0; background:#999;
+}
+body {
+  color:#000; background:#999;
+  margin:0; padding:0;
+  font-family:verdana,arial,sans-serif;
+  font-size:12px;
+}
+a {
+  text-decoration:none;
+  color:#633; background:transparent;
+  border-bottom:1px dashed #633;
+  padding:1px 1px 0 1px;
+}
+a:hover {
+  text-decoration:none;
+  color:#000; background:#999;
+  border-top:solid 1px #bbb;
+  border-left:solid 1px #bbb;
+  border-right:solid 1px #633;
+  border-bottom:solid 1px #633;
+  padding:0;
+}
+h1 {
+  color:#633; background:transparent;
+  margin:1.5em 0 .2em 0;
+  padding:.5em 0;
+  font-size:16px;
+  font-weight:bold;
+}
+h2 {
+  color:#633; background:transparent;
+  margin:1.5em 0 .2em 0;
+  padding:.5em 0;
+  font-size:14px;
+  font-weight:normal;
+}
+h3 {
+  color:#633; background:transparent;
+  margin:1.5em 0 .2em 0;
+  padding:.5em 0;
+  font-size:10px;
+  font-weight:bold;
+}
+ol {
+  margin:.2em 0 .2em 1.75em;
+}
+ul {
+  margin:.2em 0 .2em 1.75em;
+  list-style-type:circle;
+}
+li {
+/*  margin:0 0 4px 10px; */
+}
+pre {
+  color:#333; background:#eee;
+  margin:0; padding:6px 4px;
+  font-family:monospace,courier;
+  font-size:12px;
+  overflow:hidden;
+}
+
+.fw { /* firstWord */
+  color:#633; background:transparent;
+  font-size:14px;
+}
+
+.myHead {
+  color:#999; background:#633;
+  margin:0; padding:4px;
+  font-weight:bold;
+  font-size:12px;
+  border-bottom:1px solid #bbb;
+}
+.myColumn {
+  color:#000; background:#fff;
+  margin:0; padding:10px;
+  font-size:12px;
+  font-family:georgia,verdana,arial,sans-serif;
+  border-left:1px solid #000;
+  float:left; /* for downgrade mode */
+}
+.myFoot {
+  color:#000; background:#999;
+  margin:0; padding:4px;
+  font-size:10px;
+  text-align:right;
+  clear:both;
+}
+
+#xMenu1 { /* for downgrade mode */
+  float:left;
+}
+
+/* Title for horizontal and vertical menus */
+
+.myHMTitle {
+  color:#999;
+  background:#633;
+  display:block;
+  text-align:right;
+  font-weight:bold;
+  font-size:10px;
+}
+
+/* Menu items in boxes */
+
+a.xmItm {
+  text-decoration:none;
+  display:block;
+  color:#633;
+  background:transparent;
+  border:none;
+  font-size:10px;
+}
+a.xmItm:hover {
+  text-decoration:none;
+  color:#000;
+  background:transparent;
+  display:block;
+  font-size:10px;
+}
+
+/* Inline bar links, for horizontal menu bar */
+
+a.xmLnk {
+  position:relative;
+  top:2px;
+  text-decoration:none;
+  margin:0 10px 0 0; padding:2px;
+  color:#633; background:transparent;
+  border:none;
+  display:inline;
+  font-size:10px;
+}
+a.xmLnk:hover {
+  position:relative;
+  text-decoration:none;
+  color:#000;
+  background:transparent;
+  display:inline;
+  font-size:10px;
+}
+/* Bar for horizontal menu */
+
+div.myHMBar {
+/*  text-align:right; */
+}
+
+/* Boxes other than bars */
+
+div.myMBox {
+  width:140px;
+  color:#000;
+  background:#999;
+  font-size:10px;
+  text-align:left;
+}
+
+/* Inline bar labels, for horizontal menu bar */
+
+.myHMBarLbl {
+  color:#633;
+  background:transparent;
+  border:none;
+  display:inline;
+  cursor:default;
+  font-size:10px;
+}
+.myHMBarLblHvr {
+  color:#000;
+  background:transparent;
+  display:inline;
+  cursor:default;
+  font-size:10px;
+}
+.myHMBarLblHvrClosed {
+  color:#000;
+  background:transparent;
+  display:inline;
+  cursor:default;
+  font-size:10px;
+}
+
+/* Block labels, for menu boxes */
+
+.myMLbl {
+  color:#633; background:transparent;
+  border:none;
+  display:block;
+  cursor:default;
+  font-size:10px;
+}
+.myMLblHvr {
+  color:#000;
+  background:transparent;
+  display:block;
+  cursor:default;
+  font-size:10px;
+}

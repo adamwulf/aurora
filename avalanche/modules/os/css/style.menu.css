@@ -1,0 +1,64 @@
+.xTrigger {
+  position:relative;
+  cursor:pointer;
+  z-index:1;
+}
+.xMenu {
+  position:absolute;
+  visibility:hidden;
+  overflow:hidden;
+  z-index:2;
+  margin:0;
+  border: 1px solid #BEBEBE;
+  background: transparent;
+}
+
+.menu_button{
+	font-family: verdana, sans-serif;
+	font-size: 13px;
+	background-color: #F7F7F7;
+	color:  #5B5B5B;
+	padding-left: 2px;
+}
+
+table.menu_button:hover {
+	font-family: verdana, sans-serif;
+	font-size: 13px;
+	color:  #5B5B5B;
+	background-color: #ACCEA5;
+	padding-left: 2px;
+}
+
+.menu_icon{
+	border-right: 1px solid #BEBEBE;
+}
+.sprocketMenuButton{
+	float: left;
+	width: 128px;
+	height: 25px;
+	font-family: verdana, sans-serif;
+	font-size: 13px;
+	background: #F7F7F7;
+	color:  #5B5B5B;
+	padding-left: 2px;
+}
+table.sprocketMenuButton:hover{
+	background: #ACCEA5;
+}
+.sprocketMenuIcon{
+	float: left;
+	width: 30px;
+	height: 25px;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	background: #EEEEEE;
+	vertical-align: middle;
+	text-align: center;
+	border-right: 1px solid #BEBEBE;
+}
+.sprocketMenuIcon img{
+	position: relative;
+	top: 4px;
+}

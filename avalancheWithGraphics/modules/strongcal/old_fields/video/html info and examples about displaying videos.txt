@@ -1,0 +1,35 @@
+$body = videoHtml($vid_path, "video", "440", "300", true);
+function videoHtml($vid_path, $vid_id, $width, $height, $autostart){
+	$auto = "false";
+	if($autostart){
+		$auto = "true";
+	}
+	if(!is_integer(strrpos($vid_path, ".wmv"))){
+		$ret =  "<OBJECT classid='clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B'	";
+	        $ret .=	"	codebase='http://www.apple.com/qtactivex/qtplugin.cab'	";
+        	$ret .=	"	width='$width' height='$height' 			";
+		$ret .=	"	autostart='$auto'					";
+		$ret .=	"	id='$vid_id' > 						";
+		$ret .=	"	<PARAM name='src' value='$vid_path'>			";
+		$ret .= "	<PARAM name='controller' value='false'>			";
+		$ret .=	"	<EMBED width='$width' height='$height' 			";
+		$ret .=	"	autostart='$auto'					";
+		$ret .=	"	src='$vid_path' 					";
+		$ret .=	"	name='$vid_id' 						";
+		$ret .= "	name='controller' value='false'				";
+		$ret .=	"	enablejavascript='true'> 				";
+		$ret .= "	<img dynsrc='$vid_path' width='$width' hieght='$height'>";
+		$ret .=	"	</img>							";
+		$ret .=	"	</EMBED> 						";
+		$ret .=	"	</OBJECT> 						";
+	}else{
+		$ret .=	"	<EMBED width='$width' height='$height' 			";
+		$ret .=	"	autostart='$auto'					";
+		$ret .=	"	src='$vid_path' 					";
+		$ret .=	"	name='$vid_id' 						";
+		$ret .= "	name='controller' value='false'				";
+		$ret .=	"	enablejavascript='true'> 				";
+		$ret .=	"	</EMBED> 						";
+	}
+	return $ret;
+}

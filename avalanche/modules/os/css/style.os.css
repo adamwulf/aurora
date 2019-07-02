@@ -1,0 +1,375 @@
+BODY {
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	scrollbar-face-color: #DDDDDD; 
+	scrollbar-shadow-color: #DDDDDD; 
+	scrollbar-highlight-color: #DDDDDD;
+	scrollbar-3dlight-color: #000000;
+	scrollbar-darkshadow-color: #000000;
+	scrollbar-track-color:#999999; 
+	scrollbar-arrow-color: #000000;
+}
+
+.sprocketIcon{
+	float: right;
+}
+.loginButton{
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-right: 3px;
+	padding-left: 3px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	font-weight: normal;
+	font-size: 8pt;
+	font-family: verdana, sans-serif;
+	background: silver;
+	margin-top: 3px;
+	float: right;
+}
+.tooltip{
+	padding: 1px;
+	border: 1px solid black;
+	background: #fffccc;
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+	color: #000000;
+}
+.dropshadow{
+	background: url(shadow.png) no-repeat bottom right;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	margin-bottom: 0px;
+	vertical-align: top;
+	text-align: left;
+}
+.companytitle {
+	float: left;
+	width: 300px;
+	height: 20px;
+	font-family: verdana;
+	font-size: 14px;
+	padding-left: 4px;
+	padding-top: 2px;
+	background: #FFFFFF;
+}
+
+.midimg {
+	float: left;
+	width: 18px;
+	height:22px;
+	background-image: url("midimg.gif");
+}
+.oscontrol {
+	background-image: url("rightbgimg.gif");
+	font-family: verdana;
+	font-size: 10px;
+	height: 22px;
+	float: right;
+}
+.topLeftOSHeader{
+	float: left;
+	height: 22px;
+	width: 318px;
+}
+.OSHeaderStyle{
+	background-image: url("rightbgimg.gif");
+	border-bottom: 1px solid #818080;
+	height: 22px;
+	width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.emptyOverview{
+	height: 400px;
+	font-family: verdana, sans-serif;
+	font-size: 12pt;
+	font-color: #333333;
+}
+
+
+.confirm_window_yes{
+	left: 15px;
+	position: relative;
+	font-size: 12pt;
+	font-family: verdana, sans-serif;
+	color: #000000;
+	padding-top: 3px;
+}
+
+
+.button_group_style{
+	clear: both;
+}
+
+.confirm_window_no{
+	right: 15px;
+	position: relative;
+	float: left;
+	margin-left: 95px;
+	font-size: 12pt;
+	font-family: verdana, sans-serif;
+	color: #000000;
+	padding-top: 3px;
+}
+
+.window_box_style{
+	padding: 7px;
+	line-height: 17px;
+	border: 1px solid black;
+	background: #ffffff;
+	font-family: verdana, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	position: relative;
+	top: -6;
+	left: -6;
+}
+
+.window_shadow_style{
+	background: url(shadow.png) no-repeat bottom right;
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-bottom: 0px;
+	padding-top: 0px;
+	margin-bottom: 0px;
+	vertical-align: top;
+	text-align: left;
+	position: absolute;
+	top: -1000;
+	left: -1000;
+}
+
+.button_style{
+	border: 1px solid black;
+	padding: 3px;
+	background: #EEEEEE;
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+	color: #000000;
+}
+
+.page_header{
+	height: 40px;
+	margin-left: 20px;
+	font-family: verdana, sans-serif;
+	font-size: 14pt;
+	text-align: left;
+	text-decoration: bold;
+}
+
+.export_button {
+	width: 30px;
+	height: 30px;
+	background-image: url(../images/export.gif);
+	background-repeat: no-repeat;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.export_event_button {
+	width: 30px;
+	height: 30px;
+	background-image: url(../images/exportevent.gif);
+	background-repeat: no-repeat;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+a{
+	text-decoration: none;
+	color: #777777;
+}
+
+a.black_link{
+	color: black;
+	text-decoration: none;
+}
+
+a.black_link:hover{
+	color: black;
+	text-decoration: underline;
+}
+
+.notes_list{
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.user_profile_container{
+	background-color: #FFFFFF;
+	background-image: url("profile.gif");
+	background-repeat: no-repeat;
+}
+
+.add_user_container{
+	background-color: #FFFFFF;
+	background-image: url("adduser.gif");
+	background-repeat: no-repeat;
+}
+
+a:hover {
+	color: #000000;
+}
+
+.footer_text{
+	text-align: center;
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+}
+
+.content_font{
+	font-size: 14px;
+	font-family: times;
+	color: #000;
+}
+
+.content_title{
+	font-size: 15px;
+	font-family: arial, sans-serif;
+	font-weight: bold;
+	color: #000;
+}
+
+.tab_open{
+	font-size: 10px;
+	font-family: verdana, sans-serif;
+	color: #000000;
+	background-color: white;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	padding-left: 5px;
+	padding-top: 2px;
+}
+
+.tab_closed{
+	font-size: 10px;
+	font-family: verdana, sans-serif;
+	color: #000000;
+	background-color: silver;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+	padding-left: 5px;
+	padding-top: 2px;
+}
+
+.about_header{
+	width: 401px;
+	height: 30px;
+	font-family: verdana, sans-serif;
+	font-size: 12pt;
+	color: black;
+	padding: 4px;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+}
+
+.about_footer{
+	width: 401px;
+	height: 250px;
+	font-family: verdana, sans-serif;
+	font-size: 10pt;
+	color: black;
+	padding: 4px;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+}
+
+.about_content{
+	background-color: DDE0E4;
+	border: 1px dotted black;
+}
+
+.border_left{
+	border-left: 1px solid black;
+}
+
+.news_buttons{
+	margin: 0px;
+	padding-right: 1px;
+	padding-left: 20px;
+}
+
+
+
+.preferences_tab_open{
+	font-size: 10px;
+	font-family: verdana, sans-serif;
+	color: #000000;
+	background-color: white;
+	border: 1px solid black;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	margin: 4px;
+}
+
+.preferences_tab_closed{
+	font-size: 10px;
+	font-family: verdana, sans-serif;
+	color: #000000;
+	padding-right: 6px;
+	padding-left: 6px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin: 4px;
+}
+
+.preferences_buttons_panel{
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	background: #ADB8D0;
+	height: 28px;
+}
+
+.preferences_footer{
+	width: 401px;
+	height: 450px;
+	font-family: verdana, sans-serif;
+	font-size: 10pt;
+	color: black;
+	padding: 4px;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+}
+
+.preferences_content{
+	background-color: DDE0E4;
+	border: 1px dotted black;
+}
+
+.preferences_text{
+	font-family: verdana, sans-serif;
+}
+
+.error_panel {
+	font-family: verdana, sans-serif;
+	font-size: 10pt;
+	text-align: center;
+	padding: 4px;
+	border: 1px solid black;
+	width: 250px;
+	height: 100px;
+	background-color: #EEEEEE;
+}

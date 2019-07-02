@@ -1,0 +1,74 @@
+
+
+
+.first_time_outer_panel{
+	border: 1px solid black;
+	width: 400px;
+	margin: 100px;
+}
+
+.first_time_titles{
+	width: 400px;
+	height: 25px;
+	padding: 3px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	background: #ADB8D0;
+}
+
+.first_time_title{
+	width: 400px;
+	height: 50px;
+	padding-left: 4px;
+	font-family: verdana, sans-serif;
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+.first_time_buttons{
+	width: 400px;
+	height: 25px;
+	padding: 3px;
+	border-top: 1px solid black;
+	background: #ADB8D0;
+}
+
+.first_time_buttons_content{
+	width: 197px;
+}
+
+.first_time_input{
+	border: 1px solid black;
+}
+
+.first_time_content{
+	width: 400px;
+	padding: 4px;
+	font-family: times;
+	font-size: 10pt;
+	height: 200px;
+}
+
+.first_time_content_text{
+	font-family: times;
+	font-size: 10pt;
+}
+
+.first_time_button{
+	border: 1px solid black;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	background-color: silver;
+	font-size: 9pt;
+	font-family: verdana, sans-serif;
+	margin: 3px;
+}
+
+.first_time_main_color_box{
+	border: 1px solid black;
+	width: 40px;
+	height: 40px;
+	margin: 40px;
+}

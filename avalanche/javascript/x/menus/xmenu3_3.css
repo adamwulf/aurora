@@ -1,0 +1,127 @@
+/*
+	xMenu3_1.css
+	Cross-Browser.com
+*/
+
+a {
+  text-decoration:none;
+  color:#633; background:transparent;
+  border-bottom:1px dashed #633;
+  padding:1px 1px 0 1px;
+}
+a:hover {
+  text-decoration:none;
+  color:#000; background:#999;
+  border-top:solid 1px #bbb;
+  border-left:solid 1px #bbb;
+  border-right:solid 1px #633;
+  border-bottom:solid 1px #633;
+  padding:0;
+}
+
+
+#xMenu1 { /* for downgrade mode */
+  float:left;
+}
+
+/* Title for horizontal and vertical menus */
+
+.myHMTitle {
+  color:#999;
+  background:#633;
+  display:block;
+  text-align:right;
+  font-weight:bold;
+  font-size:10px;
+}
+
+/* Menu items in boxes */
+
+div.xmItm {
+  text-decoration:none;
+  display:block;
+  color:#633;
+  background:transparent;
+  border:none;
+  font-size:10px;
+  clear: left;
+  cursor:default;
+}
+div.xmItm:hover {
+  text-decoration:none;
+  color:#000;
+  background:transparent;
+  display:block;
+  font-size:10px;
+  clear: left;
+  cursor:default;
+}
+
+
+/* Boxes other than bars */
+
+div.myMBox {
+  width:140px;
+  color:#000;
+  background:#999;
+  font-size:10px;
+  text-align:left;
+}
+
+/* Inline bar labels, for horizontal menu bar */
+
+.myHMBarLbl {
+  color:#633;
+  background:transparent;
+  border:none;
+  display:inline;
+  cursor:default;
+  font-size:10px;
+}
+.myHMBarLblHvr {
+  color:#000;
+  background:transparent;
+  display:inline;
+  cursor:default;
+  font-size:10px;
+}
+.myHMBarLblHvrClosed {
+  color:#000;
+  background:transparent;
+  display:inline;
+  cursor:default;
+  font-size:10px;
+}
+
+/* Block labels, for menu boxes */
+
+.myMLbl {
+  color:#633; background:transparent;
+  border:none;
+  display:block;
+  cursor:default;
+  font-size:10px;
+}
+.myMLblHvr {
+  color:#000;
+  background:transparent;
+  display:block;
+  cursor:default;
+  font-size:10px;
+}
+
+
+.xmLbl {
+  float:none;
+  position:relative;
+  overflow:hidden;
+}
+
+.xmBox {
+  float:none;
+  position:absolute;
+  overflow:visible;
+  visibility:hidden;
+  margin:0;
+}
+

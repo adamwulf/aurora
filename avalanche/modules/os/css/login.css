@@ -1,0 +1,65 @@
+.login_main{
+	border: 1px solid black;
+	background: #EEEEEE;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 320px;
+	height: 254px;
+}
+
+.login_input{
+	border: 1px solid black;
+}
+
+.login_bar_style{
+	border-top: 1px solid #8AAD83;
+	border-bottom: 1px solid #8AAD83;
+	background: #ACCEA5;
+	width: 110px;
+	height: 20px;
+}
+
+.login_logo_style{
+	border: 2px solid #688B61;			
+}
+
+
+.logincell{
+	padding: 4px;
+	background: #C9C9C9;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	position: absolute;
+	left: -400px;
+	top: 70px;
+	width: 170px;
+}
+
+.txt {
+	width: 150px;
+}
+
+.login_exit_button{
+	padding: 2px;
+}
+
+.button{
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-right: 3px;
+	padding-left: 3px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	font-weight: normal;
+	font-size: 8pt;
+	font-family: verdana, sans-serif;
+	background: silver;
+}
+
+.os_header{
+	font-weight: bold;
+	font-size: 12pt;
+	font-family: verdana, sans-serif;
+}

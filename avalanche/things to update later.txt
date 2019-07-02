@@ -1,0 +1,13 @@
+avalanche/modules renameUser/group
+
+
+notes:
+$this->_recent_log_in
+ is -1 if no logging in or out is done this page load
+ is false if most recent activity is logOut
+ is userId if most recent activity is logIn
+
+ tested so far is only one logout/in per page load.
+ to test is multiple logout/in per page load.
+
+

@@ -1,0 +1,30 @@
+.calendar_form {
+	padding: 4px;
+	border: 1px solid black;
+	width: 250px;
+	height: 100px;
+	background-color: #EEEEEE;
+}
+
+.form_header{
+	font-family: verdana, sans-serif;
+	font-size: 10pt;
+	color: black;
+}
+
+.big_container {
+	padding: 0px;
+	background-color: #FFFFFF;
+	background-image: url("addevent1.gif");
+	background-repeat: no-repeat;
+	
+}
+
+.form_cell{
+	padding: 4px;
+	text-align: center;
+}
+
+.input{
+	border: 1px solid black;
+}

@@ -1,0 +1,74 @@
+
+
+basic template brainstorm thingie.
+
+speaking of which, "brainstorm" wouldn't be a bad name for the message program...
+
+
+anyways.
+
+ok, i'll just type out a psuedo final version of what we need
+
+
+/****************************************
+ *					*
+ * FILENAME.php				*
+ *					*
+ ****************************************
+ *					*
+ * DESCRIPTION				*
+ * this'll be a basic description of 	*
+ * what the file does.			*
+ * ie, this file displays the admin's	*
+ * control panel or an error if the	*
+ * user is not admin...			*
+ *					*
+ ****************************************
+ *					*
+ * FORM INPUT				*
+ *					*
+ * basic description of what this file	*
+ * expects as input, and what it'll do	*
+ * with the input, also, what happends	*
+ * with if there's an error in input	*
+ *					*
+ * INPUT VARIABLES			*
+ *					*
+ * $in_var1 - description		*
+ * $in_var2 - description		*
+ *					*
+ ****************************************
+ * 					*
+ * if this file can take input from	*
+ * different types of forms, then there	*
+ * should be mulitple "FORM INPUT"	*
+ * boxes like the one above.		*
+ *					*
+ ****************************************
+ *					*
+ * FORM OUTPUT				*
+ *					*
+ * this describes what forms will be	*
+ * printed from this file, and what	*
+ * variables will be sent to the next	*
+ * page.				*
+ * 					*
+ * $out_var1 - description		*
+ * $out_var2 - description		*
+ * 					*
+ ****************************************
+ * 					*
+ * if this file prints multiple forms	*
+ * then there should be a "FORM OUTPUT"	*
+ * box for each one like the one above.	*
+ *					*
+ ****************************************
+ *					*
+ * LINKS				*
+ *					*
+ * this will describe what links are	*
+ * printed in this page and where the	*
+ * links will send the user and what	*
+ * varibles will be sent via the link	*
+ *					*
+ ****************************************/

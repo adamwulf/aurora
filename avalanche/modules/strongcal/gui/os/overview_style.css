@@ -1,0 +1,28 @@
+.overview_section_style {
+	padding-left: 4px;
+	border: 1px solid #585858;
+}
+
+.overview_title_style{
+	padding-left: 4px;
+	font-family: verdana, sans-serif;
+	font-size: 10pt;
+	border-bottom: 1px solid #8AAD83;
+}
+
+.overview_cell_style{
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+}
+
+.date_header_style{
+	padding-left: 4px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+	color: black;
+	border-top: 1px solid #91A1C6;
+	border-bottom: 1px solid #91A1C6;
+}
+

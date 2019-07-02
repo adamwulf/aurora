@@ -1,0 +1,194 @@
+.sharingContainer{
+	width: 550px;
+	position: relative;
+	right: 4px;
+}
+
+.userIcon{
+	width: 14px;
+	height: 22px;
+	float: left;
+	padding-right: 6px;
+}
+.groupIcon{
+	width: 17px;
+	height: 22px;
+	float: left;
+	padding-right: 3px;
+}
+
+.groupNameInnerStyle{
+	width: 550px;
+	height: 27px;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+.groupNameStyle{
+	height: 27px;
+	width: 130px;
+	white-space: nowrap;
+	overflow: hidden;
+	padding-left: 20px;
+	float: left;
+	vertical-align: middle;
+}
+
+.checkSharePanel{
+	width: 50px;
+	height: 25px;
+	padding-left: 3px;
+	padding-top: 2px;
+	float: left;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.endBoxStyle{
+	clear: both;
+}
+
+.headerRow{
+	width: 550px;
+	height: 27px;
+	clear: both;
+	padding-top: 4px;
+	font-family: verdana, sans-serif;
+	font-size: 12pt;
+	background: #ACCEA5;
+	color: #333333;
+}
+
+.disabledRow{
+	width: 550px;
+	height: 27px;
+	padding-top: 3px;
+	clear: both;
+	border-top: 1px solid #999999;
+	background: #EEEEEE;
+	font-family: verdana, sans-serif;
+	font-size: 10pt;
+	color: #666666;
+}
+.enabledRow{
+	width: 550px;
+	height: 27px;
+	padding-top: 3px;
+	clear: both;
+	border-top: 1px solid #91a1c6;
+	background: #c3cbdd;
+	font-family: verdana, sans-serif;
+	font-size: 10pt;
+	color: #1c3875;
+	text-decoration: none;
+}
+
+div.enabledRow:hover{
+	background: #dfe3ed;
+}
+.enabledRow a{
+	text-decoration: underline;
+	color: #1c3875;
+}
+
+.shareMenuItem{
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 120px;
+}
+.shareMenuItem a{
+	text-decoration: none;
+	color: #333333;
+}
+.shareMenuItem a:hover{
+	text-decoration: underline;
+}
+
+
+.adminTextPanel{
+	float: left;
+	text-align: center;
+	width: 228;
+	padding-top: 3px;
+}
+.notShared{
+	float: left;
+	width: 300px;
+	text-align: center;
+	padding-top: 3px;
+}
+
+.eventPanel{
+	float: left;
+	padding-top: 3px;
+	width: 114px;
+	text-align: center;
+}
+.commentPanel{
+	float: left;
+	padding-top: 3px;
+	width: 114px;
+	text-align: center;
+}
+.adminPanel{
+	float: left;
+	padding-top: 3px;
+	width: 114px;
+	text-align: center;
+}
+.sharingHeaderStyle{
+	background: url('sharingHeader.gif');
+	height: 46px;
+	font-family: verdana, sans-serif;
+	font-size: 11pt;
+	color: #4b4b4b;
+}
+
+.sharingHeaderHolder{
+	margin-top: 10px;
+	border: 1px solid #8AAD83;
+	width: 550px;
+}
+
+.nameHeader{
+	float: left;
+	padding-top: 13px;
+	padding-left: 20px;
+	width: 130px;
+	height: 44px;
+	vertical-align: middle;
+	text-align: center;
+}
+.shareHeader{
+	float: left;
+	padding-top: 13px;
+	padding-left: 3px;
+	width: 50px;
+	height: 44px;
+	text-align: center;
+}
+.permissionHeader1Line{
+	float: left;
+	padding-top: 13px;
+	width: 114px;
+	height: 44px;
+	text-align: center;
+}
+.permissionHeader2Line{
+	float: left;
+	padding-top: 6px;
+	width: 114px;
+	height: 44px;
+	text-align: center;
+}
+
+.messageBox{
+	clear: both;
+	padding: 1px;
+	border: 1px solid #F1F1F1;
+	margin-top: 10px;
+	width: 550px;
+	text-align: center;
+	font-size: 10pt;
+}

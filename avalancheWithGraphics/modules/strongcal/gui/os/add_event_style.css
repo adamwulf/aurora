@@ -1,0 +1,102 @@
+.big_event_container{
+	background-color: #FFFFFF;
+	background-image: url("event.gif");
+	background-repeat: no-repeat;
+}
+
+.big_container {
+	padding: 0px;
+	background-color: #FFFFFF;
+	background-image: url("addevent2.gif");
+	background-repeat: no-repeat;
+	
+}
+
+.add_event_container {
+	padding: 0px;
+	border: 1px solid black;
+	margin-top: 110px;
+	margin-left: 170px;
+}
+
+.edit_event_container {
+	padding: 0px;
+	border: 1px solid black;
+	background-color: #FFFFFF;
+}
+
+.color_container {
+	padding: 0px;
+	border: 1px solid black;
+}
+
+.add_event_panel {
+	padding: 3px;
+	border: 0px solid black;
+}
+
+.cal_label {
+	font-family: verdana, sans-serif;
+	font-size: 16px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.add_event_label {
+	font-family: verdana, sans-serif;
+	font-size: 12px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.add_event_mini_container {
+	padding-top: 8px;
+	padding-right: 8px;
+	padding-left: 8px;
+	padding-bottom: 4px;
+	border: 1px dotted #A0A0A0;
+	background-color: #DDE0E4
+}
+
+.add_event_input {
+	padding-right: 4px;
+	padding-bottom: 8px;
+}
+
+.add_event_mini_container2 {
+	margin: 0px;
+	margin-top: 8px;
+	border-top: 1px dotted #A0A0A0;
+	background-color: #D0D6CB;
+}
+.add_event_mini_container2_cell{
+	padding: 8px;
+}
+
+.add_event_inner_mini {
+	padding: 4px;
+	border: 1px solid #A0A0A0;
+	background-color: #D5DAD0;
+}
+
+.recur_checkbox{
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+}
+
+.input{
+	border: 1px solid black;
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+	color: black;
+}
+
+textarea {
+	border: 1px solid #a0a0a0;
+}
+
+.text{
+	font-family: verdana, sans-serif;
+	font-size: 10pt;
+	color: black;
+}

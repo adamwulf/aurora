@@ -1,0 +1,138 @@
+/* column for the different options */
+.calPageStyle{
+	width: 780px;
+}
+.column{
+	float: left;
+	width: 150px;
+	height: 480px;
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+	color: #333333;
+	border-right: 1px solid #999999;
+	padding-right: 10px;
+}
+.calAuthorHolder{
+	width: 169px;
+	clear: both;
+	overflow: hidden;
+}
+.calAuthorHolder a{
+	color: #333333;
+}
+.headerRight{
+	float: right;
+	font-size: 8pt;
+	width: 170px;
+	text-align: right;
+	height: 82px;
+	margin-right: 5px;
+}
+.headerLeft{
+	float: left;
+	padding-top: 20px;
+	width: 370px;
+	height: 60px;
+}
+.calButtonStyle{
+	border: 1px solid #666666;
+	background: #EEEEEE;
+}
+.submitStyle{
+	width: 550px;
+	text-align: center;
+	margin-top: 5px;
+}
+.avatarHolderStyle{
+}
+.avatarIconStyle{
+	border: 1px solid black;
+	margin-top: 5px;
+	margin-bottom: 4px;
+}
+.contentStyle{
+	float: left;
+	font-family: verdana, sans-serif;
+	font-size: 14pt;
+	color: #333333;
+	padding-top: 16px;
+	width: 555px;
+	padding-left: 10px;
+}
+.manageCalHeader{
+	font-family: verdana, sans-serif;
+	font-size: 14pt;
+	color: #333333;
+	padding-top: 6px;
+	padding-left: 4px;
+	padding-bottom: 7px;
+}
+.avatarStyle{
+	width: 20px;
+	height: 20px;
+	border: 1px solid black;
+}
+
+.buttonDesc{
+	font-size: 8pt;
+	padding-top: 10px;
+}
+.activeButton{
+	margin-top: 10px;
+	width: 140px;
+	height: 70px;
+	padding: 6px;
+	font-family: verdana, sans-serif;
+	font-size: 14pt;
+	color: #333333;
+}
+.inactiveButton{
+	margin-top: 10px;
+	width: 140px;
+	height: 70px;
+	padding: 6px;
+	font-family: verdana, sans-serif;
+	font-size: 14pt;
+	color: #999999;
+	cursor: pointer;
+}
+div.inactiveButton:hover{
+	padding: 5px;
+	border: 1px solid #999999;
+	background: #F1F1F1;
+}
+
+
+.contentHeader{
+	margin-top: 10px;
+	background: url('profile_header_back.gif');
+	border: 1px solid #91a1c6;
+	height: 84px;
+	font-family: verdana, sans-serif;
+	font-size: 18pt;
+	color: #4b4b4b;
+	width: 550px;
+}
+
+.calendarColorBox{
+	width: 40px;
+	height: 40px;
+	border: 1px solid black;
+	margin-left: 20px;
+	margin-right: 20px;
+	float: left;
+}
+
+.infoBox{
+	padding: 4px;
+	background: #F1F1F1;
+	font-family: verdana, sans-serif;
+	font-size: 12pt;
+	color: #4b4b4b;
+}
+.infoBoxHolder{
+	padding: 1px;
+	border: 1px solid #F1F1F1;
+	margin-top: 10px;
+	width: 550px;
+}

@@ -1,0 +1,36 @@
+html, body {
+	width: 100%;
+	margin: 0px;
+
+}
+
+.sidebar {
+	font-family: verdana, sans-serif;
+	font-size: 12px;
+	background-image: url("http://awulf.inversiondesigns.com/avalanche/modules/strongcal/gui/os/sidebarbg.gif");
+}
+
+.sidebar_button{
+
+}
+
+.border_top{
+	overflow: hidden;
+}
+
+.text_align_center{
+	text-align: center;
+}
+
+
+.aurora_sidebar_text{
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+}
+
+.aurora_sidebar_link{
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+	color: black;
+	text-align: center;
+}

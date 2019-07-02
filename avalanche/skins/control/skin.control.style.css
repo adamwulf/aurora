@@ -1,0 +1,155 @@
+BODY {MARGIN: 0px; scrollbar-face-color: #7a7a7a; scrollbar-shadow-color: #000000; scrollbar-highlight-color: #C8CfD5; scrollbar-3dlight-color: #000000; scrollbar-darkshadow-color: #730609; scrollbar-track-color:#464646; scrollbar-arrow-color: #000000;}
+A {font-weight:none;color:#333333; text-decoration:none;}
+A:visited {font-weight:none;color:#333333; text-decoration:none;}
+A:hover{color:#333333; TEXT-DECORATION:underline}
+A.blueHover:hover{color:#000099; TEXT-DECORATION:none}
+HR {	COLOR: #000000}
+HR.blue {	COLOR: #0000ff}
+HR.green {	COLOR: #00ff00}
+HR.red {	COLOR: #ff0000}
+HR.silver {	COLOR: #c0c0c0}
+HR.white {	COLOR: #ffffff}
+
+A { text-decoration:none; }
+A:link { text-decoration: none; }
+A:visited { text-decoration: none; }
+A:active { text-decoration: none; }
+A:hover { text-decoration: underline; }
+
+
+
+
+A.red {            
+
+          a.red:{color="#AA0000";}
+
+          a.red:link { color: "#AA0000"; }          /* unvisited link */
+
+          a.red:visited { color: "#AA0000";}       /* visited links */
+
+          a.red:active { color: "#AA0000"; }        /* active links */  
+
+          a.red:hover { color: "#FF0000"; }        /* mouse on */
+
+      }
+
+A.green    {
+
+          a.green:{color="#008800";}
+
+          a.green:link { color: "#008800"; }          /* unvisited link */
+
+          a.green:visited { color: "#008800"; }       /* visited links */
+
+          a.green:active { color: "#008800"; }        /* active links */  
+
+          a.green:hover { color: "#00CC00"; }        /* mouse on */
+
+          }
+
+
+
+
+
+A.blue{
+
+         a.blue:{color="#0000BB";}
+
+         a.blue:link {color= "#0000BB";}
+
+         a.blue:visited{color="#0000BB";}
+
+         a.blue:active{color="#0000BB";}
+
+         a.blue:hover{color="#0000FF";}
+
+       }
+
+A.dkblue{
+
+         a.dkblue:{color="#000000";}
+
+         a.dkblue:link {color= "#000000";}
+
+         a.dkblue:visited{color="#000000";}
+
+         a.dkblue:active{color="#000000";}
+
+         a.dkblue:hover{color="#0000CC";}
+
+       }
+
+A.white{
+
+         a.white:{color="#FFFFFF";}
+
+         a.white:link {color= "#FFFFFF";}
+
+         a.white:visited{color="#FFFFFF";}
+
+         a.white:active{color="#FFFFFF";}
+
+         a.white:hover{color="#FFFFFF";}
+
+       }
+
+A.silver{
+
+         a.silver:{color="#C0C0C0";}
+
+         a.silver:link {color= "#C0C0C0";}
+
+         a.silver:visited{color="#C0C0C0";}
+
+         a.silver:active{color="#C0C0C0";}
+
+         a.silver:hover{color="#FFFFFF";}
+
+       }
+
+A.black{
+
+         a.black:{color="#000000";}
+
+         a.black:link {color= "#000000";}
+
+         a.black:visited{color="#000000";}
+
+         a.black:active{color="#000000";}
+
+         a.black:hover{color="#000000";}
+
+       }
+
+A.dkgrey{
+
+         a.dkgrey:{color="#333333";}
+
+         a.dkgrey:link {color= "#333333";}
+
+         a.dkgrey:visited{color="#333333";}
+
+         a.dkgrey:active{color="#333333";}
+
+         a.dkgrey:hover{color="#666666";}
+
+       }
+
+
+
+ 
+
+  /* setting the anchor border around IMG elements
+
+     requires contextual selectors */
+
+
+
+A.imglink1 {
+
+    A.imglink1:link IMG { border: 0px;}
+
+    A.imglink1:visited IMG { border: 0px;}
+
+    A.imglink1:active IMG { border: 0px;}
+  }

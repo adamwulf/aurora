@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>General Debugging Tips</title>
+<meta name='author' content='Mike Foster (Cross-Browser.com)' />
+<meta name='description' content='Cross-Browser DHTML Libraries and Applications' />
+<meta name='keywords' content='menu,dhtml,crossbrowser,layout,css,dom,api,library,demo,javascript,code' />
+<link rel='stylesheet' type='text/css' href='../../css/s6.css' />
+<style type='text/css'>
+</style>
+</head>
+<body>
+
+<div id='header'>
+<h1>Cross-Browser.com</h1>
+<div class='subtitle'>General Debugging Tips</div>
+</div> <!-- end header -->
+
+<div id='leftColumn' class='column'>
+<div class='leftContent'>
+
+
+<h2>Squash Those Bugs!</h2>
+
+<p>You can download some very nice Javascript debugging programs for a variety of platforms, but your initial debugging can be done with simple techniques right in your code. Most browsers will give the line number of an error - this is essential. Some browsers give better error descriptions than others. There are basically two types of errors: syntax errors, and logic errors.</p>
+<h3>Syntax Errors</h3>
+<p>A syntax error will occur when you have not followed the <i>grammer</i> of Javascript: forget to put two quotes around a string; forget to put a closing curly brace; have punctuation in the wrong place, etc. The browser will inform you of most syntax errors.</p>
+<h3>Logic Errors</h3>
+<p>After you correct your syntax errors, the script still may not work properly while running: it may be mis-calculating a value, or perhaps an <b>if</b> condition is using the logically wrong (but syntactically valid) operator. These are logic errors.</p>
+<p>Among the tools that most Debuggers provide for solving errors are <i>Watch Variables</i> and <i>Breakpoints</i>. You can utilize these same concepts without a debugger.</p>
+<h3>Watch Variables</h3>
+<p>A watch variable is a variable for which you want to watch the value, <i>as the script is running</i> - that is, as the page is active in a browser.</p>
+<p>A simple technique for using watch variables without a debugger is to use the window's <b>status bar</b> (some browsers are better at this than others). For example, in the following code fragment I want to <i>watch</i> the value of the variable <b>dx</b>. I insert line number 9. Notice the "//// debug" comment. I do this so I won't forget why I added this line, and so, later, I can search my file for "debug", and delete all those lines.</p>
+<p>Now I save the file, refresh the browser, and watch the value of dx on the status bar, as the script is running.</p>
+<pre>
+1:  if (cl + dx < 0) {
+2:    cl = 0;
+3:    dx = 0;
+4:  }
+5:  else if (cr + dx > this.width()) {
+6:    cr = cl + this.clipWidth();
+7:    dx = 0;
+8:  }
+9:  window.status = "dx: " + dx; ////////////////////// debug
+</pre>
+
+<h3>Break Points</h3>
+<p>There are times when a variable's value is changing too quickly to use a watch. You need to stop the script and look at the variable. A break point is a line in the script at which <i>the script stops running</i>. You can then look at the current values of variables. When you are ready, you let the script continue running.</p>
+<p>A simple technique for using break points without a debugger is to use Javascript's <b>alert()</b> function. This function stops the script, displays a message, and waits for the user to click the OK button. The script then continues executing. This technique is not <i>exactly</i> like a break point, but its close enough. For example, in the following code fragment I want to see the value of dx only if it enters the <i>else if</i> block, and before it is assigned zero. I insert line number 6.
+<pre>
+1:  if (cl + dx < 0) {
+2:    cl = 0;
+3:    dx = 0;
+4:  }
+5:  else if (cr + dx > this.width()) {
+6:    alert("dx: " + dx); ////////////////////// debug
+7:    cr = cl + this.clipWidth();
+8:    dx = 0;
+9:  }
+</pre>
+
+</div> <!-- end leftContent -->
+
+<div class='leftContent'>
+<a href='http://cross-browser.com/'>Cross-Browser.com</a> - DHTML libraries and applications.
+</div> <!-- end leftContent -->
+
+</div> <!-- end leftColumn -->
+
+<div id='rightColumn' class='column'>
+<div class='rightContent'>
+<p><b>Debugging Tips</b></p>
+<p>Syntax Errors</p>
+<p>Logic Errors</p>
+<p>Watch Variables</p>
+<p>Break Points</p>
+</div> <!-- end rightContent -->
+</div> <!-- end rightColumn -->
+
+</body>
+</html>
+
+
+
+
+
+
+
+

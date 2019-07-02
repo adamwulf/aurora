@@ -1,0 +1,58 @@
+/* xMenu1 Object Prototype
+
+  Parameters:
+    triggerId   - id string of element; when clicked shows menu.
+    menuId      - id string of menu.
+    mouseMargin - integer margin around menu;
+                  when mouse is outside this margin the menu is hid.
+*/
+
+function xMenu1(triggerId, menuId, mouseMargin)
+{
+  var trg = xGetElementById(triggerId);
+  var mnu = xGetElementById(menuId);
+  if (trg && mnu) {
+    xAddEventListener(trg, 'click', onClick, false);
+  }
+  function onClick()
+  {
+  var x, y, cw = xClientWidth(), ch = xClientHeight(), bw = xWidth(mnu), bh = xHeight(mnu);
+  /// find x
+  if (xPageX(trg) + bw > cw + xScrollLeft()) {
+    // align box right with label right
+    x = xPageX(trg) + xWidth(trg) - bw;
+  }
+  else {
+    // align box left with label left
+    x = xPageX(trg);
+  }
+  /// find y
+  if (xPageY(trg) + xHeight(trg) + bh > ch + xScrollTop()) {
+    // put box above label
+    y = xPageY(trg) - bh;
+  }
+  else {
+    // put box under label
+    y = xPageY(trg) + xHeight(trg);
+  }
+  
+  x += xScrollLeft(trg);
+  y += xScrollTop(trg);
+  
+  xMoveTo(mnu, x, y);
+
+  // xMoveTo(mnu, xPageX(trg), xPageY(trg) + xHeight(trg));
+    xShow(mnu);
+    xAddEventListener(document, 'mousemove', onMousemove, false);
+  }
+  function onMousemove(ev)
+  {
+    var e = new xEvent(ev);
+    if (!xHasPoint(mnu, e.pageX, e.pageY, -mouseMargin) &&
+        !xHasPoint(trg, e.pageX, e.pageY, -mouseMargin))
+    {
+      xHide(mnu);
+      xRemoveEventListener(document, 'mousemove', onMousemove, false);
+    }
+  }
+} // end xMenu1

@@ -1,0 +1,155 @@
+.container {
+	padding: 0px;
+	border: 1px solid black;
+}
+
+
+.txt {
+	width: 150px;
+}
+
+.main_color_box{
+	width: 40px;
+	height: 40px;
+	border: 1px solid black;
+	margin: 12px;
+}
+
+.cal_owner_style{
+	text-decoration: underline;
+	color: black;
+}
+
+.cal_owner_style:hover{
+	text-decoration: underline;
+	color: #333333;
+}
+
+.manage_cals_button{
+	font-family: verdana, sans-serif;
+	font-size: 8pt;
+	margin-top: 3px;
+	background: #EEEEEE;
+}
+
+.sharing_button{
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-right: 4px;
+	padding-left: 4px;
+	background: #EEEEEE;
+	border: 1px solid black;
+}
+
+.cal_checkbox{
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+}
+
+.cal_submit{
+	border: 1px solid black;
+}
+
+.item_style{
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+}
+
+table.sharing_item_style{
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+	padding: 2px;
+}
+
+.sharing_item_text{
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+}
+
+table.sharing_item_style:hover{
+	font-family: verdana, sans-serif;
+	font-size: 9pt;
+	border: 1px solid #9BA597;
+	background-color: #ACCEA5;
+	padding: 1px;
+}
+
+.list_border{
+	border-right: 1px solid #7B8577;
+}
+
+.info {
+	background-color: #F1F1F1;
+	margin-top: 12px;
+	margin-right: 12px;
+	margin-left: 12px;
+	border: 1px dotted;
+	width: 612px;
+	font-family: verdana;
+	font-size: 12px;
+	padding: 6px;
+}
+
+.cal_tab_light{
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	font-family: arial, sans-serif;
+	font-size: 9pt;
+	font-weight: normal;
+	color: black;
+	cursor: pointer;
+}
+
+.cal_tab_dark{
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 6px;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+	font-family: arial, sans-serif;
+	font-size: 9pt;
+	font-weight: normal;
+	color: #333333;
+	cursor: pointer;
+}
+
+.cal_holder{
+	font-family: arial, sans-serif;
+	font-size: 9pt;
+	font-weight: normal;
+	border-bottom: 1px solid black;
+}
+
+.sharing_content{
+	padding-top: 4px;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-bottom: 3px;
+}
+
+table.manage_cal_row:hover{
+	border-top: 1px solid black;
+	background-color: #ACCEA5;
+	border-bottom: 1px solid black;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+table.manage_cal_row{
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+

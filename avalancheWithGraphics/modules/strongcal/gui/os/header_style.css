@@ -1,0 +1,133 @@
+.calendarheader {
+	border-bottom: 1px solid #818080;
+}
+
+.header_left_content{
+	font-family: verdana;
+	font-size: 14px;
+	padding-left: 4px;
+}
+
+
+
+.aurora_view_icon{
+	width: 10px;
+	height: 10px;
+	margin: 2px;
+	border: 1px solid black;
+}
+
+.aurora_header_button{
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	font-weight: normal;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 11px;
+	font-family: verdana, sans-serif;
+	background: #ADB8D0;
+}
+
+.active_aurora_header_button{
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	font-weight: normal;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 11px;
+	font-family: verdana, sans-serif;
+	background: #FFFFFF;
+}
+
+table.aurora_header_button:hover{
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	font-weight: normal;
+	margin-left: 5px;
+	margin-right: 5px;
+	font-size: 11px;
+	font-family: verdana, sans-serif;
+	background: #FFFFFF;
+}
+
+.aurora_search_button{
+	padding-left: 3px;
+	padding-right: 3px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000;
+	font-weight: normal;
+	margin-left: 3px;
+	font-size: 11px;
+	font-family: verdana, sans-serif;
+	background: #ADB8D0;
+}
+
+.aurora_search_field{
+	margin-top: 1px;
+	border-right: 1px solid black;
+	border-top: 1px solid black;
+	border-left: 1px solid black;
+	border-bottom: 1px solid black;
+	background: #FFFFFF;
+}
+
+.aurora_search_no_border{
+	font-weight: normal;
+	font-size: 10px;
+	font-family: verdana, sans-serif;
+	border-width: 0px;
+	background: #FFFFFF;
+}
+
+.month_button {
+	width: 30px;
+	height: 25px;
+	background-image: url(monthsmall.gif);
+	background-repeat: no-repeat;
+		margin-left: 4px;
+	margin-right: 4px;
+}
+
+.day_button {
+	width: 30px;
+	height: 25px;
+	background-image: url(daysmall.gif);
+	background-repeat: no-repeat;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+.week_button {
+	width: 79px;
+	height: 16px;
+	background-image: url(week.gif);
+	background-repeat: no-repeat;
+		margin-left: 4px;
+	margin-right: 4px;
+}
+
+.bold_header{
+	font-family: verdana, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	width: 500px;
+}
+
+

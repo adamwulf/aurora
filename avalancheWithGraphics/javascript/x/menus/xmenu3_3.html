@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>xMenu3 Demo #1</title>
+<link rel='stylesheet' type='text/css' href='xmenu3_3.css' />
+<script type='text/javascript' src='../x_core.js'></script>
+<script type='text/javascript' src='../x_event.js'></script>
+<script type='text/javascript' src='xmenu3.js'></script>
+</head>
+
+<body>
+<script>
+window.onload = function() {
+  // Create menu 1
+  this.m1 = new xMenu('xMenu1',         // element id
+    'horizontal', 2, -6,                // mnuType, verOfs, hrzOfs
+    -12, -16, -20, -4,                  // lbl selection area clipping (top,right,bottom,left)
+    -32, null, null, null,              // box selection area clipping
+    'myHMBarLbl', 'myHMBarLblHvr',       // barLblOutStyle, barLblOvrStyle
+    'myHMBarLblHvrClosed',                // barLblOvrClosedStyle
+    'myMLbl', 'myMLblHvr',             // lblOutStyle, lblOvrStyle
+    'myHMBar', 'myMBox');            // barStyle, boxStyle
+
+  this.m1.load();
+  
+  // Set menu z's
+  xZIndex(this.m1.ele, 30);
+	this.m1.paint();
+	xShow(this.m1.ele);
+}
+
+function winOnResize() {
+	// paint menus
+	this.m1.paint();
+	xShow(this.m1.ele);
+}
+
+  xAddEventListener(window, 'resize', winOnResize);
+
+</script>
+<!-- xMenu1 -->
+
+<div id='xMenu1' class='xmBox'>
+  <div class='xmLbl'>sadfsafd</div>
+  <div class='xmBox'>
+    <div class='xmItm'>M1L1B item 1</div>
+    <div class='xmItm'>M1L1B item 2</div>
+    <div class='xmLbl'>M1L1L1</div>
+    <div class='xmBox'>
+      <div class='xmItm'>M1L1L1B item 1</div>
+      <div class='xmItm'>M1L1L1B item 2</div>
+      <div class='xmItm'>M1L1L1B item 3</div>
+      <div class='xmLbl'>M1L1L1L1</div>
+      <div class='xmBox'>
+        <div class='xmItm'>M1L1L1L1B item 1</div>
+        <div class='xmItm'>M1L1L1L1B item 2</div>
+        <div class='xmItm'>M1L1L1L1B item 3</div>
+        <div class='xmItm'>M1L1L1L1B item 4</div>
+      </div> <!-- end M1L1L1L1B -->
+      <div class='xmLbl'>M1L1L1L2</div>
+      <div class='xmBox'>
+        <div class='xmItm'>M1L1L1L2B item 1</div>
+        <div class='xmItm'>M1L1L1L2B item 2</div>
+        <div class='xmItm'>M1L1L1L2B item 3</div>
+        <div class='xmItm'>M1L1L1L2B item 4</div>
+      </div> <!-- end M1L1L1L2B -->
+      <div class='xmItm'>M1L1L1B item 4</div>
+    </div> <!-- end M1L1L1B -->
+    <div class='xmItm'>M1L1B item 4</div>
+    <div class='xmItm'>M1L1B item 5</div>
+  </div> <!-- end M1L1B -->
+</div> <!-- end xMenu1 -->
+
+</body>
+</html>
+

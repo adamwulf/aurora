@@ -1,0 +1,94 @@
+.color_box{
+	width: 10px;
+	height: 10px;
+	border: 1px solid black;
+	margin: 2px;
+}
+
+.main_color_box{
+	width: 30px;
+	height: 30px;
+	border: 1px solid black;
+	margin: 12px;
+}
+
+.main_color_box2 {
+	width: 40px;
+	height: 40px;
+	border: 1px solid black;
+	margin-right: 12px;
+	margin-bottom: 12px;
+}
+
+.mini_color_box {
+	width: 20px;
+	height: 20px;
+	border: 1px solid black;
+	margin: 6px;
+}
+
+.calendar_input{
+	border: 1px solid black;
+}
+
+#ownedby {
+	font-family: verdana;	
+	font-size: 12px;
+	padding-left: 18px;
+}
+
+.nobg {
+	background-color: #FFFFFF;
+	width: 100%;
+	height: 45px;
+	font-family: verdana;
+	font-size: 16px;
+
+
+}
+
+
+.editlite {
+	background-color: #F3F4D1;
+	
+}
+.edit {
+	background-color: #FEFFBC;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	padding: 12px;
+	border-top: 1px dotted;
+	border-bottom: 1px dotted;
+	font-family: verdana;
+	font-size: 12px;
+}
+
+.edit_text{
+	font-family: verdana;
+	font-size: 12px;
+}
+
+#choosecal {
+	font-size: 12px;
+}
+
+.info {
+	background-color: #ABB5A7;
+	margin: 12px;
+	border: 1px dotted;
+	width: 426px;
+	height: 250px;
+	font-family: verdana;
+	font-size: 12px;
+	padding: 6px;
+}
+
+.avatar_box {
+	position: relative;
+
+}
+
+.go_button{
+	border: 1px solid black;
+}
+

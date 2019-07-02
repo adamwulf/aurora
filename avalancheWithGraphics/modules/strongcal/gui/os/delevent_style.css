@@ -1,0 +1,38 @@
+.calendar_form {
+	padding: 4px;
+	border: 1px solid black;
+	width: 400px;
+	height: 100px;
+	background-color: #EEEEEE;
+}
+
+.form_header{
+	font-family: verdana, sans-serif;
+	font-size: 10pt;
+	color: black;
+	padding: 6px;
+}
+
+.form_cell_yes{
+	margin-right: 10px;
+	text-align: right;
+	width: 180px;
+}
+
+.form_cell_no{
+	margin-left: 10px;
+	text-align: left;
+	width: 180px;
+}
+
+.input{
+	border: 1px solid black;
+}
+
+.big_container {
+	padding: 0px;
+	background-color: #FFFFFF;
+	background-image: url("delevent.gif");
+	background-repeat: no-repeat;
+	
+}

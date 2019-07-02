@@ -1,0 +1,10 @@
+
+body{
+	margin: 0px;
+	padding: 0px;
+}
+
+.header_cell{
+	border-bottom: 1px solid black;
+	padding: 5px;
+}

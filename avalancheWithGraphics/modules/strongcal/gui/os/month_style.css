@@ -1,0 +1,46 @@
+.container {
+	padding: 0px;
+	border: 1px solid black;
+}
+
+
+.month_cell_text{
+	font: 9pt verdana, sans-serif;
+}
+
+.month_cell_title{
+	font: 9pt verdana, sans-serif;
+	font-weight: bold;
+	color: #516D9E;
+	padding:1px;
+}
+
+table.month_cell_title:hover{
+	border: 1px solid black;
+	padding: 0px;
+	background-color: silver;
+}
+
+
+.txt {
+	width: 150px;
+}
+
+.month_view_week_button{
+	width: 10px;
+	border: 1px solid black;
+	background: silver;
+	background-image: url(week_button.gif);
+}
+
+.top_row{
+	border: 1px solid black;
+	background: silver;
+	text-align: center;
+	height: 18px;
+}
+.top_corner{
+	width: 10px;
+	border: 1px solid black;
+	background: silver;
+}

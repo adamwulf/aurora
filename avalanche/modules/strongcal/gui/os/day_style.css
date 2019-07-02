@@ -1,0 +1,51 @@
+.container {
+	padding: 0px;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+
+.event_cell{
+	font: 9pt verdana, sans-serif;
+	border-bottom: 1px solid silver;
+	border-top: 1px solid silver;
+	border-left: 1px solid white;
+	border-right: 1px solid white;
+}
+
+.event_panel{
+	border: 1px solid gray;
+	padding: 4px;
+	overflow: hidden;
+}
+
+.event_panel_content{
+	font: 9pt verdana, sans-serif;
+}
+
+.event_cell_title{
+	font: 9pt verdana, sans-serif;
+	font-weight: bold;
+	color: #516D9E;
+}
+
+
+.time{
+	font: 9pt verdana, sans-serif;
+}
+
+.all_day_title{
+	font-size: 11pt;
+}
+
+.all_day_frame a{
+	color: #000000;
+	text-decoration: none;
+	font-size: 9pt;
+}
+
+.all_day_frame{
+	font-family: verdana, sans-serif;
+	border: 1px solid black;
+	padding: 4px;
+}
