@@ -356,9 +356,9 @@ class module_strongcal_recurrance {
 	//		RECUR_DAILY					//
 	//		RECUR_WEEKLY					//
 	//		RECUR_MONTHLY					//
-	//		RECUR_YEARLY					//  
-	//								//  
-	//  precondition:						//  
+	//		RECUR_YEARLY					//
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -376,8 +376,8 @@ class module_strongcal_recurrance {
 	//		RECUR_NO_END_DATE				//
 	//		RECUR_END_AFTER					//
 	//		RECUR_END_BY					//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -386,7 +386,7 @@ class module_strongcal_recurrance {
 	function endType(){
 		return $this->_end_type;
 	}
-	
+
 	//////////////////////////////////////////////////////////////////
 	//  monthly_type()						//
 	//--------------------------------------------------------------//
@@ -394,8 +394,8 @@ class module_strongcal_recurrance {
 	//  output: the monthly type of this recurrance pattern		//
 	//		RECUR_MONTHLY_DOM				//
 	//		RECUR_MONTHLY_DOW				//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -404,7 +404,7 @@ class module_strongcal_recurrance {
 	function monthlyType(){
 		return $this->_month_type;
 	}
-	
+
 
 	//////////////////////////////////////////////////////////////////
 	//  yearly_type()						//
@@ -413,8 +413,8 @@ class module_strongcal_recurrance {
 	//  output: the yearly type of this recurrance pattern		//
 	//		RECUR_YEARLY_DOM				//
 	//		RECUR_YEARLY_DOW				//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -423,7 +423,7 @@ class module_strongcal_recurrance {
 	function yearlyType(){
 		return $this->_year_type;
 	}
-	
+
 
 
 	//////////////////////////////////////////////////////////////////
@@ -435,8 +435,8 @@ class module_strongcal_recurrance {
 	//		RECUR_END_AFTER					//
 	//		RECUR_END_BY					//
 	//  output: none						//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -489,8 +489,8 @@ class module_strongcal_recurrance {
 	//		must be one of the form:			//
 	//		yyyy-mm-dd					//
 	//  output: none						//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -519,8 +519,8 @@ class module_strongcal_recurrance {
 	//  input: $day_count - the number of days to recur		//
 	//		"Recur every ____ day(s)"			//
 	//  output: none						//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -552,10 +552,10 @@ class module_strongcal_recurrance {
 	//	   $week_days - a string representatio of what weekdays //
 	//		to recur on. Each day is represented by its	//
 	//		number.						//
-	//		0 (for Sunday) through 6 (for Saturday)		// 
+	//		0 (for Sunday) through 6 (for Saturday)		//
 	//  output: none						//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -598,10 +598,10 @@ class module_strongcal_recurrance {
 	//		week in the case of DOW.			//
 	//	   $month_weekday - the integer representation of the	//
 	//		weekday to recur on (only applies to DOW)	//
-	//		0 (for Sunday) through 6 (for Saturday)		// 
+	//		0 (for Sunday) through 6 (for Saturday)		//
 	//  output: none						//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -666,10 +666,10 @@ class module_strongcal_recurrance {
 	//		week in the case of DOW.			//
 	//	   $month_weekday - the integer representation of the	//
 	//		weekday to recur on (only applies to DOW)	//
-	//		0 (for Sunday) through 6 (for Saturday)		// 
+	//		0 (for Sunday) through 6 (for Saturday)		//
 	//  output: none						//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -736,8 +736,8 @@ class module_strongcal_recurrance {
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: the id of this recurrance				//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -752,8 +752,8 @@ class module_strongcal_recurrance {
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: the calendar of this recurrance			//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -802,10 +802,10 @@ class module_strongcal_recurrance {
 	//  compareTo($recurance)					//
 	//--------------------------------------------------------------//
 	//  input: $recurrance - the recurrance patter to compare to	//
-	//								//  
+	//								//
 	//  output: boolean, true if fields are equal			//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//								//
 	//  postcondition:						//
 	//								//
@@ -868,7 +868,7 @@ class module_strongcal_recurrance {
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $cal->getId() . "_recur WHERE id = '$id'";
 			$result = $this->avalanche->mysql_query($sql);
 		}
-		while(is_object($cal) && $id && $myrow = mysql_fetch_array($result)){
+		while(is_object($cal) && $id && $myrow = mysqli_fetch_array($result)){
 			$this->_id            = $myrow['id'];
 			$this->_start_time    = $myrow['start_time'];
 			$this->_end_time      = $myrow['end_time'];
@@ -946,7 +946,7 @@ class module_strongcal_recurrance {
 		$sql = "INSERT INTO $tablename (`start_time`) VALUES ('00:00:00')";
 		$result = $this->avalanche->mysql_query($sql);
 
-		$id = mysql_insert_id();
+		$id = mysqli_insert_id($this->avalanche->mysqliLink());
 		$this->_id = $id;
 		return $this;
 	}
@@ -1022,7 +1022,7 @@ class module_strongcal_recurrance {
 							$month_count++;
 							$start_month = date("m", $start_date);
 						}
-						if($this->_month_day == date("d", $start_date) && 
+						if($this->_month_day == date("d", $start_date) &&
 						   ($month_count % $this->_month_months == 0) &&
 						   date("Y-m-d", $start_date) >= $this->_start_date){
 							$events_count++;
@@ -1053,8 +1053,8 @@ class module_strongcal_recurrance {
 						if($this->_month_weekday == date("w", $start_date)){
 							$dow_count++;
 						}
-						if(($this->_month_week == $dow_count) && 
-							($this->_month_weekday == date("w", $start_date)) && 
+						if(($this->_month_week == $dow_count) &&
+							($this->_month_weekday == date("w", $start_date)) &&
 							($month_count % $this->_month_months == 0) &&
 							date("Y-m-d", $start_date) >= $this->_start_date){
 							$events_count++;
@@ -1075,7 +1075,7 @@ class module_strongcal_recurrance {
 					$events_count=0;
 					while($this->_end_type != RECUR_END_AFTER && (date("Y-m-d", $start_date) <= date("Y-m-d", $end_date)) ||
 						($this->_end_type == RECUR_END_AFTER && $events_count < $this->_end_after )){
-						if($this->_year_day == date("d", $start_date) && 
+						if($this->_year_day == date("d", $start_date) &&
 							($this->_year_month == date("m", $start_date))){
 							$events_count++;
 							$ret[] = date("Y-m-d", $start_date);
@@ -1104,8 +1104,8 @@ class module_strongcal_recurrance {
 						if($this->_year_weekday == date("w", $start_date)){
 							$dow_count++;
 						}
-						if(($this->_year_week == $dow_count) && 
-							($this->_year_weekday == date("w", $start_date)) && 
+						if(($this->_year_week == $dow_count) &&
+							($this->_year_weekday == date("w", $start_date)) &&
 							($this->_year_month == date("m", $start_date))){
 							$events_count++;
 							$ret[] = date("Y-m-d", $start_date);

@@ -16,7 +16,7 @@ class visitor_search_new extends visitor_basic_search{
 					$cal_array = array();
 					$sql = "SELECT id FROM " . $this->avalanche->PREFIX() . "strongcal_calendars WHERE added_on > '" . $this->search_terms . "'";
 					$result = $this->avalanche->mysql_query($sql);
-					while($myrow = mysql_fetch_array($result)){
+					while($myrow = mysqli_fetch_array($result)){
 						$cal = $module->getCalendarFromDb($myrow["id"]);
 						if($cal->author() != $this->avalanche->getActiveUser()){
 							if(is_object($cal) && $cal->canReadName()){
@@ -66,7 +66,7 @@ class visitor_search_new extends visitor_basic_search{
 							$comments_from_cal = array();
 							$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $cal->getId() . "_comments WHERE post_date > '" . $this->search_terms . "'";
 							$result = $this->avalanche->mysql_query($sql);
-							while($myrow = mysql_fetch_array($result)){
+							while($myrow = mysqli_fetch_array($result)){
 								if($myrow["author"] != $this->avalanche->getActiveUser()){
 									$myrow["id"] = (int)$myrow["id"];
 									$myrow["event_id"] = (int)$myrow["event_id"];
@@ -110,7 +110,7 @@ class visitor_search_new extends visitor_basic_search{
 					$task_results = array();
 					$sql = "SELECT id FROM " . $this->avalanche->PREFIX() . "taskman_tasks WHERE created_on > '" . $this->search_terms . "' AND ( 0 $cal_ids)";
 					$result = $this->avalanche->mysql_query($sql);
-					while($myrow = mysql_fetch_array($result)){
+					while($myrow = mysqli_fetch_array($result)){
 						$task = $module->getTask((int)$myrow["id"]);
 						if($task->author() != $this->avalanche->getActiveUser()){
 							$task_results[] = $task;

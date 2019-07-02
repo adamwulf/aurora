@@ -137,7 +137,7 @@ class ExportCalendarVisitor implements module_strongcal_visitor, module_taskman_
 		$author = $this->avalanche->getUser($event->author());
 		$output .= "ORGANIZER" . ";CN=" . $name . ":MAILTO:" . $author->email() . "\r\n";
 		$start = $event->getValue("start_date") . " " . $event->getValue("start_time");
-		$start = new DateTime($start);
+		$start = new MMDateTime($start);
 		if($event->isAllDay()){
 			$start = ";VALUE=DATE:" . date("Ymd", $start->getTimeStamp());
 		}else{
@@ -145,7 +145,7 @@ class ExportCalendarVisitor implements module_strongcal_visitor, module_taskman_
 		}
 		$output .= "DTSTART" . $start . "\r\n";
 		$end = $event->getValue("end_date") . " " . $event->getValue("end_time");
-		$end = new DateTime($end);
+		$end = new MMDateTime($end);
 		if($event->isAllDay()){
 			$end = ";VALUE=DATE:" . date("Ymd", $end->getTimeStamp());
 		}else{
@@ -155,7 +155,7 @@ class ExportCalendarVisitor implements module_strongcal_visitor, module_taskman_
 		$output .= "TRANSP:OPAQUE\r\n";
 		$output .= "UID:" . $id . "_" . $this->avalanche->DOMAIN() . "_" . $event->calendar()->getId() . "_" . $event->getId() . "\r\n";
 		$added = $event->added_on();
-		$added = new DateTime($added);
+		$added = new MMDateTime($added);
 		$added = date("Ymd\THi00\Z", $added->getTimeStamp());
 		$output .= "DTSTAMP:" . $added . "\r\n";
 		$output .= "DESCRIPTION;ENCODING=QUOTED-PRINTABLE:" . str_replace('\n', '=0D=0A=',str_replace('\r', '=0D=0A=', $this->quotedPrintableEncode($event->getDisplayValue("description")))) . "\r\n";
@@ -225,12 +225,12 @@ class ExportCalendarVisitor implements module_strongcal_visitor, module_taskman_
 			$output .= "ORGANIZER" . ";CN=" . $name . ":MAILTO:" . $assignee->email() . "\r\n";
 			$due = $task->due();
 			$due = $taskman->adjustToGMT($due);
-			$due = new DateTime($due);
+			$due = new MMDateTime($due);
 			$due = date("Ymd\THi00\Z", $due->getTimeStamp());
 			$output .= "DUE:" . $due . "\r\n";
 			$output .= "UID:" . $id . "_" . $this->avalanche->DOMAIN() . "_" . $task->getId() . "\r\n";
 			$added = $task->createdOn();
-			$added = new DateTime($added);
+			$added = new MMDateTime($added);
 			$added = date("Ymd\THi00\Z", $added->getTimeStamp());
 			$output .= "DTSTAMP:" . $added . "\r\n";
 			$output .= "DESCRIPTION;ENCODING=QUOTED-PRINTABLE:" . str_replace('\n', '=0D=0A=',str_replace('\r', '=0D=0A=', $this->quotedPrintableEncode($task->description()))) . "\r\n";
@@ -247,7 +247,7 @@ class ExportCalendarVisitor implements module_strongcal_visitor, module_taskman_
 			$output .= "STATUS:" . $this->getStatusName($task->status()) . "\r\n";
 			if($task->completed() != "0000-00-00 00:00:00"){
 				$completed = $task->completed();
-				$completed = new DateTime($completed);
+				$completed = new MMDateTime($completed);
 				$completed = date("Ymd\THi00\Z", $completed->getTimeStamp());
 				$output .= "COMPLETED:" . $completed . "\r\n";
 			}

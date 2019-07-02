@@ -125,7 +125,7 @@ class module_bootstrap_accounts_manage_gui extends module_bootstrap_module{
 							$time_old = $days_old . " days";
 						}
 						$account_panel->add(new Text($time_old));
-						$expire = new DateTime($account->expiresOn());
+						$expire = new MMDateTime($account->expiresOn());
 						$expire = date("M jS, `y H:i", $expire->getTimestamp());
 						$account_panel->add(new Text($expire));
 						$account_panel->add(new Link($account->email(), "mailto:" . $account->email()));

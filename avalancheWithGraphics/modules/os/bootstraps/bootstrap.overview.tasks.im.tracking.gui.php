@@ -123,7 +123,7 @@ class module_bootstrap_os_overview_tasks_im_tracking_gui extends module_bootstra
 				// header for day
 				foreach($tasks as $task){
 					$total_height += 16;
-					$modifiedOn = new DateTime($task->modifiedOn());
+					$modifiedOn = new MMDateTime($task->modifiedOn());
 					$stamp = $modifiedOn->getTimeStamp();
 					$modifiedOn = $modifiedOn->toString();
 					if($today != substr($modifiedOn, 0, 10)){
@@ -179,7 +179,7 @@ class module_bootstrap_os_overview_tasks_im_tracking_gui extends module_bootstra
 					$status_panel->add($status);
 					$status_panel->add($username);
 					// find due date
-					$due = new DateTime($task->due());
+					$due = new MMDateTime($task->due());
 					if(substr($due->toString(),0,10) == date("Y-m-d", $strongcal->localtimestamp())){
 						$due = date("g:ia", $due->getTimeStamp());
 						$due = substr($due, 0, strlen($due)-1);

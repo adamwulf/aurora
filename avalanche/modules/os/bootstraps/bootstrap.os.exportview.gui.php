@@ -85,7 +85,7 @@ class module_bootstrap_os_export_gui extends module_bootstrap_module{
 					
 					// make the time midnight...
 					$date .= " 00:00:00";
-					$date = new DateTime($date);
+					$date = new MMDateTime($date);
 					$title = "Export " . ucwords($range);
 					if($range == "month"){
 						$description = date("F, Y", $date->getTimeStamp());

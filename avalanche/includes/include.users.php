@@ -69,7 +69,7 @@ class avalanche_user{
 		if($this->_loaded === false){
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "users WHERE id='" . $this->getId() . "'";
 			$result = $this->avalanche->mysql_query($sql);
-			if($myrow = mysql_fetch_array($result)){
+			if($myrow = mysqli_fetch_array($result)){
 				$this->_user_data = $myrow;
 				$this->_loaded = true;
 			}else{
@@ -82,7 +82,7 @@ class avalanche_user{
 		if(!$this->_avatar_loaded){
 			$sql = "SELECT id, avatar FROM " . $this->avalanche->PREFIX() . "users WHERE id='" . $this->getId() . "'";
 			$result = $this->avalanche->mysql_query($sql);
-			if($myrow = mysql_fetch_array($result)){
+			if($myrow = mysqli_fetch_array($result)){
 				$this->_user_data["avatar"] = $myrow["avatar"];
 				$this->_avatar_loaded = true;
 			}else{
@@ -458,7 +458,7 @@ class avalanche_user{
 		$user_id = $this->getId();
 		if($this->avalanche->loggedInHuh($user_id)){
 			$result = $this->avalanche->mysql_query("SELECT * FROM " . $this->avalanche->PREFIX() . "loggedinusers WHERE user_id='" . $user_id . "'");
-			while ($myrow = mysql_fetch_array($result)) {
+			while ($myrow = mysqli_fetch_array($result)) {
 				return $myrow['last_active'];
 			}
 			throw new Exception("cannot find user: $user_id");
@@ -471,7 +471,7 @@ class avalanche_user{
 		$this->reload();
 		$user_id = $this->getId();
 		$result = $this->avalanche->mysql_query("SELECT * FROM " . $this->avalanche->PREFIX() . "users WHERE id='" . $user_id . "'");
-		while ($myrow = mysql_fetch_array($result)) {
+		while ($myrow = mysqli_fetch_array($result)) {
 			return $myrow['last_login'];
 		}
 		throw new Exception("cannot find user: $user_id");
@@ -481,7 +481,7 @@ class avalanche_user{
 		$this->reload();
 		$user_id = $this->getId();
 		$result = $this->avalanche->mysql_query("SELECT * FROM " . $this->avalanche->PREFIX() . "users WHERE id='" . $user_id . "'");
-		while ($myrow = mysql_fetch_array($result)) {
+		while ($myrow = mysqli_fetch_array($result)) {
 			return $myrow['last_logout'];
 		}
 		throw new Exception("cannot find user: $user_id");

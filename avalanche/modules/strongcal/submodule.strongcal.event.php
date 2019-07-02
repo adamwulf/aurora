@@ -625,7 +625,7 @@ class module_strongcal_event{
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $cal->getId() . " WHERE id = '$id'";
 			$result = $this->avalanche->mysql_query($sql);
 
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$field = "recur_id";
 				$temp_recur_id = $myrow[$field];
 				$this->_recurrance_is_loaded = false;
@@ -687,7 +687,7 @@ class module_strongcal_event{
 			$table = $this->avalanche->PREFIX() . "strongcal_attendees";
 			$sql = "SELECT * FROM $table WHERE cal_id='" . $this->calendar()->getId() . "' AND event_id='" . $this->getId() . "'";
 			$result = $this->avalanche->mysql_query($sql);
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$attendee = new module_strongcal_attendee($this->avalanche, $this, $myrow);
 				$id = (int)$myrow["user_id"];
 				if(is_object($this->_attendees->get($id))){
@@ -710,7 +710,7 @@ class module_strongcal_event{
 			$table = $this->avalanche->PREFIX() . "strongcal_attendees";
 			$sql = "INSERT INTO $table (`cal_id`,`event_id`,`user_id`) VALUES ('" . $this->calendar()->getId() . "','" . $this->getId() . "','$user_id')";
 			$result = $this->avalanche->mysql_query($sql);
-			$id = (int) mysql_insert_id();
+			$id = (int) mysqli_insert_id($this->avalanche->mysqliLink());
 			$attendee = new module_strongcal_attendee($this->avalanche, $this, $id);
 
 			// load attendees
@@ -768,7 +768,7 @@ class module_strongcal_event{
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->calendar()->getId() . " WHERE id='" . $this->getId() . "'";
 			$result = $this->avalanche->mysql_query($sql);
 
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$field = "recur_id";
 				$temp_recur_id = $myrow[$field];
 				$this->_recurrance_is_loaded = false;
@@ -860,7 +860,7 @@ class module_strongcal_event{
 				$event_id = $this->getId();
 				$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $cal->getId() . "_comments WHERE event_id = '$event_id' ORDER BY post_date DESC";
 				$result = $this->avalanche->mysql_query($sql);
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					$author = $myrow['author'];
 					if($sleep){
 						$author = $this->avalanche->getUsername($author);
@@ -963,7 +963,7 @@ class module_strongcal_event{
 				if($result){
 					$this->_has_comments += 1;
 					if($this->_comments_loaded){
-						$ret = array("id" => mysql_insert_id(),
+						$ret = array("id" => mysql_insert_id($this->avalanche->mysqliLink()),
 								"author" => $author,
 								"date" => $post_date,
 								"title" => strip_slashes($title),
@@ -1126,7 +1126,7 @@ class module_strongcal_event{
 		if($sets && $cal->canWriteValidations()){
 			$sql = "SELECT * FROM $tablename WHERE $where";
 			$result = $this->avalanche->mysql_query($sql);
-			if(mysql_fetch_array($result)){
+			if(mysqli_fetch_array($result)){
 				return true;
 			}else{
 				return false;
@@ -1165,7 +1165,7 @@ class module_strongcal_event{
 			$recur_id = $this->_old_recur->getId();
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $cal->getId() . " WHERE recur_id = '$recur_id' AND id != '" . $this->getId() . "'";
 			$result = $this->avalanche->mysql_query($sql);
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$this->_calendar->removeEvent($myrow['id']);
 			}
 		}

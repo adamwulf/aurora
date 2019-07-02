@@ -24,7 +24,7 @@ class visitor_getAllUsergroups extends visitor_template{
 		}else{
 			throw new Exception("no case for object of type " . get_class($obj));
 		}
-		
+
 	}
 
 
@@ -34,7 +34,7 @@ class visitor_getAllUsergroups extends visitor_template{
 		$ok = false;
 	        $sql = "SELECT * FROM " . $avalanche->PREFIX() . "usergroups ORDER BY type ASC";
 	        $result = $avalanche->mysql_query($sql);
-	        while ($myrow = mysql_fetch_array($result)) {
+	        while ($myrow = mysqli_fetch_array($result)) {
 			$ok = true;
 			$group = $avalanche->getUsergroup((int)$myrow['id']);
 			$ret[] = $group;
@@ -48,7 +48,7 @@ class visitor_getAllUsergroups extends visitor_template{
 				$ret[] = $group;
 			}
 		}
-		
+
 		if($ok){
 		        return $ret;
 		}else{

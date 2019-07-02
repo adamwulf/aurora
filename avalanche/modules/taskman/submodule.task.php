@@ -158,8 +158,8 @@ class module_taskman_task{
 			if($this->canWrite()){
 				$sql = "UPDATE `" . $this->avalanche->PREFIX() . $this->taskman->folder() . "_tasks` SET `author`=\"" . $author . "\" WHERE id='" . $this->id . "'";
 				$result = $this->avalanche->mysql_query($sql);
-				if(mysql_error()){
-					throw new DatabaseException(mysql_error());
+				if(mysqli_error($this->avalanche->mysqliLink())){
+					throw new DatabaseException(mysqli_error($this->avalanche->mysqliLink()));
 				}
 				$this->author = $author;
 				return $author;
@@ -199,8 +199,8 @@ class module_taskman_task{
 			if($this->canWrite()){
 				$sql = "UPDATE `" . $this->avalanche->PREFIX() . $this->taskman->folder() . "_tasks` SET `completed`=\"" . $completed . "\" WHERE id='" . $this->id . "'";
 				$result = $this->avalanche->mysql_query($sql);
-				if(mysql_error()){
-					throw new DatabaseException(mysql_error());
+				if(mysqli_error($this->avalanche->mysqliLink())){
+					throw new DatabaseException(mysqli_error($this->avalanche->mysqliLink()));
 				}
 				$this->completed_datetime = $completed;
 				return $this->taskman->adjustFromGMT($completed);
@@ -223,8 +223,8 @@ class module_taskman_task{
 			if($this->canWrite()){
 				$sql = "UPDATE `" . $this->avalanche->PREFIX() . $this->taskman->folder() . "_tasks` SET `cancelled`=\"" . $cancelled . "\" WHERE id='" . $this->id . "'";
 				$result = $this->avalanche->mysql_query($sql);
-				if(mysql_error()){
-					throw new DatabaseException(mysql_error());
+				if(mysqli_error($this->avalanche->mysqliLink())){
+					throw new DatabaseException(mysqli_error($this->avalanche->mysqliLink()));
 				}
 				$this->cancelled_datetime = $cancelled;
 				return $this->taskman->adjustFromGMT($cancelled);
@@ -260,8 +260,8 @@ class module_taskman_task{
 			if($this->canWrite()){
 				$sql = "UPDATE `" . $this->avalanche->PREFIX() . $this->taskman->folder() . "_tasks` SET `modified_on`=\"" . $modifiedOn . "\" WHERE id='" . $this->id . "'";
 				$result = $this->avalanche->mysql_query($sql);
-				if(mysql_error()){
-					throw new DatabaseException(mysql_error());
+				if(mysqli_error($this->avalanche->mysqliLink())){
+					throw new DatabaseException(mysqli_error($this->avalanche->mysqliLink()));
 				}
 				$this->modified_datetime = $modifiedOn;
 				return $this->taskman->adjustFromGMT($modifiedOn);
@@ -285,8 +285,8 @@ class module_taskman_task{
 				$due = $this->taskman->adjustToGMT($due);
 				$sql = "UPDATE `" . $this->avalanche->PREFIX() . $this->taskman->folder() . "_tasks` SET `due`=\"" . $due . "\" WHERE id='" . $this->id . "'";
 				$result = $this->avalanche->mysql_query($sql);
-				if(mysql_error()){
-					throw new DatabaseException(mysql_error());
+				if(mysqli_error($this->avalanche->mysqliLink())){
+					throw new DatabaseException(mysqli_error($this->avalanche->mysqliLink()));
 				}
 				$this->due_datetime = $due;
 				$this->setModified();
@@ -314,8 +314,8 @@ class module_taskman_task{
 			if($this->canWrite()){
 				$sql = "UPDATE `" . $this->avalanche->PREFIX() . $this->taskman->folder() . "_tasks` SET `summary`=\"" . $title . "\" WHERE id='" . $this->id . "'";
 				$result = $this->avalanche->mysql_query($sql);
-				if(mysql_error()){
-					throw new DatabaseException(mysql_error());
+				if(mysqli_error()){
+					throw new DatabaseException(mysqli_error());
 				}
 				$this->title = $title;
 				$this->setModified();
@@ -465,11 +465,11 @@ class module_taskman_task{
 		$task_id = $this->getId();
 		$sql = "SELECT $task_table.id AS task_id, $task_table.author, $status_table.status, $status_table.to_user_id AS assigned_to, $status_table.user_id AS modified_by, $status_table.stamp , $status_table.comment FROM $task_table, $status_table WHERE $task_table.id = $task_id AND $task_table.id = $status_table.task_id ORDER BY $status_table.stamp DESC, $status_table.id DESC";
 		$result = $this->avalanche->mysql_query($sql);
-		if(mysql_error()){
-			throw new DatabaseException(mysql_error());
+		if(mysqli_error($this->avalanche->mysqliLink())){
+			throw new DatabaseException(mysqli_error($this->avalanche->mysqliLink()));
 		}
 		$status = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			// datetime of change
 			$myrow["stamp"] = $myrow["stamp"];
 			// the author id of the task
@@ -506,8 +506,8 @@ class module_taskman_task{
 			if($this->canWrite()){
 				$sql = "UPDATE `" . $this->avalanche->PREFIX() . $this->taskman->folder() . "_tasks` SET `priority`=\"" . $priority . "\" WHERE id='" . $this->id . "'";
 				$result = $this->avalanche->mysql_query($sql);
-				if(mysql_error()){
-					throw new DatabaseException(mysql_error());
+				if(mysqli_error($this->avalanche->mysqliLink())){
+					throw new DatabaseException(mysqli_error($this->avalanche->mysqliLink()));
 				}
 				$this->priority = $priority;
 				$this->setModified();

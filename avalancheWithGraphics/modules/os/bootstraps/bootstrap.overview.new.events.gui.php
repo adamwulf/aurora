@@ -123,7 +123,7 @@ class module_bootstrap_os_overview_new_events_gui extends module_bootstrap_modul
 						$r = $event->stealRecurrance();
 						$list_of_series->put($r->getId(), true);
 				    }
-					$added_on_time = new DateTime($event->added_on());
+					$added_on_time = new MMDateTime($event->added_on());
 					$added_on_time->hour($added_on_time->hour() + (int)floor($strongcal->timezone()));
 					$added_on_time->minute($added_on_time->minute() + (int)(60 * ($strongcal->timezone() - floor($strongcal->timezone()))));
 					$added_on_time = $added_on_time->toString();

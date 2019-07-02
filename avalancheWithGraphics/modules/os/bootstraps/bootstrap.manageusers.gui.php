@@ -597,7 +597,7 @@ class module_bootstrap_os_manageusers_gui extends module_bootstrap_module{
 					$info_panel->add($bottom);
 
 					try{
-						$lastActive = new DateTime($main_user->lastActive());
+						$lastActive = new MMDateTime($main_user->lastActive());
 						$lastActive->hour((int)($lastActive->hour() + $strongcal->timezone()));
 						$lastActive->minute((int)(($strongcal->timezone() - round($strongcal->timezone(),0))*60));
 						$lastActive = $lastActive->toString();
@@ -605,7 +605,7 @@ class module_bootstrap_os_manageusers_gui extends module_bootstrap_module{
 						$lastActive = "never";
 					}
 					try{
-						$lastLoggedIn = new DateTime($main_user->lastLoggedIn());
+						$lastLoggedIn = new MMDateTime($main_user->lastLoggedIn());
 						$lastLoggedIn->hour((int)($lastLoggedIn->hour() + $strongcal->timezone()));
 						$lastLoggedIn->minute((int)(($strongcal->timezone() - round($strongcal->timezone(),0))*60));
 						$lastLoggedIn = $lastLoggedIn->toString();
@@ -614,7 +614,7 @@ class module_bootstrap_os_manageusers_gui extends module_bootstrap_module{
 					}
 
 					try{
-						$lastLoggedOut = new DateTime($main_user->lastLoggedOut());
+						$lastLoggedOut = new MMDateTime($main_user->lastLoggedOut());
 						$lastLoggedOut->hour((int)($lastLoggedOut->hour() + $strongcal->timezone()));
 						$lastLoggedOut->minute((int)(($strongcal->timezone() - round($strongcal->timezone(),0))*60));
 						$lastLoggedOut = $lastLoggedOut->toString();

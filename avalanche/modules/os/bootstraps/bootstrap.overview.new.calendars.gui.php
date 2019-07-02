@@ -111,7 +111,7 @@ class module_bootstrap_os_overview_new_calendars_gui extends module_bootstrap_mo
 			$has_calendars = count($calendar_list);
 
 			foreach($calendar_list as $calendar){
-				$added_on_time = new DateTime($calendar->addedOn());
+				$added_on_time = new MMDateTime($calendar->addedOn());
 				$added_on_time->hour($added_on_time->hour() + (int)floor($strongcal->timezone()));
 				$added_on_time->minute($added_on_time->minute() + (int)(60 * ($strongcal->timezone() - floor($strongcal->timezone()))));
 				$added_on_time = $added_on_time->toString();

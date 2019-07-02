@@ -79,14 +79,14 @@ $fileloader->include_recursive(ROOT . APPPATH . MODULES . "reminder/bootstraps/"
 //////////////////////////////////////////////////////////////////
 //Syntax - module classes should always start with module_ followed by the module's install folder (name)
 class module_reminder extends module_template implements module_strongcal_listener, module_taskman_listener {
-	
+
 	//////////////////////////////////////////////////////////////////
 	//  __construct()						//
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: none						//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	should only be called once				//
 	//	(command.php of avalanche will include this		//
 	//	   file after installation)				//
@@ -101,18 +101,18 @@ class module_reminder extends module_template implements module_strongcal_listen
 	//								//
 	//	I.E.	module_strongcal::init();			//
 	//////////////////////////////////////////////////////////////////
-	
+
 	public function avalanche(){
 		return $this->avalanche;
 	}
-	
+
 	private $avalanche;
 	private $reminder_cache;
 	function __construct($avalanche){
 		$this->avalanche = $avalanche;
 		$this->_name = "Inversion Reminder";
-		$this->_version = "1.0.0";	
-		$this->_desc = "Reminder for Inversion Designs.";	
+		$this->_version = "1.0.0";
+		$this->_desc = "Reminder for Inversion Designs.";
 		$this->_folder = "reminder";
 		$this->_copyright = "Copyright 2004 Inversion Designs";
 		$this->_author = "Adam Wulf";
@@ -131,7 +131,7 @@ class module_reminder extends module_template implements module_strongcal_listen
 		if($this->avalanche->loggedInHuh()){
 			$sql = "INSERT INTO " . $this->avalanche->PREFIX() . $this->folder() . "_reminders (`author`) VALUES ('" . $this->avalanche->loggedInHuh() . "')";
 			$result = $this->avalanche->mysql_query($sql);
-			$reminder = new module_reminder_reminder($this->avalanche, mysql_insert_id());
+			$reminder = new module_reminder_reminder($this->avalanche, mysql_insert_id($this->avalanche->mysqliLink()));
 			$reminder->addUser($this->avalanche->getActiveUser());
 			$this->reminder_cache->put($reminder->getId(), $reminder);
 		}else{
@@ -162,9 +162,9 @@ class module_reminder extends module_template implements module_strongcal_listen
 			$field = "reminder_id";
 		}
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if(is_object($this->reminder_cache->get((int)$myrow[$field]))){
 				$ret[] = $this->reminder_cache->get((int)$myrow[$field]);
 			}else{
@@ -175,7 +175,7 @@ class module_reminder extends module_template implements module_strongcal_listen
 		}
 		return $ret;
 	}
-	
+
 	// get's all reminders for a user for an event/task
 	function getMyRemindersFor($item, $user_id=false){
 		if($user_id === false){
@@ -195,9 +195,9 @@ class module_reminder extends module_template implements module_strongcal_listen
 			$field = "reminder_id";
 		}
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if(is_object($this->reminder_cache->get((int)$myrow[$field]))){
 				$ret[] = $this->reminder_cache->get((int)$myrow[$field]);
 			}else{
@@ -208,8 +208,8 @@ class module_reminder extends module_template implements module_strongcal_listen
 		}
 		return $ret;
 	}
-	
-	
+
+
 	// get's all reminders this user author'd
 	// or for an event, or a task
 	function getRemindersBefore($datetime){
@@ -222,9 +222,9 @@ class module_reminder extends module_template implements module_strongcal_listen
 		$sql = "SELECT * FROM $reminder_table WHERE `send_on` <= '" . $datetime . "' AND sent_on = '0000-00-00 00:00:00'";
 		$field = "id";
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if(is_object($this->reminder_cache->get((int)$myrow[$field]))){
 				$r = $this->reminder_cache->get((int)$myrow[$field]);
 			}else{
@@ -238,7 +238,7 @@ class module_reminder extends module_template implements module_strongcal_listen
 		}
 		return $ret;
 	}
-	
+
 	function getReminder($reminder_id){
 		if(!is_int($reminder_id)){
 			throw new IllegalArgumentException("argument to " . __METHOD__ . " must be an int");
@@ -246,9 +246,9 @@ class module_reminder extends module_template implements module_strongcal_listen
 		$reminder_table = $this->avalanche->PREFIX() . $this->folder() . "_reminders";
 		$sql = "SELECT * FROM $reminder_table WHERE id = '$reminder_id'";
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = false;
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if(is_object($this->reminder_cache->get((int)$myrow["id"]))){
 				$ret = $this->reminder_cache->get((int)$myrow["id"]);
 			}else{
@@ -258,7 +258,7 @@ class module_reminder extends module_template implements module_strongcal_listen
 			return $ret;
 		}
 	}
-	
+
 	function deleteReminder($reminder_id){
 		$note = $this->getReminder($reminder_id);
 		if($note->canWrite()){
@@ -274,15 +274,15 @@ class module_reminder extends module_template implements module_strongcal_listen
 			$result = $this->avalanche->mysql_query($sql);
 			$sql = "DELETE FROM $event_table WHERE reminder_id = '$reminder_id'";
 			$result = $this->avalanche->mysql_query($sql);
-			
+
 			$this->reminder_cache->clear($reminder_id);
 			return true;
 		}else{
 			return false;
 		}
 	}
-	
-	
+
+
 	//////////////////////////////////////////////////////////
 	// implement module_strongcal_listener			//
 	//////////////////////////////////////////////////////////
@@ -290,29 +290,29 @@ class module_reminder extends module_template implements module_strongcal_listen
 	function eventAdded($cal_id, $event_id){
 		// noop
 	}
-	
+
 	// notifies that an event has been edited
 	function eventEdited($cal_id, $event_id){
 		$strongcal = $this->avalanche->getModule("strongcal");
 		$cal = $strongcal->getCalendarFromDb($cal_id);
 		$event = $cal->getEvent($event_id);
-		
+
 		$reminders = $this->getRemindersFor($event);
-		
+
 		foreach($reminders as $reminder){
 			$reminder->verify();
 		}
 	}
-	
+
 	public function eventDeleted($cal_id, $event_id){
 		$reminder_table = $this->avalanche->PREFIX() . $this->folder() . "_relation_event";
 		$sql = "SELECT * FROM $reminder_table WHERE cal_id = '$cal_id' AND event_id = '$event_id'";
 		$result = $this->avalanche->mysql_query($sql);
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$this->deleteReminder((int)$myrow["reminder_id"]);
 		}
 	}
-	
+
 	// notifies that an attendee has been added
 	function attendeeAdded($cal_id, $event_id, $user_id){
 		$strongcal = $this->avalanche->getModule("strongcal");
@@ -327,7 +327,7 @@ class module_reminder extends module_template implements module_strongcal_listen
 			}
 		}
 	}
-	
+
 	// notifies that an attendee has been deleted
 	function attendeeDeleted($cal_id, $event_id, $user_id){
 		$strongcal = $this->avalanche->getModule("strongcal");
@@ -347,14 +347,14 @@ class module_reminder extends module_template implements module_strongcal_listen
 	function calendarAdded($cal_id){
 		// noop
 	}
-	
-	
+
+
 	// notifies that a calendar has been deleted
 	function calendarDeleted($cal_id){
 		// noop
 	}
 
-	
+
 	//////////////////////////////////////////////////////////
 	// implement module_taskman_listener			//
 	//////////////////////////////////////////////////////////
@@ -368,7 +368,7 @@ class module_reminder extends module_template implements module_strongcal_listen
 		$reminder_table = $this->avalanche->PREFIX() . $this->folder() . "_relation_task";
 		$sql = "SELECT * FROM $reminder_table WHERE task_id = '$task_id'";
 		$result = $this->avalanche->mysql_query($sql);
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$this->deleteReminder((int)$myrow["reminder_id"]);
 		}
 	}
@@ -379,20 +379,20 @@ class module_reminder extends module_template implements module_strongcal_listen
 	function taskStatusChanged($task_id, $comment=false){
 		// noop
 	}
-	
+
 	// called when a task is edited (including status)
 	function taskEdited($task_id){
 		$taskman = $this->avalanche->getModule("taskman");
 		$task = $taskman->getTask($task_id);
-		
+
 		$reminders = $this->getRemindersFor($task);
-		
+
 		foreach($reminders as $reminder){
 			$reminder->verify();
 		}
 	}
 
-	
+
 	////////////////////////////////////////////////////////////////////////////////////
 	// cron
 	////////////////////////////////////////////////////////////////////////////////////
@@ -406,18 +406,18 @@ class module_reminder extends module_template implements module_strongcal_listen
 			$ret .= "sending reminder\n";
 		}
 	}
-	
+
 	function deleteUser($user_id){
 		$sql = "DELETE FROM `" . $this->avalanche->PREFIX() . $this->folder() . "_outbox` WHERE `user_id`='" . $user_id . "'";
 		$result = $this->avalanche->mysql_query($sql);
 		$reminder_table = $this->avalanche->PREFIX() . $this->folder() . "_reminders";
 		$sql = "DELETE FROM $reminder_table WHERE author = '$user_id'";
 		$result = $this->avalanche->mysql_query($sql);
-			
+
 		return true;
 	}
 
-} 
+}
 
 //be sure to leave no white space before and after the php portion of this file
 //headers must remain open after this file is included

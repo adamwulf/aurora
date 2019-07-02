@@ -13,7 +13,7 @@ class MMDateTime{
 
 	// accepts a hex color (with or without #)
 	function __construct($d){
-		if(!is_string($d) || !DateTime::isDateTime($d)){
+		if(!is_string($d) || !MMDateTime::isDateTime($d)){
 			throw new IllegalArgumentException("argument to " . __METHOD__ . " must be a datetime formatted string. given: $d");
 		}
 		$this->year  = substr($d, 0, 4);

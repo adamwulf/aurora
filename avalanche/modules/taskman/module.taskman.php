@@ -236,7 +236,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 		$sql = "INSERT INTO `" . $this->avalanche->PREFIX() . $this->folder() . "_tasks` (`author`,`created_on`,`cal_id`,`completed`,`description`,`due`,`priority`,`summary`,`status`,`delegated_to`,`assigned_to`) VALUES ('$user_id','$created_on','$cal_id', '0000-00-00 00:00:00', '$description', '$due', '$priority', '$summary','" . module_taskman_task::$STATUS_DEFAULT . "','$user_id','$user_id');";
 		$this->avalanche->mysql_query($sql);
 		// get new task id
-		$task_id = mysqli_insert_id();
+		$task_id = mysqli_insert_id($this->avalanche->mysqliLink());
 		// insert history
 		$sql = "INSERT INTO `" . $this->avalanche->PREFIX() . $this->folder() . "_status_history` (`task_id`,`user_id`,`status`, `stamp`, `comment`) VALUES ('" . $task_id . "', '" . $this->avalanche->loggedInHuh() . "', '" . module_taskman_task::$STATUS_DEFAULT . "', '" . $created_on . "','')";
 		$result = $this->avalanche->mysql_query($sql);

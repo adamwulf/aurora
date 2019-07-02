@@ -1,12 +1,12 @@
 <?php
 
-	$avalanche_db = mysql_connect(HOST, ADMIN, PASS);
+	$avalanche_db = mysqli_connect(HOST, ADMIN, PASS);
 	mysql_select_db(DATABASENAME,$avalanche_db);
 
 
 function getDb(){
 	$tableName = PREFIX . $tableName;
-	$db = mysql_connect(HOST, ADMIN, PASS);
+	$db = mysqli_connect(HOST, ADMIN, PASS);
 	mysql_select_db(DATABASENAME,$db);
 	return $db;
 }
@@ -15,7 +15,7 @@ function getDb(){
 
 function runSQL($sql){
 	global $avalanche_db;
-	$result = mysql_query($sql,$avalanche_db);
+	$result = mysqli_query($sql,$avalanche_db);
 	return $result;
 }
 
@@ -24,7 +24,7 @@ function runSQL($sql){
 function connectTo($tableName, $where="none"){
 
 	$tableName = PREFIX . $tableName;
-	$db = mysql_connect(HOST, ADMIN, PASS);
+	$db = mysqli_connect(HOST, ADMIN, PASS);
 	mysql_select_db(DATABASENAME,$db);
 
 	if($where=="none"){
@@ -33,7 +33,7 @@ function connectTo($tableName, $where="none"){
 		$sql = "SELECT * FROM " . $tableName . " WHERE " . $where;
 	}
 
-		$result = mysql_query($sql,$db);
+		$result = mysqli_query($sql,$db);
 
 	return $result;
 
@@ -46,7 +46,7 @@ function connectTo($tableName, $where="none"){
 //$Id = the value to look for in the $colForId column
 function get($table, $col, $Id, $colForId){
 	$result = connectTo($table, $colForId . "='" . $Id . "'");
-	while ($myrow = mysql_fetch_array($result)) {
+	while ($myrow = mysqli_fetch_array($result)) {
 		if($Id == $myrow[$colForId]){  // just in case. should always be true
 			return $myrow[$col];
 		}
@@ -56,19 +56,19 @@ function get($table, $col, $Id, $colForId){
 
 function insert($tableName, $vars, $vals){
 	$tableName = PREFIX . $tableName;
-	$db = mysql_connect(HOST, ADMIN, PASS);
+	$db = mysqli_connect(HOST, ADMIN, PASS);
 	mysql_select_db(DATABASENAME,$db);
 
         $sql = "INSERT INTO $tableName $vars VALUES $vals";
 
-        $result = mysql_query($sql, $db);
+        $result = mysqli_query($sql, $db);
 	return $result;
 }
 
 function countRows($tableName, $where=0){
 
 	$tableName = PREFIX . $tableName;
-	$db = mysql_connect(HOST, ADMIN, PASS);
+	$db = mysqli_connect(HOST, ADMIN, PASS);
 	mysql_select_db(DATABASENAME,$db);
 
 	if(!$where){
@@ -78,10 +78,10 @@ function countRows($tableName, $where=0){
 	}
 
 
-	$result = mysql_query($sql,$db);
+	$result = mysqli_query($sql,$db);
 
 
-	$count = mysql_num_rows($result);
+	$count = mysqli_num_rows($result);
 
 	return $count;
 }
@@ -89,8 +89,8 @@ function countRows($tableName, $where=0){
 function delete($tableName, $where=0){
 	$sql = "";
 	$tableName = PREFIX . $tableName;
-	$db = mysql_connect(HOST, ADMIN, PASS);
-	$result = mysql_select_db(DATABASENAME,$db);
+	$db = mysqli_connect(HOST, ADMIN, PASS);
+	$result = mysqli_select_db(DATABASENAME,$db);
 
 	if(!$where){
 		$sql = "DELETE FROM " . $tableName;
@@ -98,7 +98,7 @@ function delete($tableName, $where=0){
 		$sql = "DELETE FROM " . $tableName . " WHERE " . $where;
 	}
 
-	$result = mysql_query($sql, $db);
+	$result = mysqli_query($sql, $db);
 
 	return $result;
 }

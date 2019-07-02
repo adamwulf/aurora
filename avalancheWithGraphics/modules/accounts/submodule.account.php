@@ -189,8 +189,8 @@ class module_accounts_account{
 	 * ie, the number of months between the addedOn date and expiration date
 	 */
 	public function monthsSoFar(){
-		$expires = new DateTime($this->expiresOn());
-		$added = new DateTime($this->addedOn());
+		$expires = new MMDateTime($this->expiresOn());
+		$added = new MMDateTime($this->addedOn());
 
 		return ($expires->getTimeStamp() - $added->getTimeStamp())/(60*60*24*30);
 	}
@@ -203,8 +203,8 @@ class module_accounts_account{
 	 */
 	public function getMonthsLeft(){
 		$strongcal = $this->getAvalanche()->getModule("strongcal");
-		$now = new DateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()));
-		$expires = new DateTime($this->expiresOn());
+		$now = new MMDateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()));
+		$expires = new MMDateTime($this->expiresOn());
 		$timeleft = $expires->getTimeStamp() - $now->getTimeStamp();
 		$months_left = $timeleft / (60*60*24*30);
 		return $months_left;
@@ -274,12 +274,12 @@ class module_accounts_account{
 		if($this->getMonthsLeft() < 0){
 			// i'm expired, reset expiration date based on now
 			$strongcal = $this->getAvalanche()->getModule("strongcal");
-			$now = new DateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()));
+			$now = new MMDateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()));
 			$now->month($now->month() + $t->quantity());
 			$sql = "UPDATE " . $this->avalanche->PREFIX() . "accounts SET `expires_on` = '" . ($now->toString()) . "' WHERE `id` = '" . $this->getId() . "'";
 		}else{
 			// i'm not expired, add to expiration date
-			$expires = new DateTime($this->expiresOn());
+			$expires = new MMDateTime($this->expiresOn());
 			$expires->month($expires->month() + $t->quantity());
 			$sql = "UPDATE " . $this->avalanche->PREFIX() . "accounts SET `expires_on` = '" . ($expires->toString()) . "' WHERE `id` = '" . $this->getId() . "'";
 		}

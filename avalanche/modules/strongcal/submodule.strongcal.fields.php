@@ -125,7 +125,7 @@ abstract class module_strongcal_field {
 	               	$sql = "SELECT * FROM $tablename WHERE id = '$id'";
 			$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				$my_row = mysql_fetch_array($result);
+				$my_row = mysqli_fetch_array($result);
 				$this->_value = $my_row[$this->field()];
 				return true;
 			}else{
@@ -202,7 +202,7 @@ abstract class module_strongcal_field {
 		if(is_object($this->_calendar) && $this->_id !== false){
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->_calendar->getId() . "_fields WHERE id = '" . $this->_id . "'";
 			$result = $this->avalanche->mysql_query($sql);
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$this->_prompt     = $myrow['prompt'];
 				$this->_field      = $myrow['field'];
 				$this->_type       = $myrow['type'];
@@ -223,7 +223,7 @@ abstract class module_strongcal_field {
 		if(is_object($this->_calendar) && is_object($this->_event)){
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->_calendar->getId() . " WHERE id='" . $this->_event->getId() . "'";
 			$result = $this->avalanche->mysql_query($sql);
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$val = $myrow[$this->_field];
 				if(get_magic_quotes_runtime()){
 					$val = stripslashes($val);
@@ -765,7 +765,7 @@ abstract class module_strongcal_field {
 			$val_for_sql = addslashes($val);
 	               	$sql = "UPDATE $tablename SET " . $this->_field . " = '" . $val_for_sql . "' WHERE id = '" . $this->_event->getId() . "'";
 			$result = $this->avalanche->mysql_query($sql);
-			if(mysql_affected_rows() > 0){
+			if(mysqli_affected_rows($this->avalanche->mysqliLink()) > 0){
 				$this->_value = $val;
 
 				// now we need to notify the visitors

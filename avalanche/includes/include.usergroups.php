@@ -19,7 +19,7 @@ abstract class avalanche_usergroup{
 	 * this has to be "defended" in the sub classes
 	 */
 	public static $SYSTEM = "SYSTEM";
-	
+
 	/**
 	 * created for team only purposes. these teams can be seen by members of the team, but
 	 * not by anyone else.
@@ -28,7 +28,7 @@ abstract class avalanche_usergroup{
 	 * used specifically for the project functionality
 	 */
 	public static $TEAM = "TEAM";
-	
+
 	/**
 	 * groups created for a modules use. these groups will never be seen by users, and are for
 	 * backend purposes only
@@ -40,7 +40,7 @@ abstract class avalanche_usergroup{
 	 * organization and permission setting (ie, for calendars)
 	 */
 	public static $PERSONAL = "PERSONAL";
-	
+
 	/**
 	 * This is for groups that can be seen and used (but not edited) by all users
 	 * only the system can edit these groups
@@ -55,12 +55,12 @@ abstract class avalanche_usergroup{
 	 * the usergroup id for this group
 	 */
 	private $_groupId;
-	
+
 	/**
 	 * the data (permission, desc, keywords, etc) pulled from the database
 	 */
 	protected $_group_data;
-	
+
 	/**
 	 * the display type for this group (all uppercase type)
 	 */
@@ -140,12 +140,12 @@ abstract class avalanche_usergroup{
 		$table2 = $this->avalanche->PREFIX() . "user_link";
 		$sql = "SELECT DISTINCTROW $table1.id FROM $table1, $table2 WHERE $table1.id = $table2.user_id AND $table2.group_id = $groupId ORDER BY $table1.username";
 	        $result = $this->avalanche->mysql_query($sql);
-	        while ($myrow = mysql_fetch_array($result)) {
-                        $ret[] = $this->avalanche->getUser((int)$myrow["id"]); 
+	        while ($myrow = mysqli_fetch_array($result)) {
+                        $ret[] = $this->avalanche->getUser((int)$myrow["id"]);
 	        }
 	        return $ret;
 	}
-	
+
 	// this groups instance of the avalanche it lives in
 	protected $avalanche = false;
 
@@ -174,7 +174,7 @@ abstract class avalanche_usergroup{
 		}
 		if($data === false){
 			$result = $this->avalanche->mysql_query("SELECT * FROM " . $avalanche->PREFIX() . "usergroups WHERE id='$groupId'");
-			if($myrow = mysql_fetch_array($result)) {
+			if($myrow = mysqli_fetch_array($result)) {
 				if(get_magic_quotes_gpc()){
 					$myrow['name'] = stripslashes($myrow['name']);
 					$myrow['description'] = stripslashes($myrow['description']);
@@ -275,7 +275,7 @@ abstract class avalanche_usergroup{
 			return true;
 		}
 	}
-	
+
 	// runs the visitor on usergroup case
 	function execute($visitor){
 		return $visitor->visit($this);
@@ -294,7 +294,7 @@ abstract class avalanche_usergroup{
 		$sql = "INSERT INTO " . $this->avalanche->PREFIX() . "user_link (user_id, group_id) VALUES (\"".$userId."\",\"".$groupId."\")";
 		$result = $this->avalanche->mysql_query($sql);
 		return true;
-	}        
+	}
 	//////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////
 
@@ -313,7 +313,7 @@ abstract class avalanche_usergroup{
 		$this->_group_data["name"] = $new_name;
 		return true;
 	}
-	
+
 	//////////////////////////////////////////////////////////
 	// updates the description of the group
 	//////////////////////////////////////////////////////////
@@ -326,7 +326,7 @@ abstract class avalanche_usergroup{
 		$this->_group_data["description"] = $data;
 		return true;
 	}
-	
+
 	//////////////////////////////////////////////////////////
 	// updates the description of the group
 	//////////////////////////////////////////////////////////
@@ -339,7 +339,7 @@ abstract class avalanche_usergroup{
 		$this->_group_data["keywords"] = $data;
 		return true;
 	}
-	
+
 	//////////////////////////////////////////////////////////
 	// returns true if the user is in the usergroup
 	//
@@ -348,12 +348,12 @@ abstract class avalanche_usergroup{
 		$groupId = $this->getId();
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "user_link WHERE group_id = \"$groupId\" AND user_id=\"$userId\"";
 		$result = $this->avalanche->mysql_query($sql);
-		if($myrow = mysql_fetch_array($result)){	
+		if($myrow = mysqli_fetch_array($result)){
 			return true;
 		}
 		return false;
 	}
-	
+
 	//////////////////////////////////////////////////////////
 	// Notes:
 	// unlinks the user with the group
@@ -366,7 +366,7 @@ abstract class avalanche_usergroup{
 	}
 
 
-	
+
 	//////////////////////////////////////////////////////////
 	// returns true if this usergroup has
 	// the $perm permission
@@ -375,7 +375,7 @@ abstract class avalanche_usergroup{
 	function hasPermissionHuh($perm) {
 		return false;
 	}
-		
+
 	//////////////////////////////////////////////////////////
 	// updates the permissions of user with id of $argUserId
 	//////////////////////////////////////////////////////////

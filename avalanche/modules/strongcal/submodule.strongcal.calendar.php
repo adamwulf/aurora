@@ -2225,7 +2225,7 @@ class module_strongcal_calendar {
 	//////////////////////////////////////////////////////////////////
 	function addField($my_array){
 		$field = $my_array["name"];
-		if(!ereg('^([[:alnum:]]|[0-9]|[_])+$', $field)){
+		if(!preg_match('/^([[:alnum:]]|[0-9]|[_])+$/', $field)){
 			return false;
 		}
 		$prompt = addslashes($my_array["prompt"]);
@@ -2598,7 +2598,7 @@ class module_strongcal_calendar {
 		$sql = "INSERT INTO `$tablename` ($vars) VALUES ($values)";
 		if($this->canWriteEntries() && $this->canReadName()){
 			$result = $this->avalanche->mysql_query($sql);
-			$new_id = mysqli_insert_id();
+			$new_id = mysqli_insert_id($this->avalanche->mysqliLink());
 			$new_event = $this->getEvent($new_id);
 			// add the current user as an attendee for the event, if logged in
 			if($this->avalanche->loggedInHuh()){

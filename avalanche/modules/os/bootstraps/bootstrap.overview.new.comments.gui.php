@@ -111,7 +111,7 @@ class module_bootstrap_os_overview_new_comments_gui extends module_bootstrap_mod
 			$has_comments = count($comment_list);
 
 			foreach($comment_list as $comment){
-				$added_on_time = new DateTime($comment["date"]);
+				$added_on_time = new MMDateTime($comment["date"]);
 				$added_on_time->hour($added_on_time->hour() + (int)floor($strongcal->timezone()));
 				$added_on_time->minute($added_on_time->minute() + (int)(60 * ($strongcal->timezone() - floor($strongcal->timezone()))));
 				$added_on_time = $added_on_time->toString();

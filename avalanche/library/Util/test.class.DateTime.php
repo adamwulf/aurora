@@ -2,7 +2,7 @@
 Class TestDateTime extends TestCase{
 
 	public function test_DateTime_obj(){
-		$d = new DateTime("2004-12-23 12:23:14");
+		$d = new MMDateTime("2004-12-23 12:23:14");
 
 		$this->assertEquals($d->year(), 2004, "info is correct");
 		$this->assertEquals($d->month(), 12, "info is correct");
@@ -18,7 +18,7 @@ Class TestDateTime extends TestCase{
 
 
 	public function testToGMT(){
-		$d = new DateTime("2004-08-04 20:06:14");
+		$d = new MMDateTime("2004-08-04 20:06:14");
 		$d->toGMT(-6);
 
 		$this->assertEquals($d->year(), 2004, "info is correct");
@@ -31,9 +31,9 @@ Class TestDateTime extends TestCase{
 	}
 
 	public function testToGMTToTimezone(){
-		$d = new DateTime("2004-08-04 20:06:14");
+		$d = new MMDateTime("2004-08-04 20:06:14");
 		$d->toGMT(-6);
-		$d = new DateTime($d->toString());
+		$d = new MMDateTime($d->toString());
 		$d->toTimezone(-6);
 
 		$this->assertEquals($d->year(), 2004, "info is correct");
@@ -46,7 +46,7 @@ Class TestDateTime extends TestCase{
 	}
 
 	public function testToHoustonTimezone(){
-		$d = new DateTime("2004-08-05 01:06:14");
+		$d = new MMDateTime("2004-08-05 01:06:14");
 		$d->toTimezone(-6);
 
 		$this->assertEquals($d->year(), 2004, "info is correct");
@@ -59,7 +59,7 @@ Class TestDateTime extends TestCase{
 	}
 
 	public function testToBerlinTimezone(){
-		$d = new DateTime("2004-08-05 01:06:14");
+		$d = new MMDateTime("2004-08-05 01:06:14");
 		$d->toTimezone(1);
 
 		$this->assertEquals($d->year(), 2004, "info is correct");

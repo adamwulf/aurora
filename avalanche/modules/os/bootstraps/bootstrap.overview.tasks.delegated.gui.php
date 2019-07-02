@@ -114,7 +114,7 @@ class module_bootstrap_os_overview_tasks_delegated_gui extends module_bootstrap_
 				$overdue_set = false;
 				foreach($tasks as $task){
 					$total_height += 16;
-					$due = new DateTime($task->due());
+					$due = new MMDateTime($task->due());
 					$stamp = $due->getTimeStamp();
 					$due = $due->toString();
 					if($today != substr($due, 0, 10)){

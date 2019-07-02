@@ -108,7 +108,7 @@ class module_bootstrap_os_overview_tasks_this_week_gui extends module_bootstrap_
 				$today_set = false;
 				foreach($tasks as $task){
 					$total_height += 16;
-					$due = new DateTime($task->due());
+					$due = new MMDateTime($task->due());
 					$stamp = $due->getTimeStamp();
 					$due = $due->toString();
 					//echo $overdue_set . " vs " . !$today_set . "<br>";

@@ -79,14 +79,14 @@ $fileloader->include_recursive(ROOT . APPPATH . MODULES . "notifier/bootstraps/"
 //////////////////////////////////////////////////////////////////
 //Syntax - module classes should always start with module_ followed by the module's install folder (name)
 class module_notifier extends module_template implements module_strongcal_listener, module_taskman_listener{
-	
+
 	//////////////////////////////////////////////////////////////////
 	//  __construct()						//
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: none						//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	should only be called once				//
 	//	(command.php of avalanche will include this		//
 	//	   file after installation)				//
@@ -106,14 +106,14 @@ class module_notifier extends module_template implements module_strongcal_listen
 	function __construct($avalanche){
 		$this->avalanche = $avalanche;
 		$this->_name = "Inversion Notifier";
-		$this->_version = "1.0.0";	
-		$this->_desc = "Notifier for Inversion Designs.";	
+		$this->_version = "1.0.0";
+		$this->_desc = "Notifier for Inversion Designs.";
 		$this->_folder = "notifier";
 		$this->_copyright = "Copyright 2004 Inversion Designs";
 		$this->_author = "Adam Wulf";
 		$this->_date = "11-30-04";
 		$this->notification_cache = new HashTable();
-		
+
 		$strongcal = $this->avalanche->getModule("strongcal");
 		$strongcal->addListener($this);
 
@@ -127,11 +127,11 @@ class module_notifier extends module_template implements module_strongcal_listen
 		}
 		$sql = "INSERT INTO " . $this->avalanche->PREFIX() . "notifier_notifications (`user_id`) VALUES ('$user_id')";
 		$result = $this->avalanche->mysql_query($sql);
-		$notification = new module_notifier_notification($this->avalanche, mysql_insert_id());
+		$notification = new module_notifier_notification($this->avalanche, mysql_insert_id($this->avalanche->mysqliLink()));
 		$this->notification_cache->put($notification->getId(), $notification);
 		return $notification;
 	}
-	
+
 	function getNotificationsFor($user_id){
 		if(!is_int($user_id)){
 			throw new IllegalArgumentException("argument to " . __METHOD__ . " must be an int");
@@ -139,9 +139,9 @@ class module_notifier extends module_template implements module_strongcal_listen
 		$notification_table = $this->avalanche->PREFIX() . $this->folder() . "_notifications";
 		$sql = "SELECT * FROM $notification_table WHERE user_id = '$user_id'";
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if(is_object($this->notification_cache->get((int)$myrow["id"]))){
 				$ret[] = $this->notification_cache->get((int)$myrow["id"]);
 			}else{
@@ -152,7 +152,7 @@ class module_notifier extends module_template implements module_strongcal_listen
 		}
 		return $ret;
 	}
-	
+
 	function getNotification($notification_id){
 		if(!is_int($notification_id)){
 			throw new IllegalArgumentException("argument to " . __METHOD__ . " must be an int");
@@ -160,9 +160,9 @@ class module_notifier extends module_template implements module_strongcal_listen
 		$notification_table = $this->avalanche->PREFIX() . $this->folder() . "_notifications";
 		$sql = "SELECT * FROM $notification_table WHERE id = '$notification_id'";
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = false;
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if(is_object($this->notification_cache->get((int)$myrow["id"]))){
 				$ret = $this->notification_cache->get((int)$myrow["id"]);
 			}else{
@@ -172,21 +172,21 @@ class module_notifier extends module_template implements module_strongcal_listen
 			return $ret;
 		}
 	}
-	
+
 	function deleteNotification($notification_id){
 		$note = $this->getNotification($notification_id);
 		if($note->canWrite()){
 			$notification_table = $this->avalanche->PREFIX() . $this->folder() . "_notifications";
 			$sql = "DELETE FROM $notification_table WHERE id = '$notification_id'";
 			$result = $this->avalanche->mysql_query($sql);
-			
+
 			$this->notification_cache->clear($notification_id);
 			return true;
 		}else{
 			return false;
 		}
 	}
-	
+
 
 	//////////////////////////////////////////////////////////
 	// implement module_strongcal_listener			//
@@ -204,9 +204,9 @@ class module_notifier extends module_template implements module_strongcal_listen
 
 		$sql = "SELECT * FROM $notification_table WHERE (calendars LIKE '%|$cal_id|%' OR all_calendars='1') AND item='" . module_notifier_notification::$ITEM_EVENT . "' AND action='" . module_notifier_notification::$ACTION_ADDED . "'";
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = false;
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$id = (int) $myrow["id"];
 			$note = $this->getNotification($id);
 			if($note->userId() != $user_id && $cal->canReadName($this->avalanche->getAllUsergroupsFor($note->userId()))){
@@ -219,7 +219,7 @@ class module_notifier extends module_template implements module_strongcal_listen
 			}
 		}
 	}
-	
+
 	// notifies that an event has been edited
 	function eventEdited($cal_id, $event_id){
 		$user_id = (int)($this->avalanche->loggedInHuh() ? $this->avalanche->loggedInHuh() : $this->avalanche->getVar("USER"));
@@ -234,7 +234,7 @@ class module_notifier extends module_template implements module_strongcal_listen
 		$sql = "SELECT * FROM $notification_table WHERE (calendars LIKE '%|$cal_id|%' OR all_calendars='1') AND item='" . module_notifier_notification::$ITEM_EVENT . "' AND action='" . module_notifier_notification::$ACTION_EDITED . "'";
 		$result = $this->avalanche->mysql_query($sql);
 		$ret = false;
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$id = (int) $myrow["id"];
 			$note = $this->getNotification($id);
 			if($note->userId() != $user_id && $cal->canReadName($this->avalanche->getAllUsergroupsFor($note->userId()))){
@@ -247,7 +247,7 @@ class module_notifier extends module_template implements module_strongcal_listen
 			}
 		}
 	}
-	
+
 	public function eventDeleted($cal_id, $event_id){
 		$user_id = (int)($this->avalanche->loggedInHuh() ? $this->avalanche->loggedInHuh() : $this->avalanche->getVar("USER"));
 		$notification_table = $this->avalanche->PREFIX() . $this->folder() . "_notifications";
@@ -260,9 +260,9 @@ class module_notifier extends module_template implements module_strongcal_listen
 
 		$sql = "SELECT * FROM $notification_table WHERE (calendars LIKE '%|$cal_id|%' OR all_calendars='1') AND item='" . module_notifier_notification::$ITEM_EVENT . "' AND action='" . module_notifier_notification::$ACTION_DELETED . "'";
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = false;
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$id = (int) $myrow["id"];
 			$note = $this->getNotification($id);
 			if($note->userId() != $user_id && $cal->canReadName($this->avalanche->getAllUsergroupsFor($note->userId()))){
@@ -275,23 +275,23 @@ class module_notifier extends module_template implements module_strongcal_listen
 			}
 		}
 	}
-	
+
 	// notifies that a calendar has been added
 	function calendarAdded($cal_id){
 		// noop
 	}
-	
-	
+
+
 	// notifies that a calendar has been deleted
 	function calendarDeleted($cal_id){
 		// noop
 	}
-	
+
 	// notifies that an attendee has been added
 	function attendeeAdded($cal_id, $event_id, $user_id){
 		// noop
 	}
-	
+
 	// notifies that an attendee has been deleted
 	function attendeeDeleted($cal_id, $event_id, $user_id){
 		// noop
@@ -315,9 +315,9 @@ class module_notifier extends module_template implements module_strongcal_listen
 
 		$sql = "SELECT * FROM $notification_table WHERE (calendars LIKE '%|" . $task->calId() . "|%' || all_calendars = '1') AND item='" . module_notifier_notification::$ITEM_TASK . "' AND action='" . module_notifier_notification::$ACTION_ADDED . "'";
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = false;
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$id = (int) $myrow["id"];
 			$note = $this->getNotification($id);
 			if($note->userId() != $user_id && $cal->canReadName($this->avalanche->getAllUsergroupsFor($note->userId()))){
@@ -330,7 +330,7 @@ class module_notifier extends module_template implements module_strongcal_listen
 			}
 		}
 	}
-	
+
 	// notifies that an task has been deleted
 	function taskDeleted($task_id){
 		$user_id = (int)($this->avalanche->loggedInHuh() ? $this->avalanche->loggedInHuh() : $this->avalanche->getVar("USER"));
@@ -346,9 +346,9 @@ class module_notifier extends module_template implements module_strongcal_listen
 
 		$sql = "SELECT * FROM $notification_table WHERE (calendars LIKE '%|" . $task->calId() . "|%' || all_calendars = '1') AND item='" . module_notifier_notification::$ITEM_TASK . "' AND action='" . module_notifier_notification::$ACTION_DELETED . "'";
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = false;
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$id = (int) $myrow["id"];
 			$note = $this->getNotification($id);
 			if($note->userId() != $user_id && $cal->canReadName($this->avalanche->getAllUsergroupsFor($note->userId()))){
@@ -361,7 +361,7 @@ class module_notifier extends module_template implements module_strongcal_listen
 			}
 		}
 	}
-	
+
 	// notifies that an task has it's status changed
 	function taskStatusChanged($task_id, $comment=false){
 		$user_id = (int)($this->avalanche->getActiveUser());
@@ -375,7 +375,7 @@ class module_notifier extends module_template implements module_strongcal_listen
 
 		$title = "Task Status Change";
 
-		
+
 		if($task->status() == module_taskman_task::$STATUS_COMPLETED){
 			$extra_sql = " OR action='" . module_notifier_notification::$ACTION_COMPLETED . "'";
 		}else
@@ -389,9 +389,9 @@ class module_notifier extends module_template implements module_strongcal_listen
 		}
 		$sql = "SELECT * FROM $notification_table WHERE (calendars LIKE '%|" . $task->calId() . "|%' || all_calendars = '1') AND item='" . module_notifier_notification::$ITEM_TASK . "' AND (action='" . module_notifier_notification::$ACTION_STATUS . "' $extra_sql)";
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = false;
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$id = (int) $myrow["id"];
 			$note = $this->getNotification($id);
 			if($note->userId() != $user_id && $cal->canReadName($this->avalanche->getAllUsergroupsFor($note->userId()))){
@@ -449,7 +449,7 @@ class module_notifier extends module_template implements module_strongcal_listen
 			}
 		}
 	}
-	
+
 	// notifies that an task has it's status changed
 	function taskEdited($task_id){
 		$user_id = (int)$this->avalanche->getActiveUser();
@@ -465,9 +465,9 @@ class module_notifier extends module_template implements module_strongcal_listen
 
 		$sql = "SELECT * FROM $notification_table WHERE (calendars LIKE '%|" . $task->calId() . "|%' || all_calendars = '1') AND item='" . module_notifier_notification::$ITEM_TASK . "' AND action='" . module_notifier_notification::$ACTION_EDITED . "'";
 		$result = $this->avalanche->mysql_query($sql);
-		
+
 		$ret = false;
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$id = (int) $myrow["id"];
 			$note = $this->getNotification($id);
 			if($note->userId() != $user_id && $cal->canReadName($this->avalanche->getAllUsergroupsFor($note->userId()))){
@@ -480,7 +480,7 @@ class module_notifier extends module_template implements module_strongcal_listen
 			}
 		}
 	}
-	
+
 	private function getReadableStatus($task){
 		$os = $this->avalanche->getModule("os");
 		if($task->status() == module_taskman_task::$STATUS_ACCEPTED){
@@ -508,13 +508,13 @@ class module_notifier extends module_template implements module_strongcal_listen
 	public function cron(){
 		// noop
 	}
-	
+
 	function deleteUser($user_id){
 		$sql = "DELETE FROM `" . $this->avalanche->PREFIX() . $this->folder() . "_notifications` WHERE `user_id`='" . $user_id . "'";
 		$result = $this->avalanche->mysql_query($sql);
 	}
-	
-} 
+
+}
 
 //be sure to leave no white space before and after the php portion of this file
 //headers must remain open after this file is included

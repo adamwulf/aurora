@@ -55,8 +55,8 @@ class module_strongcal_attendee{
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: the calendar for which this event is a part		//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -72,8 +72,8 @@ class module_strongcal_attendee{
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: the event for which this event is a part		//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -88,8 +88,8 @@ class module_strongcal_attendee{
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: the author of this event				//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -105,8 +105,8 @@ class module_strongcal_attendee{
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: the id of this event in it's respective calendar	//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -122,7 +122,7 @@ class module_strongcal_attendee{
 	//--------------------------------------------------------------//
 	//  input: whether the attendee has confirmed his reservation	//
 	//  output: none						//
-	//								//  
+	//								//
 	//////////////////////////////////////////////////////////////////
 	function confirm($confirm = 0){
 		if($confirm === 0){
@@ -150,7 +150,7 @@ class module_strongcal_attendee{
 	//  input: $cal - the event object to which this attendee	//
 	//		  belongs					//
 	//  output: the id of this field				//
-	//								//  
+	//								//
 	//////////////////////////////////////////////////////////////////
 	private $avalanche;
 	function __construct($avalanche, $event, $id){
@@ -173,7 +173,7 @@ class module_strongcal_attendee{
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_attendees WHERE id = '$id'";
 			$result = $this->avalanche->mysql_query($sql);
 
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$field = "user_id";
 				$temp_user = $myrow[$field];
 				$this->_user_id = $temp_user;
@@ -185,9 +185,9 @@ class module_strongcal_attendee{
 		}else
 		if(is_array($id)){
 			$myrow = $id;
-			
+
 			$this->_id = (int)$myrow["id"];
-			
+
 			$field = "user_id";
 			$temp_user = $myrow[$field];
 			$this->_user_id = $temp_user;
@@ -197,8 +197,8 @@ class module_strongcal_attendee{
 			$this->_confirm = $temp_confirm;
 		}
 	}
-	
-	
+
+
 	public function getAvalanche(){
 		return $this->avalanche;
 	}

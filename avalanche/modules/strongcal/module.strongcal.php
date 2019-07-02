@@ -1033,7 +1033,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 				throw new DatabaseException("trying to add calendar, but mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
-			$newid = mysqli_insert_id();
+			$newid = mysqli_insert_id($this->avalanche->mysqliLink());
 
 
 			/*
@@ -1053,7 +1053,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 					  end_time time NOT NULL default '00:00:00',
 					  description text NOT NULL,
 					  priority text NOT NULL,
-					  PRIMARY KEY  (id)) TYPE=MyISAM;";
+					  PRIMARY KEY  (id));";
 
 	        	$result = $this->avalanche->mysql_query($sql_table);
 			if(mysql_error()){
@@ -1098,7 +1098,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 					  usergroup tinyint(4) NOT NULL default '0',
 					  removeable tinyint(4) NOT NULL default '1',
 					  ics mediumint(9) NOT NULL default '0',
-					  PRIMARY KEY  (id)) TYPE=MyISAM;";
+					  PRIMARY KEY  (id));";
 	        	$result = $this->avalanche->mysql_query($sql_fields);
 			if(mysql_error()){
 				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
@@ -1172,7 +1172,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 			  year_weekday mediumint(9) NOT NULL default '0',
 			  last_entry_date date NOT NULL default '0000-00-00',
 			  PRIMARY KEY  (id)
-			) TYPE=MyISAM;";
+			);";
 		       	$result = $this->avalanche->mysql_query($sql_recur);
 			if(mysql_error()){
 				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
@@ -1187,7 +1187,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 			  val text NOT NULL,
 			  dflt text NOT NULL,
 			  PRIMARY KEY  (id)
-			) TYPE=MyISAM;";
+			);";
 		       	$result = $this->avalanche->mysql_query($sql_varlist);
 			if(mysql_error()){
 				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");

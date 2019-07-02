@@ -113,7 +113,7 @@ class module_bootstrap_os_overview_new_tasks_gui extends module_bootstrap_module
 
 			foreach($task_list as $task){
 				$cal = $strongcal->getCalendarFromDb($task->calId());
-				$added_on_time = new DateTime($task->createdOn());
+				$added_on_time = new MMDateTime($task->createdOn());
 				$added_on_time = $added_on_time->toString();
 				if($today != substr($added_on_time,0,10)){
 					$today = substr($added_on_time,0,10);
@@ -138,7 +138,7 @@ class module_bootstrap_os_overview_new_tasks_gui extends module_bootstrap_module
 				}
 				$total_height += 16;
 				// find due time text
-				$due = new DateTime($task->due());
+				$due = new MMDateTime($task->due());
 				$due->hour($due->hour() + (int)floor($strongcal->timezone()));
 				$due->minute($due->minute() + (int)(60 * ($strongcal->timezone() - floor($strongcal->timezone()))));
 				$due = $due->toString();

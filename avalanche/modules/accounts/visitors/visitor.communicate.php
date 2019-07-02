@@ -51,17 +51,17 @@ class AccountsCommunicationVisitor extends visitor_template{
 	function moduleCase($module){
 		$ret = "executing for: " . get_class($module) . "\n";
 		$strongcal = $this->avalanche->getModule("strongcal");
-		$now = new DateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()));
+		$now = new MMDateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()));
 		if($module instanceof module_accounts){
 			$accts = $module->getAccounts();
 			$ret .= "looking at accounts\n";
 			foreach($accts as $a){
 				$ret .= "account: " . $a->name() . "\n";
 				
-				$expire = new DateTime($a->expiresOn());
+				$expire = new MMDateTime($a->expiresOn());
 				
-				$ao = new DateTime($a->addedOn());
-				$eo = new DateTime($a->expiresOn());
+				$ao = new MMDateTime($a->addedOn());
+				$eo = new MMDateTime($a->expiresOn());
 				$ao = $now->getTimeStamp() - $ao->getTimeStamp();
 				$eo = $eo->getTimeStamp() - $now->getTimeStamp();
 				

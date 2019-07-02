@@ -34,7 +34,7 @@ class module_taskman_export_loader extends module_bootstrap_module{
 				$stamp = $strongcal->gmttimestamp();
 				$date = date("Y-m-d", $stamp);
 			}
-			$date = new DateTime($date . " 00:00:00");
+			$date = new MMDateTime($date . " 00:00:00");
 			$stamp = $date->getTimeStamp();
 			
 			if(isset($data_list["range"])){

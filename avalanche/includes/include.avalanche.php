@@ -174,6 +174,12 @@ class avalanche_class{
 
 	// a cache of all avalanche variables
 	private $var_list_cache;
+
+
+	function mysqliLink(){
+		return $this->_mysqli_link;
+	}
+
 	//////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////
 	//								//
@@ -189,8 +195,8 @@ class avalanche_class{
 			$table = $this->PREFIX() . "preferences";
 			$sql = "SELECT $var FROM $table WHERE user_id='$user_id'";
 			$result = $this->mysql_query($sql);
-			if(mysqli_error()){
-				throw new DatabaseException(mysqli_error());
+			if(mysqli_error($this->_mysqli_link)){
+				throw new DatabaseException(mysqli_error($this->_mysqli_link));
 			}
 			if($myrow = mysqli_fetch_array($result)){
 				return $myrow[$var];
@@ -2075,6 +2081,9 @@ class avalanche_class{
 			$result = mysqli_query($this->_mysqli_link, $sql);
 			if(mysqli_error($this->_mysqli_link)){
 				if($verbose) echo "mysqli_error: " . mysqli_error($this->_mysqli_link) . "<br>";
+
+				error_log("Error in sql: " . $sql);
+
 				throw new DatabaseException(mysqli_error($this->_mysqli_link));
 			}
 			if(strpos($sql, "SELECT") === 0){

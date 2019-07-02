@@ -183,8 +183,8 @@ class AccountMain extends module_bootstrap_module{
 			$details->add(new Text("This account has been disabled."));
 		}
 
-		$now = new DateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()));
-		$expires_on = new DateTime($this->account->expiresOn());
+		$now = new MMDateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()));
+		$expires_on = new MMDateTime($this->account->expiresOn());
 		$timeleft = mktime($now->hour() - $expires_on->hour(),
 				   $now->minute() - $expires_on->minute(),
 				   $now->second() - $expires_on->second(),
@@ -196,7 +196,7 @@ class AccountMain extends module_bootstrap_module{
 			$details->add(new Text("Expired " . abs(round($this->account->getMonthsLeft(),1)) . " months ago"));
 		}else{
 			// get how much time is left
-			$expires_on = new DateTime($this->account->expiresOn());
+			$expires_on = new MMDateTime($this->account->expiresOn());
 			$datetime = date("l, M jS, Y", $expires_on->getTimeStamp());
 			$details->add(new Text("Valid until: " . $datetime));
 		}
@@ -286,7 +286,7 @@ class AccountMain extends module_bootstrap_module{
 				$grid->add($overview);
 				$grid->add($total);
 			}else{
-				$expires_on = new DateTime($this->account->expiresOn());
+				$expires_on = new MMDateTime($this->account->expiresOn());
 				$datetime = date("l, M jS, Y", $expires_on->getTimeStamp());
 
 				$overview = new GridPanel(1);

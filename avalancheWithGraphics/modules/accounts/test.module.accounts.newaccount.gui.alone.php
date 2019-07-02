@@ -121,7 +121,7 @@ Class TestAccountsNewAccountGui extends WebTestCase {
 	// otherwise we'd have to actuallly add an account and wait a day to test it...
 	// make the account added on yesterday
 	$offset = - 26 * 60 * 60;
-	$added = new DateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()+$offset));
+	$added = new MMDateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()+$offset));
 	$sql = "UPDATE " . $avalanche->PREFIX() . "accounts SET `added_on` = '" . ($added->toString()) . "' WHERE `id` = '" . $account->getId() . "'";
 	$avalanche->mysql_query($sql);
 	// reload the account so that it takes the new added_on date
@@ -147,12 +147,12 @@ Class TestAccountsNewAccountGui extends WebTestCase {
 	// otherwise we'd have to actuallly add an account and wait a day to test it...
 	// make the account added today (so no more emails for welcome/tips)
 	$offset = 0;
-	$added = new DateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()+$offset));
+	$added = new MMDateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()+$offset));
 	$sql = "UPDATE " . $avalanche->PREFIX() . "accounts SET `added_on` = '" . ($added->toString()) . "' WHERE `id` = '" . $account->getId() . "'";
 	$avalanche->mysql_query($sql);
 	// make the account expire tomorrow
 	$offset = 26 * 60 * 60;
-	$expire = new DateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()+$offset));
+	$expire = new MMDateTime(date("Y-m-d H:i:s", $strongcal->gmttimestamp()+$offset));
 	$sql = "UPDATE " . $avalanche->PREFIX() . "accounts SET `expires_on` = '" . ($expire->toString()) . "' WHERE `id` = '" . $account->getId() . "'";
 	$avalanche->mysql_query($sql);
 	// reload the account so that it takes the new added_on date
