@@ -5,7 +5,7 @@ class HashTable {
 	function __construct(){
 		$this->table = array();
 	}
-  
+
 	function put($key, $obj) {
 		$this->table[$key] = $obj;
 	}

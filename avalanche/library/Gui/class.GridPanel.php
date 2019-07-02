@@ -2,7 +2,7 @@
 
 
 /**
- * this class represents an Gui Panel. Panels can have other compoents added to them. the layout of the 
+ * this class represents an Gui Panel. Panels can have other compoents added to them. the layout of the
  * items in the panel is determined by the panel type.
  */
 class GridPanel extends Panel{
@@ -11,7 +11,7 @@ class GridPanel extends Panel{
 	private $_cell_style;
 
 	private $_individual_cell_styles;
-	
+
 	function __construct($cols){
 		if(!is_integer($cols)){
 			throw new IllegalArgumentException("the first argument to " . __METHOD__ . " must be an int");
@@ -21,28 +21,28 @@ class GridPanel extends Panel{
 		$this->_cols = $cols;
 		$this->setCellStyle(new Style());
 	}
-	
-	public function add(Component $comp, $opt_style = false){
+
+	public function add(Component $comp, $opt_style = false, $two=false){
 		parent::add($comp);
 		if($opt_style instanceof Style){
 			$this->_individual_cell_style[$comp->getId()] = $opt_style;
 		}
 	}
-	
-	public function remove(Component $comp){
+
+	public function remove(Component $comp, $one=false){
 		parent::remove($comp);
 		if(isset($this->_individual_cell_style[$comp->getId()])){
 			unset($this->_individual_cell_style[$comp->getId()]);
 		}
 	}
-	
+
 	public function setColumns($cols){
 		if(!is_integer($cols)){
 			throw new IllegalArgumentException("the first argument to " . __METHOD__ . " must be an int");
 		}
 		$this->_cols = $cols;
 	}
-	
+
 	public function getColumns(){
 		return $this->_cols;
 	}
@@ -63,7 +63,7 @@ class GridPanel extends Panel{
 
 	/**
 	 * returns all styles associated with this element
-	 */	
+	 */
 	public function getCellStyle($cell = false){
 		if(is_object($cell) && $cell instanceof Component && isset($this->_individual_cell_style[$cell->getId()])){
 			return $this->_individual_cell_style[$cell->getId()];

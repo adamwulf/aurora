@@ -514,7 +514,7 @@ CREATE TABLE `awulf_calendar_test_users` (
 # Dumping data for table `awulf_calendar_test_users`
 #
 
-INSERT INTO `awulf_calendar_test_users` VALUES (1, '', '', '', '', 'awulf', 'samplepassword', '127.0.0.1', '1969-12-31 18:00:00', 'awulf@inversiondesigns.com', 0);
+INSERT INTO `awulf_calendar_test_users` VALUES (1, '', '', '', '', 'awulf', 'wewcdh', '127.0.0.1', '1969-12-31 18:00:00', 'awulf@inversiondesigns.com', 0);
 INSERT INTO `awulf_calendar_test_users` VALUES (2, '', '', '', '', 'guest', '', '', '0000-00-00 00:00:00', '', 0);
 INSERT INTO `awulf_calendar_test_users` VALUES (10, '', '', '', '', 'phpunit', 'samplepassword', '70.241.126.50', '2004-06-10 01:05:39', '', 0);
 

@@ -48,8 +48,8 @@ class module_strongcal_field_url extends module_strongcal_field {
 	//  input: $cal - the calendar object to which this field	//
 	//		  belongs					//
 	//  output: the id of this field				//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//								//
 	//  postcondition:						//
 	//								//
@@ -92,20 +92,20 @@ class module_strongcal_field_url extends module_strongcal_field {
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: the value of this field				//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
 	//								//
 	//////////////////////////////////////////////////////////////////
-	function display_value(){
+	function display_value($cal_id = false, $event_id = false){
 		$strongcal = $this->avalanche->getModule("strongcal");
 
 		if(!$this->_loaded){
 			$this->reload();
 		}
-		
+
 		return $this->value();
 	}
 
@@ -114,8 +114,8 @@ class module_strongcal_field_url extends module_strongcal_field {
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: the type of this field				//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -147,7 +147,7 @@ class module_strongcal_field_url extends module_strongcal_field {
 			$current = $my_array[$name];
 		}
 		$this->_value = substr($this->value,5,1) . $current;
-		
+
 	}
 
 	//////////////////////////////////////////////////////////////////
@@ -213,8 +213,8 @@ class module_strongcal_field_url extends module_strongcal_field {
 	//  input: none							//
 	//  output: an array describing the possible styles of this	//
 	//		field						//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//	object must have id set					//
 	//								//
@@ -262,7 +262,7 @@ class module_strongcal_field_url extends module_strongcal_field {
 	function sizeable(){
 		return false;
 	}
-	
+
 	//////////////////////////////////////////////////////////////////
 	//  toHTML($skin)						//
 	//	the prefix should be unique to this field in the form	//
@@ -285,8 +285,8 @@ class module_strongcal_field_url extends module_strongcal_field {
 	//--------------------------------------------------------------//
 	//  input: a skin to print this field				//
 	//  output: string html form input				//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//	object must have vars set				//
 	//								//
@@ -297,7 +297,7 @@ class module_strongcal_field_url extends module_strongcal_field {
 		if(!is_object($skin)){
 			throw new IllegalArgumentException("2nd argument to " . __METHOD__ . " must be a skin object");
 		}
-		
+
 		$buffer = $this->avalanche->getSkin("buffer");
 		$value = $this->value();
 		if($override){
@@ -333,10 +333,10 @@ class module_strongcal_field_url extends module_strongcal_field {
 		if($override !== false){
 			$value = $override;
 		}
-		
+
 		$url = new URLInput($value);
 		$url->setName($prefix . $this->field());
-		
+
 		return $url;
 	}
 
@@ -346,7 +346,7 @@ class module_strongcal_field_url extends module_strongcal_field {
 		if($override){
 			$value = $override;
 		}
-		
+
 		$values = explode("\n", $value);
 		$text = trim($values[0]);
 		$link = trim($values[1]);

@@ -3,7 +3,7 @@
 /**
  * represents a simple Html Document
  */
-class DateTime{
+class MMDateTime{
 	private $year;
 	private $month;
 	private $day;

@@ -144,7 +144,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . $this->folder() . "_categories WHERE " . $where . " ORDER BY cal_id, name";
 		$result = $this->avalanche->mysql_query($sql);
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$ret[] = new module_taskman_category($this->avalanche, (int)$myrow['id'], (int)$myrow['cal_id'], $myrow['name']);
 		}
 		return $ret;
@@ -158,7 +158,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 		$sql = "SELECT DISTINCTROW $cat_table.* FROM $cat_table, $link_table WHERE $cat_table.id = $link_table.category_id AND $link_table.task_id = $taskId ORDER BY $cat_table.cal_id, $cat_table.name";
 		$result = $this->avalanche->mysql_query($sql);
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$ret[] = new module_taskman_category($this->avalanche, (int)$myrow['id'], (int)$myrow['cal_id'], $myrow['name']);
 		}
 		return $ret;
@@ -169,7 +169,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 		$name = addslashes($name);
 		$sql = "INSERT INTO `" . $this->avalanche->PREFIX() . $this->folder() . "_categories` (`cal_id`,`name`) VALUES ('$cal_id', '$name');";
 		$this->avalanche->mysql_query($sql);
-		$task_id = mysql_insert_id();
+		$task_id = mysqli_insert_id();
 		return new module_taskman_category($this->avalanche, $task_id, $cal_id, $name);
 	}
 
@@ -236,7 +236,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 		$sql = "INSERT INTO `" . $this->avalanche->PREFIX() . $this->folder() . "_tasks` (`author`,`created_on`,`cal_id`,`completed`,`description`,`due`,`priority`,`summary`,`status`,`delegated_to`,`assigned_to`) VALUES ('$user_id','$created_on','$cal_id', '0000-00-00 00:00:00', '$description', '$due', '$priority', '$summary','" . module_taskman_task::$STATUS_DEFAULT . "','$user_id','$user_id');";
 		$this->avalanche->mysql_query($sql);
 		// get new task id
-		$task_id = mysql_insert_id();
+		$task_id = mysqli_insert_id();
 		// insert history
 		$sql = "INSERT INTO `" . $this->avalanche->PREFIX() . $this->folder() . "_status_history` (`task_id`,`user_id`,`status`, `stamp`, `comment`) VALUES ('" . $task_id . "', '" . $this->avalanche->loggedInHuh() . "', '" . module_taskman_task::$STATUS_DEFAULT . "', '" . $created_on . "','')";
 		$result = $this->avalanche->mysql_query($sql);
@@ -340,7 +340,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 	        $result = $this->avalanche->mysql_query($sql);
 
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$current_task = $myrow["id"];
 			if(is_object($this->task_cache->get((int)$myrow["id"]))){
 				$task = $this->task_cache->get((int)$myrow["id"]);
@@ -366,7 +366,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 	        $result = $this->avalanche->mysql_query($sql);
 
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$current_task = $myrow["id"];
 			if(is_object($this->task_cache->get((int)$myrow["id"]))){
 				$task = $this->task_cache->get((int)$myrow["id"]);
@@ -433,7 +433,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 
 	        $result = $this->avalanche->mysql_query($sql);
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$current_task = $myrow["id"];
 			if(is_object($this->task_cache->get((int)$myrow["id"]))){
 				$task = $this->task_cache->get((int)$myrow["id"]);
@@ -455,7 +455,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 		$sql = "SELECT * FROM $task_table WHERE id='$task_id'";
 	        $result = $this->avalanche->mysql_query($sql);
 
-		if($myrow = mysql_fetch_array($result)){
+		if($myrow = mysqli_fetch_array($result)){
 			$current_task = $myrow["id"];
 			if(is_object($this->task_cache->get((int)$myrow["id"]))){
 				$task = $this->task_cache->get((int)$myrow["id"]);
@@ -478,7 +478,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 	        $result = $this->avalanche->mysql_query($sql);
 
 		$ret = array();
-		if($myrow = mysql_fetch_array($result)){
+		if($myrow = mysqli_fetch_array($result)){
 			$myrow["id"] = (int) $myrow["id"];
 			$myrow["author"] = (int) $myrow["author"];
 			$myrow["cal_id"] = (int) $myrow["cal_id"];
@@ -527,7 +527,7 @@ class module_taskman extends module_template implements module_strongcal_listene
 		$sql = "SELECT * FROM `" . $this->avalanche->PREFIX() . $this->folder() . "_tasks` WHERE cal_id='$cal_id'";
 	        $result = $this->avalanche->mysql_query($sql);
 		$query = "0";
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$query .= " OR task_id='" . $myrow["id"] . "'";
 		}
 

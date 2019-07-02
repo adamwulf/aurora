@@ -99,7 +99,7 @@ class module_strongcal_field_time extends module_strongcal_field {
 	//  postcondition:						//
 	//								//
 	//////////////////////////////////////////////////////////////////
-	function display_value(){
+	function display_value($cal_id = false, $event_id = false){
 		$strongcal = $this->avalanche->getModule("strongcal");
 
 		if(!$this->_loaded){

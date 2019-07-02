@@ -16,7 +16,7 @@ class SimpleWindow extends SimplePanel{
 		$this->addOld($this->window);
 	}
 
-	public function add($item){
+	public function add(Component $item, $one=false, $two=false){
 		return $this->window->add($item);
 	}
 

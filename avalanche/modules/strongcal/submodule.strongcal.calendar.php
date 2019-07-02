@@ -660,7 +660,7 @@ class module_strongcal_calendar {
 		if(!$myrow){
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_calendars WHERE id='$id'";
 			$result = $this->avalanche->mysql_query($sql);
-			$myrow = mysql_fetch_array($result);
+			$myrow = mysqli_fetch_array($result);
 		}
 
 
@@ -772,7 +772,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . "_fields WHERE valid='0' ORDER BY form_order, id ASC";
 		$result = $this->avalanche->mysql_query($sql);
 		if($result){
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$new_field = $fm->getField($myrow["type"]);
 				if(is_object($new_field)){
 					$new_field->init($this, $myrow);
@@ -834,7 +834,7 @@ class module_strongcal_calendar {
 		if($result){
 			$temp_validated = "0";
 			$this->_has_validation = false;
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$this->_has_validation = true;
 				$new_validation = new module_strongcal_validation($this->avalanche);
 				$this->_sql_validations .= "`" . $myrow['field'] . "` = '1' AND ";
@@ -890,7 +890,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . " WHERE added_on > '$datetime' LIMIT $limit";
 		$result = $this->avalanche->mysql_query($sql);
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			  $ret[] = $this->getEventFromRow($myrow);
 		}
 		return $ret;
@@ -958,7 +958,7 @@ class module_strongcal_calendar {
 
 		if($result){
 		  $count = 0;
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$new_event = false;
 				if(!$myrow["all_day"]){
 					$s = $strongcal->adjust($myrow["start_date"], $myrow["start_time"]);
@@ -1017,7 +1017,7 @@ class module_strongcal_calendar {
 			throw new DatabaseException(mysql_error());
 		}
 		$event_results = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$obj = $this->getEvent($myrow["id"], $myrow);
 			if(is_object($obj)){
 				$event_results[] = $obj;
@@ -1047,7 +1047,7 @@ class module_strongcal_calendar {
 			if(mysql_error()){
 				throw new DatabaseException(mysql_error());
 			}
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$myrow["cal_id"] = $this->getId();
 				$myrow["date"] = $myrow["post_date"];
 				$comment_results[] = $myrow;
@@ -1089,7 +1089,7 @@ class module_strongcal_calendar {
 
 			$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					$obj = $this->getEvent($myrow["id"], $myrow);
 					if($obj !== false){
 						$ret[] = $obj;
@@ -1138,7 +1138,7 @@ class module_strongcal_calendar {
 
 			$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					$obj = $this->getEvent($myrow["id"], $myrow);
 					if($obj !== false){
 						$ret[] = $obj;
@@ -1265,7 +1265,7 @@ class module_strongcal_calendar {
 			$sql = "SELECT COUNT(*) AS total FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId();
 			$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					return $myrow["total"];
 				}
 				return 0;
@@ -1298,7 +1298,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT COUNT(*) AS total FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . "_comments";
 		$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					return $myrow["total"];
 				}
 				return 0;
@@ -1339,7 +1339,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . "_comments $where ORDER BY post_date DESC";
 		$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				if($myrow = mysql_fetch_array($result)){
+				if($myrow = mysqli_fetch_array($result)){
 					return $myrow;
 				}
 				return false;
@@ -1380,7 +1380,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . "_comments $where ORDER BY post_date ASC";
 		$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					return $myrow;
 				}
 				return false;
@@ -1424,7 +1424,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . " $where ORDER BY added_on DESC";
 		$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				if($myrow = mysql_fetch_array($result)){
+				if($myrow = mysqli_fetch_array($result)){
 					return $this->getEvent($myrow['id'], $myrow);
 				}
 				return false;
@@ -1465,7 +1465,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . " $where ORDER BY added_on ASC";
 		$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					return $this->getEvent($myrow['id'], $myrow);
 				}
 				return false;
@@ -1509,7 +1509,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . " $where ORDER BY end_date DESC";
 		$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				if($myrow = mysql_fetch_array($result)){
+				if($myrow = mysqli_fetch_array($result)){
 					return $this->getEvent($myrow['id'], $myrow);
 				}
 				return false;
@@ -1550,7 +1550,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . " $where ORDER BY start_date ASC";
 		$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					return $this->getEvent($myrow['id'], $myrow);
 				}
 				return false;
@@ -1589,7 +1589,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT author, COUNT(*) AS total FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . " WHERE author='" . $user . "' GROUP BY author";
 		$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					return $myrow;
 				}
 				return false;
@@ -1630,7 +1630,7 @@ class module_strongcal_calendar {
 		$sql = "SELECT author, COUNT(*) AS total FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . "_comments WHERE author='" . $user . "' GROUP BY author";
 		$result = $this->avalanche->mysql_query($sql);
 			if($result){
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					return $myrow;
 				}
 				return false;
@@ -1669,7 +1669,7 @@ class module_strongcal_calendar {
 		if(!$this->is_serialized()){
 			if($this->canReadName()){
 				$result = $this->avalanche->mysql_query($sql);
-				if($result && $myrow = mysql_fetch_array($result)){
+				if($result && $myrow = mysqli_fetch_array($result)){
 					return $myrow['count'];
 				}else{
 					return false;
@@ -1679,7 +1679,7 @@ class module_strongcal_calendar {
 			}
 		}else{
 			$result = $this->avalanche->mysql_query($sql);
-			if($result && $myrow = mysql_fetch_array($result)){
+			if($result && $myrow = mysqli_fetch_array($result)){
 				return $myrow['count'];
 			}else{
 				return false;
@@ -1741,7 +1741,7 @@ class module_strongcal_calendar {
 				$desc_field = $fm->getField("largetext");
 				$priority_field = $fm->getField("select");
 				if($result){
-					while($myrow = mysql_fetch_array($result)){
+					while($myrow = mysqli_fetch_array($result)){
 
 						// load values into field so we can get the right formatting
 
@@ -1849,7 +1849,7 @@ class module_strongcal_calendar {
 				$title_field = $fm->getField("text");
 				$desc_field = $fm->getField("largetext");
 				$priority_field = $fm->getField("select");
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 
 						$sd_field->set_value(stripslashes($myrow["start_date"]));
 						$ed_field->set_value(stripslashes($myrow["end_date"]));
@@ -1933,7 +1933,7 @@ class module_strongcal_calendar {
 				$title_field = $fm->getField("text");
 				$desc_field = $fm->getField("largetext");
 				$priority_field = $fm->getField("select");
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 
 						$sd_field->set_value(stripslashes($myrow["start_date"]));
 						$ed_field->set_value(stripslashes($myrow["end_date"]));
@@ -2039,7 +2039,7 @@ class module_strongcal_calendar {
 		if($this->canReadName() && $cal->getId() == $this->getId()){
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . " WHERE recur_id = '" . $recur->getId() . "'";
 			$result = $this->avalanche->mysql_query($sql);
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$obj = $this->getEvent($myrow["id"], $myrow);
 				if($obj !== false){
 					$ret[] = $obj;
@@ -2079,7 +2079,7 @@ class module_strongcal_calendar {
 		if($this->canReadName() && $cal->getId() == $this->getId()){
 			$sql = "SELECT COUNT(*) AS total FROM " . $this->avalanche->PREFIX() . "strongcal_cal_" . $this->getId() . " WHERE recur_id = '" . $recur->getId() . "'";
 			$result = $this->avalanche->mysql_query($sql);
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				return $myrow['total'];
 			}
 			return $ret;
@@ -2172,7 +2172,7 @@ class module_strongcal_calendar {
 						}
 					}else{
 						$result = $this->avalanche->mysql_query($sql);
-						if($myrow = mysql_fetch_array($result)){
+						if($myrow = mysqli_fetch_array($result)){
 							for($i=0;$i<count($this->_events);$i++){
 								if($this->_events[$i]->getId() == $id){
 									return $this->_events[$i];
@@ -2344,7 +2344,7 @@ class module_strongcal_calendar {
         	        $sql = "SELECT * FROM $tablename WHERE field='$field' AND removeable='1'";
 			$result = $this->avalanche->mysql_query($sql);
 
-			if($myrow = mysql_fetch_array($result) && $this->canWriteFields() && $this->canReadName()){
+			if($myrow = mysqli_fetch_array($result) && $this->canWriteFields() && $this->canReadName()){
 				return true;
 			}else{
 				return false;
@@ -2598,7 +2598,7 @@ class module_strongcal_calendar {
 		$sql = "INSERT INTO `$tablename` ($vars) VALUES ($values)";
 		if($this->canWriteEntries() && $this->canReadName()){
 			$result = $this->avalanche->mysql_query($sql);
-			$new_id = mysql_insert_id();
+			$new_id = mysqli_insert_id();
 			$new_event = $this->getEvent($new_id);
 			// add the current user as an attendee for the event, if logged in
 			if($this->avalanche->loggedInHuh()){
@@ -2705,7 +2705,7 @@ class module_strongcal_calendar {
 		if(!$this->is_serialized() && $recur_cal->getId() == $this->getId()){
         	        $sql = "SELECT author, start_date, start_time, end_date, end_time FROM $tablename WHERE `recur_id` = '" . $recur_obj->getId() . "'";
 			$result = $this->avalanche->mysql_query($sql);
-			if($my_row = mysql_fetch_array($result)){
+			if($my_row = mysqli_fetch_array($result)){
 				$is_author = $this->avalanche->loggedInHuh() == $my_row['author'];
 				$start_time_index = -1;
 				$end_time_index = -1;
@@ -2756,7 +2756,7 @@ class module_strongcal_calendar {
 					// we didn't update the times for each event yet, so lets do that now.
 					$sql = "SELECT `id`, `start_time`, `start_date`, `end_time`, `end_date` FROM $tablename WHERE `recur_id` = '" . $recur_obj->getId() . "'";
 					$result = $this->avalanche->mysql_query($sql);
-					while($myrow = mysql_fetch_array($result)){
+					while($myrow = mysqli_fetch_array($result)){
 						$id = $myrow["id"];
 						$sd = $myrow["start_date"];
 						$st = $myrow["start_time"];
@@ -2839,7 +2839,7 @@ class module_strongcal_calendar {
 		}else{
 			$result = false;
 		}
-		if($result && mysql_affected_rows()){
+		if($result && mysqli_affected_rows()){
 			for($i=0;$i<count($this->_events);$i++){
 				if($this->_events[$i]->getId() == $event_id){
 					$this->removeFromDateIndex($this->_events[$i]);
@@ -3014,7 +3014,7 @@ class module_strongcal_calendar {
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_permissions WHERE " . $final;
 			$result = $this->avalanche->mysql_query($sql);
 
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$this->permission_cache->put((int)$myrow["usergroup"], $myrow);
 				if($myrow[$field] == "r" || $myrow[$field] == "rw"){
 					$can_read = true;
@@ -3128,7 +3128,7 @@ class module_strongcal_calendar {
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_permissions WHERE " . $final;
 			$result = $this->avalanche->mysql_query($sql);
 
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$this->permission_cache->put((int)$myrow["usergroup"], $myrow);
 				if($myrow[$field] == "rw"){
 					$can_read = true;
@@ -3204,7 +3204,7 @@ class module_strongcal_calendar {
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_permissions WHERE " . $final;
 			$result = $this->avalanche->mysql_query($sql);
 
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$this->permission_cache->put((int)$myrow["usergroup"], $myrow);
 				if($myrow[$field] == "r" || $myrow[$field] == "rw"){
 					$can_read = true;
@@ -3277,7 +3277,7 @@ class module_strongcal_calendar {
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_permissions WHERE " . $final;
 			$result = $this->avalanche->mysql_query($sql);
 
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$this->permission_cache->put((int)$myrow["usergroup"], $myrow);
 				if($myrow[$field] == "rw"){
 					$can_read = true;
@@ -3349,7 +3349,7 @@ class module_strongcal_calendar {
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_permissions WHERE " . $final;
 			$result = $this->avalanche->mysql_query($sql);
 
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$this->permission_cache->put((int)$myrow["usergroup"], $myrow);
 				if($myrow[$field] == "r" || $myrow[$field] == "rw"){
 					$can_read = true;
@@ -3421,7 +3421,7 @@ class module_strongcal_calendar {
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_permissions WHERE " . $final;
 			$result = $this->avalanche->mysql_query($sql);
 
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$this->permission_cache->put((int)$myrow["usergroup"], $myrow);
 				if($myrow[$field] == "rw"){
 					$can_read = true;
@@ -3510,7 +3510,7 @@ class module_strongcal_calendar {
 				$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_permissions WHERE " . $final;
 				$result = $this->avalanche->mysql_query($sql);
 
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					$this->permission_cache->put((int)$myrow["usergroup"], $myrow);
 					if($myrow[$field] == "r" || $myrow[$field] == "rw"){
 						$can_read = true;
@@ -3562,7 +3562,7 @@ class module_strongcal_calendar {
 		$result = $this->avalanche->mysql_query($sql);
 
 		$ret = array();
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$ret[] = (int)$myrow["event_id"];
 		}
 		$this->_is_attendee->put($user_id, $ret);
@@ -3628,7 +3628,7 @@ class module_strongcal_calendar {
 				$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_permissions WHERE " . $final;
 				$result = $this->avalanche->mysql_query($sql);
 
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					$this->permission_cache->put((int)$myrow["usergroup"], $myrow);
 					if($myrow[$field] == "rw"){
 						$can_read = true;
@@ -3698,7 +3698,7 @@ class module_strongcal_calendar {
 
 		$can_read = false;
 		$field = "cal_" . $this->getId() . "_comments";
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if($myrow[$field] == "r" || $myrow[$field] == "rw"){
 				$can_read = true;
 			}
@@ -3757,7 +3757,7 @@ class module_strongcal_calendar {
 
 		$can_read = false;
 		$field = "cal_" . $this->getId() . "_comments";
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if($myrow[$field] == "rw"){
 				$can_read = true;
 			}

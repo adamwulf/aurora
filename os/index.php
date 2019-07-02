@@ -1,4 +1,5 @@
 <?
+
 //error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE |
 //		E_CORE_ERROR | E_CORE_WARNING);
 function error_handler($errno, $errstr, $errfile, $errline) {
@@ -14,7 +15,7 @@ try{
 		$os = $avalanche->getModule("os");
 		$strongcal = $avalanche->getModule("strongcal");
 		// end dependencies
-			
+
 		/**
 		 * run the login bootstrap to make sure they're ready for the rest of the page...
 		 */
@@ -23,19 +24,19 @@ try{
 		$runner = $bootstrap->newDefaultRunner();
 		$runner->add($loader);
 		$data = $runner->run($data);
-		
 
-		
+
+
 		/**
 		* create the content for the page
 		*/
-		
+
 		$data = new module_bootstrap_data(array_merge($_REQUEST, $_FILES), "post data and files");
 		$loader = new PrimaryLoader($avalanche);
 		$runner = $bootstrap->newDefaultRunner();
 		$runner->add($loader);
 		$data = $runner->run($data);
-			
+
 		if(!($data instanceof module_bootstrap_data) || !is_string($data->data())){
 			throw new Exception("poorly formatted output: <br><br>" . str_replace("\n", "<br>", print_r($data, true)));
 		}else{
@@ -55,7 +56,7 @@ try{
 		/**
 		* end creating the content
 		*/
-		
+
 	}catch(RedirectException $e){
 		header("Location: " . $e->getMessage());
 		exit;

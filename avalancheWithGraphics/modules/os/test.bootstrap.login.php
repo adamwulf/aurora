@@ -8,7 +8,7 @@ class test_bootstrap_login extends Abstract_Avalanche_TestCase {
 	$this->assert($avalanche->needLogIn(), "i need to login");
 	try{
 		$data = array("user" => "phpunit",
-			      "pass" => "fakepassword");
+			      "pass" => "samplepassword");
 		$data = new module_bootstrap_data($data, "fake form input that gives a bad module name");
 		$runner = new module_bootstrap_runner();
 		$runner->add(new OSLoginBootstrap($avalanche, new Document()));

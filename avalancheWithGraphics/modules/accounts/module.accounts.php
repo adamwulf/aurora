@@ -92,13 +92,13 @@ class module_accounts  extends module_template{
 	private $host='localhost';
 	private $port='2082';
 
-	private $sqladmin='sampleusername';
+	private $sqladmin='invers';
 	private $sqlpass='samplepassword';
 
-	private $ftpadmin='sampleusername';
+	private $ftpadmin='invers';
 	private $ftppass='samplepassword';
 
-	private $cpaneladmin='sampleusername';
+	private $cpaneladmin='invers';
 	private $cpanelpass='samplepassword';
 
 	//////////////////////////////////////////////////////////////////

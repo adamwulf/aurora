@@ -31,8 +31,8 @@
 //Syntax - module classes should always start with module_ followed by the module's install folder (name)
 abstract class module_template{
 	//////////////////////////////////////////////////////////////////
-	//			PRIVATE VARIABLES			// 
-	//	do not directly reference these variables		// 
+	//			PRIVATE VARIABLES			//
+	//	do not directly reference these variables		//
 	protected $_name;						//
 	protected $_version;						//
 	protected $_desc;						//
@@ -40,18 +40,18 @@ abstract class module_template{
 	protected $_copyright;						//
 	protected $_author;						//
 	protected $_date;						//
-	//								// 
+	//								//
 	//////////////////////////////////////////////////////////////////
 
 
-	function name() { 
+	function name() {
 	//////////////////////////////////////////////////////////////////
 	//  name()							//
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: string - this module's name				//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -61,7 +61,7 @@ abstract class module_template{
 	//  THIS FUNCTION DOES NOT NEED TO BE REDEFINED.		//
 	//////////////////////////////////////////////////////////////////
 		return $this->_name;
-	} 
+	}
 
 	function version(){
 	//////////////////////////////////////////////////////////////////
@@ -69,8 +69,8 @@ abstract class module_template{
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: string - this module's version			//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -88,8 +88,8 @@ abstract class module_template{
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: string - this module's description			//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -107,8 +107,8 @@ abstract class module_template{
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: string - this module's install folder		//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -126,8 +126,8 @@ abstract class module_template{
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: string - this module's copyright information	//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -145,8 +145,8 @@ abstract class module_template{
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: string - this module's author			//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -164,8 +164,8 @@ abstract class module_template{
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: string - this module's last updated date		//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -181,15 +181,15 @@ abstract class module_template{
 	public function avalanche(){
 		return $this->_avalanche;
 	}
-	
+
 	function __construct($avalanche){
 	//////////////////////////////////////////////////////////////////
 	//  init()							//
 	//--------------------------------------------------------------//
 	//  input: none							//
 	//  output: none						//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	should only be called once				//
 	//	(command.php of avalanche will include this		//
 	//	   file after installation)				//
@@ -205,9 +205,9 @@ abstract class module_template{
 	//	I.E.	module_template::init();			//
 	//////////////////////////////////////////////////////////////////
 		$this->_avalanche = $avalanche;
-		$this->_name = "Incomplete Module";	
-		$this->_version = "1.0.0";	
-		$this->_desc = "This module has not redefined init()";	
+		$this->_name = "Incomplete Module";
+		$this->_version = "1.0.0";
+		$this->_desc = "This module has not redefined init()";
 		$this->_folder = "";
 		$this->_copyright = "";
 		$this->_author = "";
@@ -234,9 +234,9 @@ abstract class module_template{
 	//--------------------------------------------------------------//
 	//  input: $userid - the user id to enable from this module	//
 	//  output: boolean - true if the user has been			//
-	//			 successfully enabled			//  
-	//								//  
-	//  precondition:						//  
+	//			 successfully enabled			//
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -259,9 +259,9 @@ abstract class module_template{
 	//--------------------------------------------------------------//
 	//  input: $userid - the user id to disable from this module	//
 	//  output: boolean - true if the user has been			//
-	//			 successfully disabled			//  
-	//								//  
-	//  precondition:						//  
+	//			 successfully disabled			//
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -282,9 +282,9 @@ abstract class module_template{
 	//--------------------------------------------------------------//
 	//  input: $userid - the user id to delete from this module	//
 	//  output: boolean - true if the user has been			//
-	//			 successfully deleted			//  
-	//								//  
-	//  precondition:						//  
+	//			 successfully deleted			//
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -305,9 +305,9 @@ abstract class module_template{
 	//  input: $usergroupid - the usergroup id to delete		//
 	//			  from this module			//
 	//  output: boolean - true if the usergroup has been		//
-	//			  successfully deleted			//  
-	//								//  
-	//  precondition:						//  
+	//			  successfully deleted			//
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -327,9 +327,9 @@ abstract class module_template{
 	//--------------------------------------------------------------//
 	//  input: $userid   - the user to add to this module		//
 	//  output: boolean  - true if the user has been		//
-	//			 successfully added			//  
-	//								//  
-	//  precondition:						//  
+	//			 successfully added			//
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -343,15 +343,15 @@ abstract class module_template{
 		return true;
 	}
 
-	function addUsergroup($usergroupid){
+	function addUsergroup($usergroupid, $verify){
 	//////////////////////////////////////////////////////////////////
 	//  addUser()							//
 	//--------------------------------------------------------------//
 	//  input: $usergroup - the usergroup to add to this module	//
 	//  output: boolean   - true if the user has been		//
-	//			 successfully added			//  
-	//								//  
-	//  precondition:						//  
+	//			 successfully added			//
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -370,10 +370,10 @@ abstract class module_template{
 	//  permissions()						//
 	//--------------------------------------------------------------//
 	//  output: boolean   - an array of permissions for this module	//
-	//	eg array("can_email" => "Allow the user to send		//  
+	//	eg array("can_email" => "Allow the user to send		//
 	//				 outgoing email.")		//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -393,9 +393,9 @@ abstract class module_template{
 	//		module.						//
 	//		eg. array("can_email" => '1')			//
 	//  output: boolean   - true if the permissions have been	//
-	//			 successfully updated			//  
-	//								//  
-	//  precondition:						//  
+	//			 successfully updated			//
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -416,9 +416,9 @@ abstract class module_template{
 	//  input: $valid - true if login succeeded			//
 	//  		false if login failed				//
 	//  output: boolean - true if the user has been			//
-	//			 successfully processed	for login	//  
-	//								//  
-	//  precondition:						//  
+	//			 successfully processed	for login	//
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -440,9 +440,9 @@ abstract class module_template{
 	//  input: $valid - true if logout succeeded			//
 	//  		false if logout failed				//
 	//  output: boolean - true if the user has been			//
-	//			 successfully processed	for logout	//  
-	//								//  
-	//  precondition:						//  
+	//			 successfully processed	for logout	//
+	//								//
+	//  precondition:						//
 	//	object must be initialized				//
 	//								//
 	//  postcondition:						//
@@ -455,11 +455,11 @@ abstract class module_template{
 	//////////////////////////////////////////////////////////////////
 		return true;
 	}
-	
-	
+
+
 	// called during the cron job
 	abstract function cron();
-} 
+}
 
 //be sure to leave no white space before and after the php portion of this file
 //headers must remain open after this file is included

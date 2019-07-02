@@ -29,7 +29,7 @@ class visitor_getAllUsergroupsFor extends visitor_template{
 		}else{
 			throw new Exception("no case for object of type " . get_class($obj));
 		}
-		
+
 	}
 
 	function avalancheCase($avalanche){
@@ -44,7 +44,7 @@ class visitor_getAllUsergroupsFor extends visitor_template{
 		$table2 = $avalanche->PREFIX() . "user_link";
 		$sql = "SELECT `$table1`.* FROM `$table1`, `$table2` WHERE `$table1`.id = `$table2`.group_id AND `$table2`.user_id = '$userId'";
 	        $result = $avalanche->mysql_query($sql);
-	        while ($myrow = mysql_fetch_array($result)) {
+	        while ($myrow = mysqli_fetch_array($result)) {
 			$ok = true;
 			$group = $avalanche->getUsergroup((int)$myrow['id']);
 			$ret[] = $group;

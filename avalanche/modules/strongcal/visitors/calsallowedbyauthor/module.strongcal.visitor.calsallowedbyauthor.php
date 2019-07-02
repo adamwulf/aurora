@@ -46,8 +46,8 @@ class module_strongcal_visitor_calsallowedbyauthor implements module_strongcal_v
 	function __construct($avalanche){
 		$this->avalanche = $avalanche;
 	}
-	
-	
+
+
 	private $author;
 
 	//////////////////////////////////////////////////////////////////
@@ -56,10 +56,10 @@ class module_strongcal_visitor_calsallowedbyauthor implements module_strongcal_v
 	//	same for both recurrance patterns.			//
 	//--------------------------------------------------------------//
 	//  input: $field - the field to compare to			//
-	//								//  
+	//								//
 	//  output: boolean, true if fields are equal			//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//								//
 	//  postcondition:						//
 	//								//
@@ -96,7 +96,7 @@ class module_strongcal_visitor_calsallowedbyauthor implements module_strongcal_v
 
 		$can_read = 0;
 		$field = "add_calendar";
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if($myrow[$field] != 0 && $myrow[$field] > $can_read){
 				$can_read = $myrow[$field];
 			}else

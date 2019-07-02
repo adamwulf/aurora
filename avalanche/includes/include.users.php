@@ -13,9 +13,9 @@
 //////////////////////////////////////////////////////////////////////////
 
 class avalanche_user{
-	
-	static public $CONTACT_EMAIL = 1; 
-	static public $CONTACT_SMS = 2; 
+
+	static public $CONTACT_EMAIL = 1;
+	static public $CONTACT_SMS = 2;
 
 	//////////////////////////////////////////////////////////
 	// returns the id of this usergroup
@@ -49,7 +49,7 @@ class avalanche_user{
 			throw new IllegalArgumentException("argument 1 to " . __METHOD__ . " must be an integer");
 		}
 		$this->_id = $userId;
-		
+
 		if($myrow === false){
 			$this->_user_data = false;
 		}else if(is_array($myrow)){
@@ -64,7 +64,7 @@ class avalanche_user{
 	//////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////
 
-	
+
 	public function reload(){
 		if($this->_loaded === false){
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "users WHERE id='" . $this->getId() . "'";
@@ -77,7 +77,7 @@ class avalanche_user{
 			}
 		}
 	}
-	
+
 	public function reloadAvatar(){
 		if(!$this->_avatar_loaded){
 			$sql = "SELECT id, avatar FROM " . $this->avalanche->PREFIX() . "users WHERE id='" . $this->getId() . "'";
@@ -90,7 +90,7 @@ class avalanche_user{
 			}
 		}
 	}
-	
+
 	// returns true if the user needs to create a new password
 	public function needToResetPassword($n=0){
 		$this->reload();
@@ -107,7 +107,7 @@ class avalanche_user{
 			return $n;
 		}
 	}
-	
+
 	// enable/disable public functions
 	// disables a user
 	// returns true if user changes from enabled to disabled
@@ -131,7 +131,7 @@ class avalanche_user{
 			return false;
 		}
 	}
-	
+
 	// enables the user if he is disabled
 	// returns true if the user has switched to enabled from disabled
 	public function enable(){
@@ -142,27 +142,27 @@ class avalanche_user{
 			if($this->avalanche->hasPermissionHuh($this->avalanche->loggedInHuh(), "disable_user")){
 				$sql = "UPDATE" . $this->avalanche->PREFIX() . "users SET disabled='0' WHERE user_id='$user_id'";
 				$result = $this->avalanche->mysql_query($sql);
-		
+
 				if($result){
 					$this->_user_data["disabled"] = "0";
 					$verify = true;
 				}else{
 					$verify = false;
 				}
-		
+
 			}
 			return $verify;
 		}else{
 			return false;
 		}
 	}
-	
+
 	// returns true if the user is enabled
 	public function enabled(){
 		$this->reload();
 		return !$this->_user_data["disabled"];
 	}
-	
+
 	public function avatar($new_avatar = false){
 		$this->reloadAvatar();
 		if($new_avatar === false){
@@ -183,7 +183,7 @@ class avalanche_user{
 			return $this->_user_data["avatar"];
 		}
 	}
-	
+
 	// gets/sets username
 	public function username($new_name = false){
 		$this->reload();
@@ -208,8 +208,8 @@ class avalanche_user{
 			return $this->_user_data["username"];
 		}
 	}
-	
-	
+
+
 	// gets/sets bio name
 	public function bio($bio = false){
 		$this->reload();
@@ -232,7 +232,7 @@ class avalanche_user{
 			return $this->bio();
 		}
 	}
-	
+
 
 	// gets/sets title name
 	public function title($title = false){
@@ -256,7 +256,7 @@ class avalanche_user{
 			return $this->title();
 		}
 	}
-	
+
 	// gets/sets first name
 	public function first($first = false){
 		$this->reload();
@@ -279,7 +279,7 @@ class avalanche_user{
 			return $this->first();
 		}
 	}
-	
+
 	// gets/sets middle name
 	public function middle($middle = false){
 		$this->reload();
@@ -302,7 +302,7 @@ class avalanche_user{
 			return $this->middle();
 		}
 	}
-	
+
 	// gets/sets last name
 	public function last($last = false){
 		$this->reload();
@@ -325,18 +325,18 @@ class avalanche_user{
 			return $this->last();
 		}
 	}
-	
+
 	private function getEmailForContact(){
 		$this->reload();
 		return $this->_user_data["email"];
 	}
-	
+
 	private function getSMSForContact(){
 		$this->reload();
 		return $this->_user_data["sms"];
 	}
-	
-	
+
+
 	// gets/sets email name
 	public function email($email = false){
 		$this->reload();
@@ -359,7 +359,7 @@ class avalanche_user{
 			return $this->email();
 		}
 	}
-	
+
 	public function sms($sms = false){
 		$this->reload();
 		if($sms === false && $this->avalanche->hasPermissionHuh($this->avalanche->loggedInHuh(), "view_name")){
@@ -381,7 +381,7 @@ class avalanche_user{
 			return $this->sms();
 		}
 	}
-	
+
 	// gets/sets password name
 	public function password($password = false){
 		$this->reload();
@@ -405,7 +405,7 @@ class avalanche_user{
 			return $this->password();
 		}
 	}
-	
+
 	public function resetPassword(){
 		$os = $this->avalanche->getModule("os");
 		$name = $os->getUsername($this->getId());
@@ -414,7 +414,7 @@ class avalanche_user{
 		$sql = "UPDATE " . $this->avalanche->PREFIX() . "users SET password = \"$password\" WHERE id = \"$argUserId\"";
 		$result = $this->avalanche->mysql_query($sql);
 		$this->_user_data["password"] = $password;
-		
+
 		if(is_object($this->avalanche->ACCOUNTOBJ())){
 			$acct = $this->avalanche->ACCOUNTOBJ()->name();
 		}else{
@@ -424,12 +424,12 @@ class avalanche_user{
 		$body .= "Your username is: " . $this->username() . "\n";
 		$body .= "Your password is: " . $password . "\n";
 		$body .= "\n";
-		$body .= "Thank you,\n The Inversion Bot";		
+		$body .= "Thank you,\n The Inversion Bot";
 		$this->contactEmail($this->avalanche->getUser(-1), "$name, your password has been reset", $body);
 	}
-	
+
 	// returns the user's preferred form of contact as a
-	// bitwise OR of the CONTACT static variables.	
+	// bitwise OR of the CONTACT static variables.
 	public function preferredContact($preferred_contact = false){
 		reload();
 		if($preferred_contact === false && $this->avalanche->hasPermissionHuh($this->avalanche->loggedInHuh(), "view_name")){
@@ -450,7 +450,7 @@ class avalanche_user{
 		}else{
 			return $this->preferredContact();
 		}
-		
+
 	}
 
 	public function lastActive(){
@@ -466,7 +466,7 @@ class avalanche_user{
 			return $this->lastLoggedOut();
 		}
 	}
-	
+
 	public function lastLoggedIn(){
 		$this->reload();
 		$user_id = $this->getId();
@@ -476,7 +476,7 @@ class avalanche_user{
 		}
 		throw new Exception("cannot find user: $user_id");
 	}
-	
+
 	public function lastLoggedOut(){
 		$this->reload();
 		$user_id = $this->getId();
@@ -486,7 +486,7 @@ class avalanche_user{
 		}
 		throw new Exception("cannot find user: $user_id");
 	}
-	
+
 	// contacts the user on behalf of the user $from_user
 	//  (0 is guest, -1 is SYSTEM)
 	// sends $title and $body in the message
@@ -504,7 +504,7 @@ class avalanche_user{
 		$os = $this->avalanche->getModule("os");
 		$email = $this->getEmailForContact();
 		$sms = $this->getSMSForContact();
-		
+
 		// if it's set to email or not set at all
 		if(strlen($email) && (((int)$this->avalanche->getUserVar("preferred_contact", $this->getId()) & avalanche_user::$CONTACT_EMAIL) || ($this->avalanche->getUserVar("preferred_contact", $this->getId()) === false))){
 			$mailheaders="From:  " . $os->getUsername($from_user->getId()) . " <" . $from_user->email() . ">\n";
@@ -515,7 +515,7 @@ class avalanche_user{
 			$this->avalanche->mail($sms, $title, $body, $mailheaders);
 		}
 	}
-	
+
 	public function contactSMS($from_user, $title, $body){
 		if(!is_object($from_user) || !($from_user instanceof avalanche_user)){
 			throw new IllegalArgumentException("argument 1 to " . __METHOD__ . " must be a user object");
@@ -529,14 +529,14 @@ class avalanche_user{
 		$os = $this->avalanche->getModule("os");
 		$sms = $this->getSMSForContact();
 
-		if(strlen($sms)){		
+		if(strlen($sms)){
 			$mailheaders="From:  " . $os->getUsername($from_user->getId()) . " <" . $from_user->email() . ">\n";
 			return $this->avalanche->mail($sms, $title, $body, $mailheaders);
 		}else{
 			return false;
 		}
 	}
-	
+
 	public function contactEmail($from_user, $title, $body){
 		if(!is_object($from_user) || !($from_user instanceof avalanche_user)){
 			throw new IllegalArgumentException("argument 1 to " . __METHOD__ . " must be a user object");
@@ -550,15 +550,15 @@ class avalanche_user{
 		$os = $this->avalanche->getModule("os");
 		$email = $this->getEmailForContact();
 
-		if(strlen($email)){		
+		if(strlen($email)){
 			$mailheaders="From:  " . $os->getUsername($from_user->getId()) . " <" . $from_user->email() . ">\n";
 			return $this->avalanche->mail($email, $title, $body, $mailheaders);
 		}else{
 			return false;
-		}		
+		}
 	}
-	
-	
+
+
 	// runs the visitor on usergroup case
 	public function execute($visitor){
 		return $visitor->visit($this);
@@ -603,7 +603,7 @@ final class avalanche_system_user extends avalanche_user{
 	//////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////
 
-	
+
 	public function reloadAvatar(){
 		// noop
 	}
@@ -611,97 +611,97 @@ final class avalanche_system_user extends avalanche_user{
 	public function reload(){
 		// noop
 	}
-	
-	public function avatar(){
+
+	public function avatar($newAvatar=false){
 		return "";
 	}
-	
-	
+
+
 	// enable/disable public functions
 	// disables a user
 	// returns true if user changes from enabled to disabled
 	public function disable(){
 		throw new Exception("cannot disable SYSTEM user");
 	}
-	
+
 	// enables the user if he is disabled
 	// returns true if the user has switched to enabled from disabled
 	public function enable(){
 		return true;
 	}
-	
+
 	// returns true if the user is enabled
 	public function enabled(){
 		return true;
 	}
-	
-	
+
+
 	// gets/sets username
-	public function username(){
+	public function username($new_name = false){
 		return $this->name();
 	}
-	
-	
+
+
 	// gets/sets title name
-	public function title(){
+	public function title($title=false){
 		return "";
 	}
-	
+
 	// gets/sets first name
 	public function first($first = false){
 		return "";
 	}
-	
+
 	// gets/sets middle name
 	public function middle($middle = false){
 		return "";
 	}
-	
+
 	// gets/sets last name
 	public function last($last = false){
 		return "SYSTEM";
 	}
-	
+
 	// gets/sets email name
-	public function email(){
+	public function email($email=false){
 		return "noreply@" . $this->avalanche->DOMAIN();
 	}
-	
-	public function sms(){
+
+	public function sms($sms=false){
 		return "";
 	}
-	
+
 	// gets/sets password name
 	public function password($password = false){
 		return "";
 	}
-	
+
 	public function lastActive(){
 		$strongcal = $this->avalanche->getModule("strongcal");
 		return date("Y-m-d H:i:s", $strongcal->gmttimestamp());
 	}
-	
+
 	public function lastLoggedIn(){
 		$strongcal = $this->avalanche->getModule("strongcal");
 		return date("Y-m-d H:i:s", $strongcal->gmttimestamp());
 	}
-	
+
 	public function lastLoggedOut(){
 		$strongcal = $this->avalanche->getModule("strongcal");
 		return date("Y-m-d H:i:s", $strongcal->gmttimestamp());
 	}
-	
+
 	// contacts the user on behalf of the user $from_user
 	//  (0 is guest, -1 is SYSTEM)
 	// sends $title and $body in the message
 	// uses this user's preferred contact method: email, sms, or both
-	
+
 	public function contact($from_user, $title, $body){
 		// noop
 	}
-	
-	
-	
+
+
+
 	// runs the visitor on usergroup case
 	public function execute($visitor){
 		return $visitor->visit($this);

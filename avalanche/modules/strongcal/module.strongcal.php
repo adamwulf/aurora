@@ -462,7 +462,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 				$this->user_preference_cache->put($user_id, new HashTable());
 				$sql = "SELECT * FROM $table WHERE user_id='$user_id'";
 				$result = $this->avalanche->mysql_query($sql);
-				if($myrow = mysql_fetch_array($result)){
+				if($myrow = mysqli_fetch_array($result)){
 					$this->user_preference_cache->get($user_id)->put("highlight", $myrow["highlight"]);
 					$this->user_preference_cache->get($user_id)->put("timezone",  $myrow["timezone"]);
 					$this->user_preference_cache->get($user_id)->put("selected_calendars", $myrow["selected_calendars"]);
@@ -473,7 +473,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 					// get value for SYSTEM
 					$sql = "SELECT * FROM $table WHERE user_id='-1'";
 					$result = $this->avalanche->mysql_query($sql);
-					if($myrow = mysql_fetch_array($result)){
+					if($myrow = mysqli_fetch_array($result)){
 						if(isset($myrow["highlight"]))
 							$this->user_preference_cache->get($user_id)->put("highlight", $myrow["highlight"]);
 						if(isset($myrow["timezone"]))
@@ -499,7 +499,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 				// get value for SYSTEM
 				$sql = "SELECT $var FROM $table WHERE user_id='-1'";
 				$result = $this->avalanche->mysql_query($sql);
-				if($myrow = mysql_fetch_array($result)){
+				if($myrow = mysqli_fetch_array($result)){
 					return $myrow[$var];
 				}else{
 					throw new Exception("cannot load preference for SYSTEM");
@@ -529,7 +529,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 			if(!$this->user_has_preferences->get($user_id)){
 				$sql = "SELECT COUNT(*) AS count FROM $table WHERE user_id='$user_id'";
 				$result = $this->avalanche->mysql_query($sql);
-				$myrow = mysql_fetch_array($result);
+				$myrow = mysqli_fetch_array($result);
 				$ans = $myrow["count"];
 				$this->user_preference_cache->put($user_id, new HashTable());
 				$this->user_has_preferences->put($user_id, true);
@@ -631,8 +631,9 @@ class module_strongcal extends module_template implements avalanche_interface_os
 		if($this->var_list === false){
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_varlist";
 			$result = $this->avalanche->mysql_query($sql);
+
 			$this->var_list = array();
-			while($row = mysql_fetch_array($result)){
+			while($row = mysqli_fetch_array($result)){
 				if(get_magic_quotes_runtime()){
 					$row['val'] = stripslashes($row['val']);
 					$row['dflt'] = stripslashes($row['dflt']);
@@ -653,7 +654,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 		$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_varlist";
 			$result = $this->avalanche->mysql_query($sql);
 			$this->var_list = array();
-			while($row = mysql_fetch_array($result)){
+			while($row = mysqli_fetch_array($result)){
 				if(get_magic_quotes_runtime()){
 					$row['val'] = stripslashes($row['val']);
 					$row['dflt'] = stripslashes($row['dflt']);
@@ -757,7 +758,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 
 		$sql = "SELECT id FROM `" . $this->avalanche->PREFIX() . $this->folder() . "_calendars`";
 		$result = $this->avalanche->mysql_query($sql);
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$id = (int) $myrow["id"];
 			$sql = "DELETE FROM `" . $this->avalanche->PREFIX() . $this->folder() . "_cal_" . $id . "_fields` WHERE `usergroup`='" . $usergroupid . "'";
 			$this->avalanche->mysql_query($sql);
@@ -779,13 +780,13 @@ class module_strongcal extends module_template implements avalanche_interface_os
 
 		$sql = "SELECT id FROM `" . $this->avalanche->PREFIX() . $this->folder() . "_calendars` WHERE `author`='" . $user_id . "'";
 		$result = $this->avalanche->mysql_query($sql);
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$id = (int) $myrow["id"];
 			$this->_removeCalendar($id);
 		}
 		$sql = "SELECT id FROM `" . $this->avalanche->PREFIX() . $this->folder() . "_calendars` WHERE 1";
 		$result = $this->avalanche->mysql_query($sql);
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$id = (int) $myrow["id"];
 			$sql = "DELETE FROM `" . $this->avalanche->PREFIX() . $this->folder() . "_cal_$id` WHERE `author`='" . $user_id . "'";
 			$this->avalanche->mysql_query($sql);
@@ -820,7 +821,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 			$result = $this->avalanche->mysql_query($sql);
 			$rows = array();
 			$count = 0;
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$count++;
 				$id = $myrow['id'];
 				$calendar = $this->_getCalendarFromDb($id, $myrow);
@@ -851,7 +852,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 		if(mysql_error()){
 			throw new DatabaseException(mysql_error());
 		}
-	        while ($myrow = mysql_fetch_array($result)) {
+	        while ($myrow = mysqli_fetch_array($result)) {
 			$cal = $this->_getCalendarFromDb((int)$myrow["id"], $myrow);
 			if($cal->canReadName()){
 				$ret[] = $cal;
@@ -883,7 +884,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 			$cals = "";
 			$sql = "SELECT DISTINCT cal_id FROM `" . $this->avalanche->PREFIX() . "strongcal_attendees` WHERE user_id='$user_id'";
 			$result = $this->avalanche->mysql_query($sql);
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$cals .= " OR ";
 				$cals .= " `" . $this->avalanche->PREFIX() . "strongcal_calendars`.id='" . $myrow["cal_id"] . "'";
 			}
@@ -910,7 +911,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 			$result = $this->avalanche->mysql_query($sql);
 			$ret = array();
 			$cals = array();
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				$cal_id = $myrow['cal_id'];
 				$field = "cal_" . $cal_id . "_name";
 				if(($myrow[$field] == "r" || $myrow[$field] == "rw") && $myrow['public'] || $this->avalanche->loggedInHuh() == $myrow['author']){
@@ -953,7 +954,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 			}
 			$sql = "SELECT * FROM " . $this->avalanche->PREFIX() . "strongcal_calendars WHERE id='$id'";
 			$result = $this->avalanche->mysql_query($sql);
-			if($row = mysql_fetch_array($result)){
+			if($row = mysqli_fetch_array($result)){
 				$ret = $this->_getCalendarFromDb($id, $row);
 				if($ret->canReadName()){
 					return $ret;
@@ -1029,10 +1030,10 @@ class module_strongcal extends module_template implements avalanche_interface_os
 	        	$result = $this->avalanche->mysql_query($sql);
 
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar, but mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar, but mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
-			$newid = mysql_insert_id();
+			$newid = mysqli_insert_id();
 
 
 			/*
@@ -1056,31 +1057,31 @@ class module_strongcal extends module_template implements avalanche_interface_os
 
 	        	$result = $this->avalanche->mysql_query($sql_table);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql_table = "ALTER TABLE `" . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "` ADD INDEX(`start_time`);";
 	        	$result = $this->avalanche->mysql_query($sql_table);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql_table = "ALTER TABLE `" . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "` ADD INDEX(`end_time`);";
 	        	$result = $this->avalanche->mysql_query($sql_table);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql_table = "ALTER TABLE `" . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "` ADD INDEX(`start_date`);";
 	        	$result = $this->avalanche->mysql_query($sql_table);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql_table = "ALTER TABLE `" . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "` ADD INDEX(`end_date`);";
 	        	$result = $this->avalanche->mysql_query($sql_table);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql_fields = "CREATE TABLE " . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "_fields (
@@ -1100,50 +1101,50 @@ class module_strongcal extends module_template implements avalanche_interface_os
 					  PRIMARY KEY  (id)) TYPE=MyISAM;";
 	        	$result = $this->avalanche->mysql_query($sql_fields);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 
 			$sql = "INSERT INTO " . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "_fields VALUES (1, 'Start Date:', 'start_date', 'date', '0000-00-001', 0, 0, 0, 1, 0, 0, 0, 0);";
 		       	$result = $this->avalanche->mysql_query($sql);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql = "INSERT INTO " . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "_fields VALUES (2, 'Start Time:', 'start_time', 'time', '01:001', 15, 0, 0, 2, 0, 0, 0, 0);";
 		       	$result = $this->avalanche->mysql_query($sql);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql = "INSERT INTO " . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "_fields VALUES (3, 'End Date:', 'end_date', 'date', '0000-00-001', 0, 0, 0, 3, 0, 0, 0, 0);";
 		       	$result = $this->avalanche->mysql_query($sql);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql = "INSERT INTO " . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "_fields VALUES (4, 'End Time:', 'end_time', 'time', '01:001', 15, 0, 0, 4, 0, 0, 0, 0);";
 		       	$result = $this->avalanche->mysql_query($sql);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql = "INSERT INTO " . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "_fields VALUES (5, 'Title:', 'title', 'text', '', 0, 0, 0, 5, 0, 0, 0, 0);";
 		       	$result = $this->avalanche->mysql_query($sql);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql = "INSERT INTO " . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "_fields VALUES (6, 'Description:', 'description', 'largetext', '', 0, 0, 0, 6, 0, 0, 0, 0);";
 		       	$result = $this->avalanche->mysql_query($sql);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$sql = "INSERT INTO " . $this->avalanche->PREFIX() . "strongcal_cal_" . $newid . "_fields VALUES (7, 'Priority:', 'priority', 'select', 'High\\nHigh\\n\\nNormal\\nNormal\\n1\\nLow\\nLow\\n', 0, 0, 0, 7, 0, 0, 0, 0);";
 			$result = $this->avalanche->mysql_query($sql);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 
@@ -1174,7 +1175,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 			) TYPE=MyISAM;";
 		       	$result = $this->avalanche->mysql_query($sql_recur);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 
@@ -1189,42 +1190,42 @@ class module_strongcal extends module_template implements avalanche_interface_os
 			) TYPE=MyISAM;";
 		       	$result = $this->avalanche->mysql_query($sql_varlist);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$field = "cal_" . $newid . "_entry";
 			$sql_permissions = "ALTER TABLE `" . $this->avalanche->PREFIX() . $this->folder() . "_permissions` ADD `$field` TINYTEXT NOT NULL";
 		       	$result = $this->avalanche->mysql_query($sql_permissions);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$field = "cal_" . $newid . "_field";
 			$sql_permissions = "ALTER TABLE `" . $this->avalanche->PREFIX() . $this->folder() . "_permissions` ADD `$field` TINYTEXT NOT NULL";
 		       	$result = $this->avalanche->mysql_query($sql_permissions);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$field = "cal_" . $newid . "_validation";
 			$sql_permissions = "ALTER TABLE `" . $this->avalanche->PREFIX() . $this->folder() . "_permissions` ADD `$field` TINYTEXT NOT NULL";
 		       	$result = $this->avalanche->mysql_query($sql_permissions);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$field = "cal_" . $newid . "_name";
 			$sql_permissions = "ALTER TABLE `" . $this->avalanche->PREFIX() . $this->folder() . "_permissions` ADD `$field` TINYTEXT NOT NULL";
 		       	$result = $this->avalanche->mysql_query($sql_permissions);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$field = "cal_" . $newid . "_comments";
 			$sql_permissions = "ALTER TABLE `" . $this->avalanche->PREFIX() . $this->folder() . "_permissions` ADD `$field` TINYTEXT NOT NULL";
 		       	$result = $this->avalanche->mysql_query($sql_permissions);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			if($group){
@@ -1232,7 +1233,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 				$sql = "UPDATE " . $this->avalanche->PREFIX() . "strongcal_permissions SET $cal = 'rw' WHERE usergroup='$group'";
 				$result= $this->avalanche->mysql_query($sql);
 				if(mysql_error()){
-					throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+					throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 				}
 			}
 
@@ -1247,7 +1248,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 			);";
 		       	$result = $this->avalanche->mysql_query($sql_comments);
 			if(mysql_error()){
-				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+				throw new DatabaseException("trying to add calendar id # $newid, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 			}
 
 			$this->calendarAdded((int)$newid);
@@ -1269,61 +1270,61 @@ class module_strongcal extends module_template implements avalanche_interface_os
 		$sql = "DROP TABLE `" . $this->avalanche->PREFIX() . "strongcal_cal_" . $id . "`";
 		$result = $this->avalanche->mysql_query($sql);
 		if(mysql_error()){
-			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 		}
 
 		$sql = "DROP TABLE `" . $this->avalanche->PREFIX() . "strongcal_cal_" . $id . "_fields`";
 		$result = $this->avalanche->mysql_query($sql);
 		if(mysql_error()){
-			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 		}
 
 		$sql = "DROP TABLE `" . $this->avalanche->PREFIX() . "strongcal_cal_" . $id . "_recur`";
 		$result = $this->avalanche->mysql_query($sql);
 		if(mysql_error()){
-			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 		}
 
 		$sql = "DROP TABLE `" . $this->avalanche->PREFIX() . "strongcal_cal_" . $id . "_varlist`";
 		$result = $this->avalanche->mysql_query($sql);
 		if(mysql_error()){
-			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 		}
 
 		$sql = "DROP TABLE `" . $this->avalanche->PREFIX() . "strongcal_cal_" . $id . "_comments`";
 		$result = $this->avalanche->mysql_query($sql);
 		if(mysql_error()){
-			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 		}
 
 		$sql = "ALTER TABLE `" . $this->avalanche->PREFIX() . "strongcal_permissions` DROP `cal_" . $id . "_entry`";
 		$result = $this->avalanche->mysql_query($sql);
 		if(mysql_error()){
-			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 		}
 
 		$sql = "ALTER TABLE `" . $this->avalanche->PREFIX() . "strongcal_permissions` DROP `cal_" . $id . "_field`";
 		$result = $this->avalanche->mysql_query($sql);
 		if(mysql_error()){
-			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 		}
 
 		$sql = "ALTER TABLE `" . $this->avalanche->PREFIX() . "strongcal_permissions` DROP `cal_" . $id . "_validation`";
 		$result = $this->avalanche->mysql_query($sql);
 		if(mysql_error()){
-			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 		}
 
 		$sql = "ALTER TABLE `" . $this->avalanche->PREFIX() . "strongcal_permissions` DROP `cal_" . $id . "_name`";
 		$result = $this->avalanche->mysql_query($sql);
 		if(mysql_error()){
-			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 		}
 
 		$sql = "ALTER TABLE `" . $this->avalanche->PREFIX() . "strongcal_permissions` DROP `cal_" . $id . "_comments`";
 		$result = $this->avalanche->mysql_query($sql);
 		if(mysql_error()){
-			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysql_error() . " with sql command \"$sql\"");
+			throw new DatabaseException("trying to remove calendar id # $id, mysql returned with: " . mysqli_error() . " with sql command \"$sql\"");
 		}
 
 		$this->_calendars->clear($id);
@@ -1378,7 +1379,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 
 		$can_read = 0;
 		$field = "add_calendar";
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if($myrow[$field] != 0 && $myrow[$field] > $can_read && $can_read != -1){
 				$can_read = $myrow[$field];
 			}else
@@ -1436,7 +1437,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 
 		$can_read = false;
 		$field = "delete_calendar";
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if($myrow[$field] == 1){
 				$can_read = true;
 			}
@@ -1480,7 +1481,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 
 		$can_read = false;
 		$field = "change_permissions";
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			if($myrow[$field] == 1){
 				$can_read = true;
 			}
@@ -1516,7 +1517,7 @@ class module_strongcal extends module_template implements avalanche_interface_os
 				$sql = "SELECT usergroup FROM " . $this->avalanche->PREFIX() . "strongcal_permissions WHERE `$cal`='1'";
 				$result= $this->avalanche->mysql_query($sql);
 				$groups = array();
-				while($myrow = mysql_fetch_array($result)){
+				while($myrow = mysqli_fetch_array($result)){
 					$groups[] = $myrow["usergroup"];
 				}
 				if(count($groups) == 1 &&

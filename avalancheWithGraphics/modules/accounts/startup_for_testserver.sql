@@ -274,7 +274,7 @@ CREATE TABLE `avalanche_users` (
   PRIMARY KEY  (`id`)
 ) TYPE=MyISAM AUTO_INCREMENT=22 ;
 
-INSERT INTO `avalanche_users` VALUES (1, '', '', '', '', 'awulf', 'samplepassword', '127.0.0.1', '1969-12-31 18:00:00', '0000-00-00 00:00:00', 'awulf@inversiondesigns.com', '', 0,'',0);
+INSERT INTO `avalanche_users` VALUES (1, '', '', '', '', 'awulf', 'wewcdh', '127.0.0.1', '1969-12-31 18:00:00', '0000-00-00 00:00:00', 'awulf@inversiondesigns.com', '', 0,'',0);
 INSERT INTO `avalanche_users` VALUES (2, '', '', '', '', 'guest', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 0,'',0);
 INSERT INTO `avalanche_users` VALUES (3, '', '', '', '', 'phpunit', 'samplepassword', '67.10.15.207', '2005-01-07 05:55:56', '2005-01-07 05:55:56', '', '', 0,'',0);
 

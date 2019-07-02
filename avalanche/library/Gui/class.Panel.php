@@ -107,14 +107,14 @@ class Panel extends Component implements Sizeable, Alignable{
 		return $this->_valign;
 	}
 
-	public function add(Component $comp){
+	public function add(Component $comp, $one=false, $two=false){
 		if(!is_object($comp)){
 			throw new IllegalArgumentException("argument to add must not be null");
 		}
 		$this->_components[] = $comp;
 	}
 
-	public function remove(Component $comp){
+	public function remove(Component $comp, $one=false){
 		$index = array_search($comp, $this->_components, true);
 		if(isset($this->_components[$index])){
 			array_splice($this->_components, $index, 1);

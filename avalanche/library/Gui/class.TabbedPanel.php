@@ -11,13 +11,13 @@ class TabbedPanel extends Panel{
 	// Pair->first is open
 	// Pair->second is closed
 	private $_tabs;
-	
+
 	private $_holder_style;
 	private $_content_style;
-	
+
 	// the index+1 of the tab to show
 	private $_tab;
-	
+
 	function __construct(){
 		parent::__construct();
 		$this->_components = array();
@@ -26,8 +26,8 @@ class TabbedPanel extends Panel{
 		$this->_content_style = new Style();
 		$this->_tab = 1;
 	}
-	
-	
+
+
 	// out of bounds errors are ignored
 	public function selectTab($i){
 		if(!is_int($i)){
@@ -35,7 +35,7 @@ class TabbedPanel extends Panel{
 		}
 		$this->_tab = $i;
 	}
-	
+
 	public function tabSelected(){
 		if(count($this->_tabs)){
 			if($this->_tab > 0 && $this->_tab <= count($this->_tabs)){
@@ -47,34 +47,34 @@ class TabbedPanel extends Panel{
 			return 0;
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	// $comp the content for the tab
 	// $open_tab the content for the tab that will be displayed when the tab is open
 	// $closed_tab the content for the tab that will be displayed when teh tab is closed
 	// returns the tab number
-	public function add(Component $comp, $open_tab, $closed_tab){
+	public function add(Component $comp, $open_tab=false, $closed_tab=false){
 		parent::add($comp);
 		$this->_tabs[] = new Pair($open_tab, $closed_tab);
 		return count($this->_tabs) - 1;
 	}
-	
+
 	// $comp, the content page to remove
 	// $index, the tab number to remove
-	public function remove(Component $comp, $index){
+	public function remove(Component $comp, $index=false){
 		parent::remove($comp);
 		array_splice($this->_tabs, $index, 1);
 	}
-	
+
 	// returns an array of Pairs for the tabs
 	// first is open tab
 	// second is closed tab
 	public function getTabs(){
 		return $this->_tabs;
 	}
-	
+
 	public function getCloseFunction(){
 		$closefunction = new NewFunctionAction("close_tabs_" . $this->getId());
 		$tabs = $this->getTabs();
@@ -86,12 +86,12 @@ class TabbedPanel extends Panel{
 		}
 		return $closefunction;
 	}
-	
-	
+
+
 	public function getHolderStyle(){
 		return $this->_holder_style;
 	}
-	
+
 	public function setHolderStyle(Style $s){
 		$this->_holder_style = $s;
 	}
@@ -99,7 +99,7 @@ class TabbedPanel extends Panel{
 	public function getContentStyle(){
 		return $this->_content_style;
 	}
-	
+
 	public function setContentStyle(Style $s){
 		$this->_content_style = $s;
 	}

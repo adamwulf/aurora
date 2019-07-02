@@ -15,9 +15,9 @@ if(! defined("avalanche_FULLAPP_PHP")){
  define("LIBRARY", "library/");
  define("CLASSLOADER", "classloader/");
  define("HOST", "localhost");
- define("ADMIN", "USERNAME HERE");
- define("PASS", "PASSWORD HERE");
- define("DATABASENAME", "DATABASE NAME HERE");
+ define("ADMIN", "invers");
+ define("PASS", "samplepassword");
+ define("DATABASENAME", "invers_accttestserver");
  define("PREFIX", "avalanche_");
  if(class_exists("TestCase")){
   require(ROOT . APPPATH . INCLUDEPATH . "include.abstract.test.php");

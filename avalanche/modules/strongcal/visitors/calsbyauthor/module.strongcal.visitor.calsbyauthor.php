@@ -47,7 +47,7 @@ class module_strongcal_visitor_calsbyauthor implements module_strongcal_visitor 
 	function __construct($avalanche){
 		$this->avalanche = $avalanche;
 	}
-	
+
 	private $author;
 
 	//////////////////////////////////////////////////////////////////
@@ -56,10 +56,10 @@ class module_strongcal_visitor_calsbyauthor implements module_strongcal_visitor 
 	//	same for both recurrance patterns.			//
 	//--------------------------------------------------------------//
 	//  input: $field - the field to compare to			//
-	//								//  
+	//								//
 	//  output: boolean, true if fields are equal			//
-	//								//  
-	//  precondition:						//  
+	//								//
+	//  precondition:						//
 	//								//
 	//  postcondition:						//
 	//								//
@@ -89,7 +89,7 @@ class module_strongcal_visitor_calsbyauthor implements module_strongcal_visitor 
 
 		$result = $this->avalanche->mysql_query($sql);
 		if($result){
-			while($myrow = mysql_fetch_array($result)){
+			while($myrow = mysqli_fetch_array($result)){
 				return $myrow["total"];
 			}
 			return false;

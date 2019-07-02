@@ -189,10 +189,10 @@ class avalanche_class{
 			$table = $this->PREFIX() . "preferences";
 			$sql = "SELECT $var FROM $table WHERE user_id='$user_id'";
 			$result = $this->mysql_query($sql);
-			if(mysql_error()){
-				throw new DatabaseException(mysql_error());
+			if(mysqli_error()){
+				throw new DatabaseException(mysqli_error());
 			}
-			if($myrow = mysql_fetch_array($result)){
+			if($myrow = mysqli_fetch_array($result)){
 				return $myrow[$var];
 			}else{
 				return false;
@@ -219,7 +219,7 @@ class avalanche_class{
 			$user_id = $this->loggedInHuh();
 			$sql = "SELECT COUNT(*) AS count FROM $table WHERE user_id='$user_id'";
 			$result = $this->mysql_query($sql);
-			if($myrow = mysql_fetch_array($result)){
+			if($myrow = mysqli_fetch_array($result)){
 				if($myrow["count"]){
 					$sql = "UPDATE $table SET $var='$val' WHERE user_id='$user_id'";
 					$this->mysql_query($sql);
@@ -254,7 +254,7 @@ class avalanche_class{
 					$argIp = getenv('REMOTE_ADDR');
 					$argUser = 0;
 					$result = $this->mysql_query("SELECT * FROM " . $this->PREFIX() . "loggedinusers WHERE user_id='" . $userId . "' AND last_active > '" . $datetime . "'");
-					while ($myrow = mysql_fetch_array($result)) {
+					while ($myrow = mysqli_fetch_array($result)) {
 						return $myrow['user_id'];
 					}
 				}else{
@@ -284,7 +284,7 @@ class avalanche_class{
 		if($modId){
 			$sql = "SELECT * FROM " . $this->PREFIX() . "modules WHERE id='$modId'";
 			$result = $this->mysql_query($sql);
-			if($myrow = mysql_fetch_array($result)){
+			if($myrow = mysqli_fetch_array($result)){
 				$trialTime = $myrow['trialTime'];
 				$trialTime = $trialTime * 60 * 60 * 24;
 				// $trialTime is now in seconds
@@ -404,7 +404,7 @@ class avalanche_class{
 			$verify = $this->mysql_query($sql);
 
 			//get id of new usergroup
-			$usergroup_id = mysql_insert_id();
+			$usergroup_id = mysqli_insert_id();
 
 			// notify all modules with new usergroupid and if add went ok
 			$count = $this->getModuleCount();
@@ -502,8 +502,8 @@ class avalanche_class{
 			$ok = false;
 			$sql = "SELECT * FROM " . $this->PREFIX() . "usergroups WHERE id='$groupId'";
 			$result = $this->mysql_query($sql);
-			$fields = mysql_num_fields($result);
-			if($myrow = mysql_fetch_array($result)) {
+			$fields = mysqli_num_fields($result);
+			if($myrow = mysqli_fetch_array($result)) {
 				if($myrow["type"] == "SYSTEM"){
 					$group = new avalanche_system_usergroup($myrow['id'], $this, $myrow);
 				}else if($myrow["type"] == "TEAM"){
@@ -631,16 +631,16 @@ class avalanche_class{
 			}else{
 			        $sql = "INSERT INTO " . $this->PREFIX() . "users (username, password, email) VALUES (\"".$username."\",\"".$password."\",\"" . $email . "\")";
 			        $result = $this->mysql_query($sql);
-				$verify = mysql_insert_id();
-				$user_id = mysql_insert_id();
+				$verify = mysqli_insert_id();
+				$user_id = mysqli_insert_id();
 				$default_grp = $this->getVar("USERGROUP");
 				$all_grp = $this->getVar("ALLUSERS");
 				//get id of new user
 			        $sql = "INSERT INTO " . $this->PREFIX() . "user_link (user_id, group_id) VALUES (\"".$user_id."\",\"".$default_grp."\")";
-				$verify = mysql_insert_id() && $verify;
+				$verify = mysqli_insert_id() && $verify;
 			        $this->mysql_query($sql);
 			        $sql = "INSERT INTO " . $this->PREFIX() . "user_link (user_id, group_id) VALUES (\"".$user_id."\",\"".$all_grp."\")";
-				$verify = mysql_insert_id() && $verify;
+				$verify = mysqli_insert_id() && $verify;
 			        $this->mysql_query($sql);
 
 				// notify all modules with new username and if add went ok
@@ -672,8 +672,8 @@ class avalanche_class{
 		$ret = array();
 		$ok = false;
 	        $result = $this->mysql_query("SELECT id FROM " . $this->PREFIX() . "users WHERE id='$userId'");
-	        $count = mysql_num_rows($result);
-		while ($myrow = mysql_fetch_array($result)) {
+	        $count = mysqli_num_rows($result);
+		while ($myrow = mysqli_fetch_array($result)) {
 			$ok = true;
 			$user = new avalanche_user((int)$myrow['id'], $this);
 			$ret = $user;
@@ -846,8 +846,8 @@ class avalanche_class{
 	//////////////////////////////////////////////////////////
 	function findUser($argname){
 	        $result = $this->mysql_query("SELECT id FROM " . $this->PREFIX() . "users WHERE username='$argname'");
-	        $fields = mysql_num_fields($result);
-	        while ($myrow = mysql_fetch_array($result)) {
+	        $fields = mysqli_num_fields($result);
+	        while ($myrow = mysqli_fetch_array($result)) {
                         return (int)$myrow["id"];
 	        }
 	        return false;
@@ -861,8 +861,8 @@ class avalanche_class{
 	//////////////////////////////////////////////////////////
 	function findUserByEmail($argname){
 	        $result = $this->mysql_query("SELECT id FROM " . $this->PREFIX() . "users WHERE email='$argname'");
-	        $fields = mysql_num_fields($result);
-	        while ($myrow = mysql_fetch_array($result)) {
+	        $fields = mysqli_num_fields($result);
+	        while ($myrow = mysqli_fetch_array($result)) {
                         return (int)$myrow["id"];
 	        }
 	        return false;
@@ -884,7 +884,7 @@ class avalanche_class{
 		}
 		$ret = array();
 	        $result = $this->mysql_query("SELECT id FROM " . $this->PREFIX() . "users ORDER BY username $limit");
-	        while ($myrow = mysql_fetch_array($result)) {
+	        while ($myrow = mysqli_fetch_array($result)) {
 			$ret[] = new avalanche_user((int)$myrow["id"], $this);
 	        }
 	        return $ret;
@@ -906,7 +906,7 @@ class avalanche_class{
 		}
 		$sql = "SELECT id FROM " . $this->PREFIX() . "users WHERE $like";
 	        $result = $this->mysql_query($sql);
-	        while ($myrow = mysql_fetch_array($result)) {
+	        while ($myrow = mysqli_fetch_array($result)) {
 			$ret[] = new avalanche_user((int)$myrow["id"], $this);
 	        }
 	        return $ret;
@@ -927,7 +927,7 @@ class avalanche_class{
 		}
 		$sql = "SELECT * FROM " . $this->PREFIX() . "usergroups WHERE $like";
 	        $result = $this->mysql_query($sql);
-	        while ($myrow = mysql_fetch_array($result)) {
+	        while ($myrow = mysqli_fetch_array($result)) {
 			$ret[] = $this->getUsergroup((int)$myrow["id"]);
 	        }
 	        return $ret;
@@ -1123,8 +1123,8 @@ class avalanche_class{
 		if(($argUserId == $this->loggedInHuh()) ||
 		   $this->hasPermissionHuh($this->loggedInHuh(), "view_name")){
 			$result = $this->mysql_query("SELECT id, title, first, middle, last FROM " . $this->PREFIX() . "users WHERE id='$argUserId'");
-			$fields = mysql_num_fields($result);
-			while ($myrow = mysql_fetch_array($result)) {
+			$fields = mysqli_num_fields($result);
+			while ($myrow = mysqli_fetch_array($result)) {
 				return array("title" => $myrow['title'],
 					     "first" => $myrow['first'],
 					     "middle" => $myrow['middle'],
@@ -1153,8 +1153,8 @@ class avalanche_class{
 		if(($argUserId == $this->loggedInHuh()) ||
 		   $this->hasPermissionHuh($this->loggedInHuh(), "view_password")){
 			$result = $this->mysql_query("SELECT id, password FROM " . $this->PREFIX() . "users WHERE id='$argUserId'");
-			$fields = mysql_num_fields($result);
-			while ($myrow = mysql_fetch_array($result)) {
+			$fields = mysqli_num_fields($result);
+			while ($myrow = mysqli_fetch_array($result)) {
 				return $myrow['password'];
 			}
 			return false;
@@ -1178,8 +1178,8 @@ class avalanche_class{
 			return "*SYSTEM*";
 		}
 		$result = $this->mysql_query("SELECT id, username FROM " . $this->PREFIX() . "users WHERE id='$argUserId'");
-		$fields = mysql_num_fields($result);
-		while ($myrow = mysql_fetch_array($result)) {
+		$fields = mysqli_num_fields($result);
+		while ($myrow = mysqli_fetch_array($result)) {
 			return $myrow['username'];
 		}
 		return false;
@@ -1243,7 +1243,7 @@ class avalanche_class{
 	function getUserId($argUser, $argPass){
 		$sql = "SELECT id FROM " . $this->PREFIX() . "users WHERE username='$argUser' AND password='$argPass'";
 		$result = $this->mysql_query($sql);
-		while ($myrow = mysql_fetch_array($result)) {
+		while ($myrow = mysqli_fetch_array($result)) {
 			return $myrow['id'];
 		}
 		return false;
@@ -1351,7 +1351,7 @@ class avalanche_class{
 		if($this->var_list_cache->get($var) === false){
 			$sql = "SELECT * FROM " . $this->PREFIX() . "varlist WHERE var='$var'";
 			$result = $this->mysql_query($sql);
-			if($myrow = mysql_fetch_array($result)){
+			if($myrow = mysqli_fetch_array($result)){
 				$this->var_list_cache->put($var, $myrow['val']);
 			}else{
 				return false;
@@ -1381,7 +1381,7 @@ class avalanche_class{
 		$this->_user_cache = new HashTable();
 		// a cache for usergroups
 		$this->_usergroup_cache = new HashTable();
-		// set the cache of mysql_queries
+		// set the cache of mysqli_queries
 		$this->_query_cache = new SQLCache();
 		// count how many mysql queries have been sent...
 		$this->_query_count = 0;
@@ -1429,13 +1429,13 @@ class avalanche_class{
 
 		$sql = "SELECT * FROM " . $this->PREFIX() . "modules";
 		$result = $this->mysql_query($sql);
-		while ($myrow = mysql_fetch_array($result)) {
+		while ($myrow = mysqli_fetch_array($result)) {
 			$this->_allModules->put($myrow['folder'], $myrow['folder']);
 		}
 
 		$sql = "SELECT * FROM " . $this->PREFIX() . "skins";
 		$result = $this->mysql_query($sql);
-		while ($myrow = mysql_fetch_array($result)) {
+		while ($myrow = mysqli_fetch_array($result)) {
 			$this->_allSkins->put($myrow['folder'], $myrow['folder']);
 		}
 
@@ -1444,7 +1444,7 @@ class avalanche_class{
 		$this->var_list_cache = new HashTable();
 		$sql = "SELECT * FROM " . $this->PREFIX() . "varlist";
 		$result = $this->mysql_query($sql);
-		while($row = mysql_fetch_array($result)){
+		while($row = mysqli_fetch_array($result)){
 			if(get_magic_quotes_runtime()){
 				$row['val'] = stripslashes($row['val']);
 			}
@@ -1542,7 +1542,7 @@ class avalanche_class{
 		if($this->needLogIn()){
 			$result = $this->mysql_query("SELECT id FROM " . $this->PREFIX() . "users WHERE username='$argUser' AND password='$argPass'");
 			//checks if my username and password are valid
-			while ($myrow = mysql_fetch_array($result)) {
+			while ($myrow = mysqli_fetch_array($result)) {
 				$loginSuccess = "yes";
 			}
 
@@ -1646,7 +1646,7 @@ class avalanche_class{
 					$argUser = $_COOKIE[$this->PREFIX() . $this->ACCOUNT() . "_user_id"];
 				}
 				$result = $this->mysql_query("SELECT * FROM " . $this->PREFIX() . "loggedinusers WHERE user_id='" . $argUser . "'");
-				while ($myrow = mysql_fetch_array($result)) {
+				while ($myrow = mysqli_fetch_array($result)) {
 					$this->_recent_log_in = (int)$myrow['user_id'];
 					return (int)$myrow['user_id'];
 				}
@@ -1663,7 +1663,7 @@ class avalanche_class{
 		}else{
 			$argUser = 0;
 			$result = $this->mysql_query("SELECT * FROM " . $this->PREFIX() . "loggedinusers WHERE user_id='" . $userId . "'");
-			while ($myrow = mysql_fetch_array($result)) {
+			while ($myrow = mysqli_fetch_array($result)) {
 				return (int)$myrow['user_id'];
 			}
 			return false;
@@ -1692,7 +1692,7 @@ class avalanche_class{
 	//////////////////////////////////////////////////////////
 	function numLoggedIn(){
 		$result = $this->mysql_query("SELECT count(*) AS total FROM " . $this->PREFIX() . "loggedinusers");
-		while ($myrow = mysql_fetch_array($result)) {
+		while ($myrow = mysqli_fetch_array($result)) {
 			return $myrow['total'];
 		}
 		return false;
@@ -1719,7 +1719,7 @@ class avalanche_class{
 		}
 		$result = $this->mysql_query("SELECT user_id AS id, ip, last_active FROM " . $this->PREFIX() . "loggedinusers ORDER BY 'last_active' DESC $limit");
 		$ret = array();
-		while ($myrow = mysql_fetch_array($result)) {
+		while ($myrow = mysqli_fetch_array($result)) {
 			$ret[] = $myrow;
 		}
 		return $ret;
@@ -1831,7 +1831,7 @@ class avalanche_class{
 		$sql = "SELECT * FROM " . $this->PREFIX() . "users WHERE email = '$email'";
 		$result = $this->mysql_query($sql);
 		$found = false;
-		while($myrow = mysql_fetch_array($result)){
+		while($myrow = mysqli_fetch_array($result)){
 			$user_id = (int)$myrow["id"];
 			$user = $this->getUser($user_id);
 			$user->resetPassword();
@@ -2045,37 +2045,37 @@ class avalanche_class{
 
 
 
-	private $_mysql_link = false;
+	private $_mysqli_link = false;
 	// queries mysql and caches the result if appropriate
 	function mysql_query($sql, $verbose=false){
 		$verbose = false;
 		$sql = trim($sql);
 		// if the link's not in the cache, then make one
-		if($this->_mysql_link === false){
-			$this->_mysql_link = mysql_connect($this->HOST(), $this->ADMIN(), $this->PASS());
+		if($this->_mysqli_link === false){
+			$this->_mysqli_link = mysqli_connect($this->HOST(), $this->ADMIN(), $this->PASS());
 		}
-		if($this->_mysql_link === false){
+		if($this->_mysqli_link === false){
 			throw new DatabaseException("could not connect to MySQL");
 		};
-		if(!mysql_select_db($this->DATABASENAME(),$this->_mysql_link)){
+		if(!mysqli_select_db($this->_mysqli_link, $this->DATABASENAME())){
 			throw new DatabaseException("could not select database: " . $this->DATABASENAME());
 		};
 		// check the cache
 		if($this->_query_cache->get($sql)){
 			if($verbose)echo "found in cache<br>";
 			$result = $this->_query_cache->get($sql);
-			if(mysql_num_rows($result)){
+			if(mysqli_num_rows($result)){
 				if($verbose) echo ": seeking to 0";
-				mysql_data_seek($result, 0);
+				mysqli_data_seek($result, 0);
 			}
 			if($verbose) echo "<br>";
 		}else{
 			if($verbose) echo "not in cache";
 			$this->_query_count++;
-			$result = mysql_query($sql, $this->_mysql_link);
-			if(mysql_error()){
-				if($verbose) echo "mysql_error: " . mysql_error() . "<br>";
-				throw new DatabaseException(mysql_error());
+			$result = mysqli_query($this->_mysqli_link, $sql);
+			if(mysqli_error($this->_mysqli_link)){
+				if($verbose) echo "mysqli_error: " . mysqli_error($this->_mysqli_link) . "<br>";
+				throw new DatabaseException(mysqli_error($this->_mysqli_link));
 			}
 			if(strpos($sql, "SELECT") === 0){
 				if($verbose) echo ": select: $sql<br>";
@@ -2095,12 +2095,12 @@ class avalanche_class{
 		$this->_query_cache->reset();
 	}
 
-	// returns value of mysql_insert_id
+	// returns value of mysqli_insert_id
 	function mysql_insert_id(){
-		if($this->_mysql_link === false){
-			$this->_mysql_link = mysql_connect($this->HOST(), $this->ADMIN(), $this->PASS());
+		if($this->_mysqli_link === false){
+			$this->_mysqli_link = mysqli_connect($this->HOST(), $this->ADMIN(), $this->PASS());
 		}
-		return mysql_insert_id($this->_mysql_link);
+		return mysqli_insert_id($this->_mysqli_link);
 	}
 
 	function getQueryCount(){
@@ -2115,7 +2115,7 @@ class avalanche_class{
 	function get($table, $col, $Id, $colForId){
 		$sql = "SELECT $colForId, $col FROM " . $this->PREFIX() . $table . " WHERE $colForId ='$Id'";
 		$result = $this->mysql_query($sql);
-		while ($myrow = mysql_fetch_array($result)) {
+		while ($myrow = mysqli_fetch_array($result)) {
 			if($Id == $myrow[$colForId]){  // just in case. should always be true
 				return $myrow[$col];
 			}
